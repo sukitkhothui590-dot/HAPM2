@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แบบสอบถามความพึงพอใจ - Happy MPM Web Application & CMS</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #525659;
+    font-family: 'TH Sarabun New', 'Sarabun', sans-serif;
+    font-size: 14pt;
+    line-height: 1.5;
+    color: #000;
+  }
+  .page {
+    width: 21cm;
+    min-height: 29.7cm;
+    margin: 16px auto;
+    padding: 2.54cm 2.54cm 2.54cm 3.81cm;
+    background: #fff;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    position: relative;
+  }
+  @media print {
+    body { background: #fff; }
+    .page { margin: 0; padding: 0; box-shadow: none; width: auto; min-height: auto; page-break-after: always; }
+    .page:last-child { page-break-after: auto; }
+    .no-print { display: none !important; }
+  }
+  @page { size: A4; margin: 2.54cm 2.54cm 2.54cm 3.81cm; }
+  .header-center { text-align: center; margin-bottom: 8pt; }
+  .header-center h1 { font-size: 16pt; font-weight: 700; margin-bottom: 2pt; }
+  .header-center h2 { font-size: 14pt; font-weight: 700; margin-bottom: 2pt; }
+  .header-center p { font-size: 13pt; text-indent: 0; margin-bottom: 2pt; }
+  .section-title {
+    font-size: 14pt; font-weight: 700;
+    margin-top: 14pt; margin-bottom: 6pt;
+    padding: 4pt 8pt;
+    background: #f0f0f0;
+    border-left: 4pt solid #1565c0;
+  }
+  .section-title.green { border-left-color: #2e7d32; }
+  .section-title.orange { border-left-color: #e65100; }
+  .section-title.purple { border-left-color: #6a1b9a; }
+  .section-title.red { border-left-color: #c62828; }
+  .instructions {
+    font-size: 13pt;
+    text-indent: 1.27cm;
+    text-align: justify;
+    margin-bottom: 8pt;
+  }
+  .instructions.no-indent { text-indent: 0; }
+  table { width: 100%; border-collapse: collapse; margin: 6pt 0 10pt 0; font-size: 12pt; }
+  table th, table td { border: 1px solid #000; padding: 4pt 5pt; text-align: center; vertical-align: middle; }
+  table th { background: #f0f0f0; font-weight: 700; }
+  td.item-text { text-align: left; padding-left: 8pt; }
+  .rating-cell { width: 48px; }
+  .divider { border: none; border-top: 1.5px solid #333; margin: 10pt 0; }
+  .info-box {
+    border: 1px solid #999;
+    border-radius: 4px;
+    padding: 8pt 10pt;
+    margin: 8pt 0 12pt 0;
+  }
+  .info-row { display: flex; gap: 10pt; margin-bottom: 4pt; font-size: 13pt; }
+  .info-label { font-weight: 600; min-width: 120px; }
+  .info-line { flex: 1; border-bottom: 1px dotted #999; min-height: 18pt; }
+  .checkbox-row { display: flex; gap: 16pt; flex-wrap: wrap; font-size: 13pt; }
+  .checkbox-item { display: flex; align-items: center; gap: 4pt; }
+  .checkbox-item .box { width: 14px; height: 14px; border: 1.5px solid #333; display: inline-block; }
+  .comment-box {
+    border: 1px solid #999;
+    border-radius: 4px;
+    min-height: 80pt;
+    margin: 6pt 0;
+    padding: 6pt 8pt;
+  }
+  .comment-lines { min-height: 70pt; }
+  .comment-lines .line { border-bottom: 1px dotted #ccc; height: 22pt; }
+  .footer-note { font-size: 12pt; text-align: center; margin-top: 14pt; color: #555; }
+  .toolbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: #1a1a2e; color: #fff;
+    padding: 8px 20px; display: flex; align-items: center; justify-content: space-between;
+    z-index: 9999; font-family: sans-serif; font-size: 13px;
+  }
+  .toolbar button {
+    background: #e94560; color: #fff; border: none;
+    padding: 6px 16px; border-radius: 4px; cursor: pointer; font-size: 13px;
+  }
+  .toolbar button:hover { background: #c81e45; }
+  body { padding-top: 48px; }
+  @media print { body { padding-top: 0; } }
+</style>
+</head>
+<body>
+
+<div class="toolbar no-print">
+  <span>แบบสอบถามความพึงพอใจ — Happy MPM Web Application & CMS</span>
+  <div>
+    <button onclick="window.print()">พิมพ์ / PDF</button>
+  </div>
+</div>
+
+<!-- ==================== หน้า 1 ==================== -->
+<div class="page">
+  <div class="header-center">
+    <h1>แบบสอบถามความพึงพอใจ</h1>
+    <h2>ระบบ Happy MPM Web Application & Content Management System</h2>
+    <p>โครงงานสหกิจศึกษา สาขาวิชาระบบสารสนเทศและเทคโนโลยีมัลติมีเดีย</p>
+    <p>คณะวิศวกรรมศาสตร์ มหาวิทยาลัยหอการค้าไทย</p>
+  </div>
+
+  <hr class="divider">
+
+  <p class="instructions"><strong>คำชี้แจง:</strong> แบบสอบถามฉบับนี้จัดทำขึ้นเพื่อประเมินความพึงพอใจของผู้ใช้งานที่มีต่อระบบ Happy MPM Web Application & CMS ข้อมูลที่ได้จะนำไปใช้ประโยชน์ในการปรับปรุงและพัฒนาระบบให้ดียิ่งขึ้น โดยข้อมูลทั้งหมดจะถูกเก็บเป็นความลับและใช้เพื่อการศึกษาเท่านั้น</p>
+  <p class="instructions"><strong>คำอธิบายระบบแบบสั้น:</strong> ระบบนี้คือเว็บไซต์ Happy MPM ที่ท่านเปิดดูข้อมูล และมีหน้าจอสำหรับเจ้าหน้าที่ใช้แก้ไขข้อความ/รูปภาพบนเว็บไซต์ หากท่านเป็นผู้ใช้งานทั่วไป ให้ตอบตามประสบการณ์การใช้งานเว็บไซต์เท่านั้น ส่วนคำถามที่ระบุว่า “สำหรับเจ้าหน้าที่” หากท่านไม่ได้ใช้งาน สามารถข้ามได้</p>
+
+  <p class="instructions no-indent">แบบสอบถามแบ่งออกเป็น 3 ตอน ดังนี้</p>
+  <p class="instructions no-indent" style="margin-left:1.27cm"><strong>ตอนที่ 1:</strong> ข้อมูลทั่วไปของผู้ตอบแบบสอบถาม</p>
+  <p class="instructions no-indent" style="margin-left:1.27cm"><strong>ตอนที่ 2:</strong> ความพึงพอใจต่อระบบ (20 ข้อ)</p>
+  <p class="instructions no-indent" style="margin-left:1.27cm"><strong>ตอนที่ 3:</strong> ข้อเสนอแนะเพิ่มเติม</p>
+
+  <hr class="divider">
+
+  <!-- ========== ตอนที่ 1 ========== -->
+  <div class="section-title">ตอนที่ 1: ข้อมูลทั่วไปของผู้ตอบแบบสอบถาม</div>
+
+  <p class="instructions no-indent" style="margin-top:6pt"><strong>1. เพศ</strong></p>
+  <div class="checkbox-row" style="margin-left:1.27cm;margin-bottom:6pt">
+    <div class="checkbox-item"><span class="box"></span> ชาย</div>
+    <div class="checkbox-item"><span class="box"></span> หญิง</div>
+    <div class="checkbox-item"><span class="box"></span> ไม่ระบุ</div>
+  </div>
+
+  <p class="instructions no-indent"><strong>2. อายุ</strong></p>
+  <div class="checkbox-row" style="margin-left:1.27cm;margin-bottom:6pt">
+    <div class="checkbox-item"><span class="box"></span> ต่ำกว่า 16 ปี</div>
+    <div class="checkbox-item"><span class="box"></span> 16–30 ปี</div>
+    <div class="checkbox-item"><span class="box"></span> 31–45 ปี</div>
+    <div class="checkbox-item"><span class="box"></span> 46–60 ปี</div>
+    <div class="checkbox-item"><span class="box"></span> มากกว่า 60 ปีขึ้นไป</div>
+  </div>
+
+  <p class="instructions no-indent"><strong>3. สถานะของผู้ตอบ</strong></p>
+  <div class="checkbox-row" style="margin-left:1.27cm;margin-bottom:6pt">
+    <div class="checkbox-item"><span class="box"></span> เจ้าหน้าที่/แอดมิน (ใช้งานระบบหลังบ้านเพื่อจัดการเนื้อหา)</div>
+    <div class="checkbox-item"><span class="box"></span> บุคคลทั่วไป (ใช้งานเว็บไซต์/เข้าชมข้อมูล)</div>
+  </div>
+
+  <p class="instructions no-indent"><strong>4. ประสบการณ์การใช้งานเว็บไซต์</strong></p>
+  <div class="checkbox-row" style="margin-left:1.27cm;margin-bottom:6pt">
+    <div class="checkbox-item"><span class="box"></span> น้อยกว่า 1 ปี</div>
+    <div class="checkbox-item"><span class="box"></span> 1–3 ปี</div>
+    <div class="checkbox-item"><span class="box"></span> มากกว่า 3 ปี</div>
+  </div>
+  <p class="instructions no-indent" style="font-size:12pt;color:#555;margin-left:1.27cm;margin-top:-2pt">* หมายถึงประสบการณ์การใช้งานเว็บไซต์โดยทั่วไป (ไม่จำเป็นต้องเป็นระบบนี้เท่านั้น)</p>
+
+  <p class="instructions no-indent"><strong>5. ระดับการศึกษา</strong></p>
+  <div class="checkbox-row" style="margin-left:1.27cm;margin-bottom:6pt">
+    <div class="checkbox-item"><span class="box"></span> ต่ำกว่าปริญญาตรี</div>
+    <div class="checkbox-item"><span class="box"></span> ปริญญาตรี</div>
+    <div class="checkbox-item"><span class="box"></span> ปริญญาโท</div>
+    <div class="checkbox-item"><span class="box"></span> สูงกว่าปริญญาโท</div>
+  </div>
+
+  <p class="instructions no-indent"><strong>6. อาชีพ</strong></p>
+  <div class="checkbox-row" style="margin-left:1.27cm;margin-bottom:6pt">
+    <div class="checkbox-item"><span class="box"></span> ข้าราชการ / พนักงานรัฐวิสาหกิจ</div>
+    <div class="checkbox-item"><span class="box"></span> พนักงานบริษัทเอกชน</div>
+    <div class="checkbox-item"><span class="box"></span> นักเรียน / นักศึกษา</div>
+    <div class="checkbox-item"><span class="box"></span> อื่น ๆ ..........................................................</div>
+  </div>
+
+  <p class="instructions no-indent"><strong>7. อุปกรณ์ที่ใช้ในการเข้าเว็บไซต์นี้</strong> (เลือกได้มากกว่า 1 ข้อ)</p>
+  <div class="checkbox-row" style="margin-left:1.27cm;margin-bottom:6pt">
+    <div class="checkbox-item"><span class="box"></span> คอมพิวเตอร์ / Laptop</div>
+    <div class="checkbox-item"><span class="box"></span> แท็บเล็ต</div>
+    <div class="checkbox-item"><span class="box"></span> สมาร์ทโฟน</div>
+  </div>
+
+  <p class="instructions no-indent"><strong>8. หากท่านเป็น “บุคลากรภายในบริษัท Happy MPM” กรุณาระบุตำแหน่งงาน</strong></p>
+  <div class="comment-box" style="min-height:40pt;margin-top:4pt">
+    <div class="comment-lines">
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ========== ตอนที่ 2 ========== -->
+  <div class="section-title">ตอนที่ 2: ความพึงพอใจต่อระบบ</div>
+  <p class="instructions">กรุณาทำเครื่องหมาย &#10003; ในช่องที่ตรงกับระดับความพึงพอใจของท่านมากที่สุด</p>
+  <p class="instructions no-indent" style="font-size:12pt;color:#555;margin-bottom:2pt"><strong>เกณฑ์:</strong> 5 = มากที่สุด &nbsp; 4 = มาก &nbsp; 3 = ปานกลาง &nbsp; 2 = น้อย &nbsp; 1 = ควรปรับปรุง</p>
+
+  <!-- ด้าน 1: การใช้งานทั่วไป -->
+  <div class="section-title green" style="margin-top:10pt;font-size:13pt">ด้านที่ 1: การใช้งานทั่วไป (Functionality)</div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:30px">ข้อ</th>
+        <th>รายการประเมิน</th>
+        <th class="rating-cell">5</th>
+        <th class="rating-cell">4</th>
+        <th class="rating-cell">3</th>
+        <th class="rating-cell">2</th>
+        <th class="rating-cell">1</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td class="item-text">เมื่อท่านเข้าเว็บไซต์ Happy MPM ข้อมูลและเนื้อหาที่แสดงบนหน้าเว็บถูกต้องและครบถ้วนตามที่คาดหวัง</td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>2</td><td class="item-text">เมื่อเปลี่ยนภาษาในเว็บไซต์ (เช่น ไทย / อังกฤษ) ข้อความบนหน้าเว็บเปลี่ยนเป็นภาษานั้นได้ถูกต้อง</td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>3</td><td class="item-text">ช่องแชทผู้ช่วยอัตโนมัติ (AI Chat ที่มุมหน้าจอ) ช่วยตอบคำถามเกี่ยวกับ Happy MPM ได้ตรงประเด็นและเข้าใจง่าย</td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>4</td><td class="item-text">หน้าแผนที่สาขาที่ใช้ดูที่ตั้งของ Happy MPM แสดงตำแหน่งและข้อมูลได้ถูกต้อง และท่านใช้งานได้ไม่ยุ่งยาก</td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>5</td><td class="item-text">หน้าปฏิทินกิจกรรมแสดงวันที่และรายละเอียดกิจกรรมปัจจุบันได้ชัดเจน</td><td></td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ==================== หน้า 2 ==================== -->
+<div class="page">
+  <!-- ด้าน 2: การออกแบบ UI/UX -->
+  <div class="section-title" style="margin-top:0;font-size:13pt;border-left-color:#1565c0">ด้านที่ 2: การออกแบบส่วนติดต่อผู้ใช้ (UI/UX Design)</div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:30px">ข้อ</th>
+        <th>รายการประเมิน</th>
+        <th class="rating-cell">5</th>
+        <th class="rating-cell">4</th>
+        <th class="rating-cell">3</th>
+        <th class="rating-cell">2</th>
+        <th class="rating-cell">1</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>6</td><td class="item-text">โดยภาพรวม หน้าตาเว็บไซต์ (สี ฟอนต์ รูปภาพ) ดูสวยงาม ทันสมัย และเหมาะสมกับองค์กร</td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>7</td><td class="item-text">เมื่อท่านเข้าเว็บไซต์ ท่านมองหาเมนู/ปุ่มต่าง ๆ แล้วเข้าใจได้ง่ายว่าแต่ละส่วนทำอะไร (ไม่สับสน)</td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>8</td><td class="item-text">เมื่อเปิดเว็บไซต์ด้วยอุปกรณ์ต่าง ๆ (คอมพิวเตอร์/แท็บเล็ต/มือถือ) การจัดวางหน้าจอดูเรียบร้อย เหมาะกับขนาดหน้าจอ</td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>9</td><td class="item-text">ขนาดตัวหนังสือ สีพื้นหลัง และไอคอนในหน้าเว็บ อ่านง่าย ไม่ล้าตาเมื่อใช้งานต่อเนื่อง</td><td></td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+
+  <!-- ด้าน 3: ประสิทธิภาพ -->
+  <div class="section-title orange" style="font-size:13pt">ด้านที่ 3: ประสิทธิภาพ (Performance)</div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:30px">ข้อ</th>
+        <th>รายการประเมิน</th>
+        <th class="rating-cell">5</th>
+        <th class="rating-cell">4</th>
+        <th class="rating-cell">3</th>
+        <th class="rating-cell">2</th>
+        <th class="rating-cell">1</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>10</td><td class="item-text">เมื่อเปิดหน้าเว็บไซต์ในครั้งแรก ความเร็วในการโหลดอยู่ในระดับที่ท่านพอใจ</td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>11</td><td class="item-text">เมื่อคลิกเปลี่ยนหน้าในเว็บไซต์ หน้าจอแสดงผลต่อเนื่อง ไม่ค้างหรือกระตุกบ่อยครั้ง</td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>12</td><td class="item-text">เมื่อใช้ช่องแชทผู้ช่วยอัตโนมัติ (AI Chat) ระบบตอบกลับภายในเวลาที่ท่านรู้สึกว่าไม่นานเกินไป</td><td></td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+
+  <!-- ด้าน 4: ระบบ CMS (เฉพาะแอดมิน) -->
+  <div class="section-title purple" style="font-size:13pt">ด้านที่ 4: หน้าจอหลังบ้านสำหรับแก้ไขข้อมูลเว็บไซต์ (สำหรับเจ้าหน้าที่)</div>
+  <p class="instructions no-indent" style="font-size:12pt;color:#555;margin-bottom:4pt">* ข้อนี้สำหรับผู้ที่เคยใช้หน้าจอหลังบ้านเพื่อแก้ไขข้อมูลบนเว็บไซต์ หากท่านไม่เคยใช้งาน สามารถข้ามด้านนี้ได้</p>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:30px">ข้อ</th>
+        <th>รายการประเมิน</th>
+        <th class="rating-cell">5</th>
+        <th class="rating-cell">4</th>
+        <th class="rating-cell">3</th>
+        <th class="rating-cell">2</th>
+        <th class="rating-cell">1</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>13</td><td class="item-text">หน้าจอแก้ไขข้อความและรูปภาพของหน้าเว็บ (Live Editor) ใช้งานไม่ยุ่งยาก และทำให้ท่านแก้ไขข้อมูลได้เร็วขึ้น</td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>14</td><td class="item-text">หน้าจอดูสถิติผู้เข้าชม (Dashboard) แสดงตัวเลขและกราฟให้ท่านเข้าใจข้อมูลได้ง่าย</td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>15</td><td class="item-text">หน้าจอจัดการบัญชีผู้ใช้ และกำหนดสิทธิ์การใช้งานทำงานได้ถูกต้องตามที่ท่านคาดหวัง</td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>16</td><td class="item-text">ฟังก์ชันสำรองและกู้คืนข้อมูล (Backup/Restore) มีขั้นตอนที่ชัดเจน และทำให้ท่านรู้สึกมั่นใจในความปลอดภัยของข้อมูล</td><td></td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+
+  <!-- ด้าน 5: ความพึงพอใจโดยรวม -->
+  <div class="section-title red" style="font-size:13pt">ด้านที่ 5: ความพึงพอใจโดยรวม (Overall Satisfaction)</div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:30px">ข้อ</th>
+        <th>รายการประเมิน</th>
+        <th class="rating-cell">5</th>
+        <th class="rating-cell">4</th>
+        <th class="rating-cell">3</th>
+        <th class="rating-cell">2</th>
+        <th class="rating-cell">1</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>17</td><td class="item-text">ระบบโดยรวมตรงตามความต้องการของผู้ใช้งาน</td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>18</td><td class="item-text">ระบบมีความน่าเชื่อถือและเสถียร</td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>19</td><td class="item-text">ท่านจะแนะนำให้ผู้อื่นใช้งานระบบนี้</td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>20</td><td class="item-text">ท่านพึงพอใจต่อระบบโดยภาพรวม</td><td></td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ==================== หน้า 3 ==================== -->
+<div class="page">
+  <!-- ========== ตอนที่ 3 ========== -->
+  <div class="section-title" style="margin-top:0">ตอนที่ 3: ข้อเสนอแนะเพิ่มเติม</div>
+
+  <p class="instructions no-indent" style="margin-top:8pt"><strong>1. จุดเด่นของระบบ/เว็บไซต์ที่ท่านประทับใจมากที่สุดคืออะไร?</strong></p>
+  <div class="comment-box">
+    <div class="comment-lines">
+      <div class="line"></div><div class="line"></div><div class="line"></div>
+    </div>
+  </div>
+
+  <p class="instructions no-indent"><strong>2. จุดที่ควรปรับปรุงหรือพัฒนาเพิ่มเติมคืออะไร? (เช่น ความเร็ว ความชัดเจนของเมนู/ข้อมูล)</strong></p>
+  <div class="comment-box">
+    <div class="comment-lines">
+      <div class="line"></div><div class="line"></div><div class="line"></div>
+    </div>
+  </div>
+
+  <p class="instructions no-indent"><strong>3. ฟีเจอร์ใดที่ท่านอยากให้เพิ่มในอนาคต? (ยกตัวอย่าง: ช่องทางติดต่อ, ระบบค้นหา, การแจ้งเตือน)</strong></p>
+  <div class="comment-box">
+    <div class="comment-lines">
+      <div class="line"></div><div class="line"></div><div class="line"></div>
+    </div>
+  </div>
+
+  <p class="instructions no-indent"><strong>4. ข้อเสนอแนะอื่นๆ</strong></p>
+  <div class="comment-box">
+    <div class="comment-lines">
+      <div class="line"></div><div class="line"></div><div class="line"></div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <p class="footer-note">ขอขอบคุณท่านเป็นอย่างสูงที่สละเวลาในการตอบแบบสอบถาม</p>
+  <p class="footer-note">ข้อมูลของท่านจะถูกเก็บเป็นความลับและใช้เพื่อการศึกษาเท่านั้น</p>
+</div>
+
+</body>
+</html>

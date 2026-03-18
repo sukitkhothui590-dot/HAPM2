@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ภาคผนวก — Happy MPM Web Application & CMS</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'TH Sarabun New', 'Sarabun', 'TH Sarabun PSK', Arial, sans-serif;
+    font-size: 14pt;
+    line-height: 1.7;
+    color: #000;
+    background: #e0e0e0;
+  }
+
+  .page {
+    width: 21cm;
+    min-height: 29.7cm;
+    margin: 0.8cm auto;
+    background: #fff;
+    padding: 2.54cm 2.54cm 2.54cm 3.81cm;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    page-break-after: always;
+  }
+
+  h1 { font-size: 18pt; font-weight: 700; margin-bottom: 8pt; }
+  h2 { font-size: 16pt; font-weight: 700; margin-top: 14pt; margin-bottom: 6pt; }
+  h3 { font-size: 14pt; font-weight: 700; margin-top: 10pt; margin-bottom: 4pt; }
+  h4 { font-size: 13pt; font-weight: 700; margin-top: 8pt; margin-bottom: 3pt; }
+
+  p {
+    margin-bottom: 6pt;
+    text-indent: 1.27cm;
+    text-align: justify;
+  }
+  p.no-indent { text-indent: 0; }
+
+  ul, ol {
+    margin-left: 1.5cm;
+    margin-bottom: 8pt;
+  }
+  li { margin-bottom: 3pt; font-size: 13pt; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 6pt 0 10pt 0;
+    font-size: 12pt;
+  }
+  table th, table td {
+    border: 1px solid #000;
+    padding: 3pt 6pt;
+    vertical-align: top;
+  }
+  table th {
+    background: #f0f0f0;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .table-caption {
+    font-weight: 700;
+    margin-top: 10pt;
+    margin-bottom: 3pt;
+    text-indent: 0;
+  }
+  .img-caption {
+    font-size: 11pt;
+    text-align: center;
+    font-weight: 700;
+    margin-top: 3pt;
+    margin-bottom: 10pt;
+    text-indent: 0;
+  }
+
+  .appendix-title {
+    text-align: center;
+    font-size: 20pt;
+    font-weight: 700;
+    margin-bottom: 8pt;
+  }
+  .appendix-subtitle {
+    text-align: center;
+    font-size: 16pt;
+    font-weight: 700;
+    margin-bottom: 16pt;
+  }
+
+  .img-placeholder {
+    width: 100%;
+    border: 2px dashed #1565c0;
+    border-radius: 6px;
+    background: #f0f4ff;
+    padding: 14pt 10pt;
+    margin: 8pt 0 4pt 0;
+    text-align: center;
+  }
+  .img-placeholder .img-icon { font-size: 26pt; display: block; margin-bottom: 5pt; opacity: 0.5; }
+  .img-placeholder .img-label { font-size: 11pt; font-weight: 700; color: #1565c0; display: block; margin-bottom: 3pt; }
+  .img-placeholder .img-desc { font-size: 9.5pt; color: #444; display: block; line-height: 1.5; }
+  .img-placeholder .img-size { font-size: 8.5pt; color: #888; display: block; margin-top: 4pt; font-style: italic; }
+
+  .section-divider {
+    border: none;
+    border-top: 2px solid #333;
+    margin: 16pt 0 12pt 0;
+  }
+
+  .code-block {
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 6pt 8pt;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 9.5pt;
+    line-height: 1.4;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin: 6pt 0 10pt 0;
+    text-indent: 0;
+  }
+
+  .step-box {
+    border-left: 4px solid #1565c0;
+    padding: 4pt 8pt;
+    margin: 4pt 0 6pt 0;
+    background: #f8f9ff;
+  }
+  .step-box .step-num {
+    font-weight: 700;
+    color: #1565c0;
+    font-size: 11pt;
+  }
+
+  .toolbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: #1a1a2e;
+    color: #fff;
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 9999;
+    font-size: 11pt;
+  }
+  .toolbar button {
+    background: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 6px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11pt;
+  }
+  .spacer-top { height: 48px; }
+
+  @media print {
+    body { background: #fff; }
+    .toolbar, .spacer-top { display: none; }
+    .page { margin: 0; box-shadow: none; width: 100%; padding: 2.54cm 2.54cm 2.54cm 3.81cm; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar no-print">
+  <div><strong>ภาคผนวก</strong> — Happy MPM Web Application &amp; CMS | <span style="font-size:10pt;opacity:0.7">ก, ข, ค, ง, จ</span></div>
+  <button onclick="window.print()">พิมพ์ / บันทึก PDF</button>
+</div>
+<div class="spacer-top"></div>
+
+<!-- ==================== ปกภาคผนวก ==================== -->
+<div class="page" style="display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:29.7cm">
+  <p class="appendix-title" style="font-size:24pt;margin-bottom:20pt">ภาคผนวก</p>
+  <table style="width:80%;border:none;font-size:14pt">
+    <tbody>
+      <tr style="border:none"><td style="border:none;padding:6pt 0;font-weight:700">ภาคผนวก ก</td><td style="border:none;padding:6pt 0">คู่มือการใช้งานระบบสำหรับผู้ใช้และแอดมิน</td></tr>
+      <tr style="border:none"><td style="border:none;padding:6pt 0;font-weight:700">ภาคผนวก ข</td><td style="border:none;padding:6pt 0">รูปภาพประกอบหน้าจอระบบทั้งหมด</td></tr>
+      <tr style="border:none"><td style="border:none;padding:6pt 0;font-weight:700">ภาคผนวก ค</td><td style="border:none;padding:6pt 0">รายละเอียดทางเทคนิค API และการ Deploy</td></tr>
+      <tr style="border:none"><td style="border:none;padding:6pt 0;font-weight:700">ภาคผนวก ง</td><td style="border:none;padding:6pt 0">แบบสอบถามความพึงพอใจผู้ใช้งาน</td></tr>
+      <tr style="border:none"><td style="border:none;padding:6pt 0;font-weight:700">ภาคผนวก จ</td><td style="border:none;padding:6pt 0">ผลการทดสอบประสิทธิภาพ Lighthouse</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ==================== ภาคผนวก ก ==================== -->
+<div class="page">
+  <p class="appendix-title">ภาคผนวก ก</p>
+  <p class="appendix-subtitle">คู่มือการใช้งานระบบสำหรับผู้ใช้และแอดมิน</p>
+  <hr class="section-divider">
+
+  <h2>ส่วนที่ 1 คู่มือสำหรับผู้ใช้งานทั่วไป (Public User Guide)</h2>
+  <p>คู่มือฉบับนี้จัดทำขึ้นเพื่ออธิบายขั้นตอนการใช้งานเว็บไซต์ happympm.com สำหรับผู้เข้าชมทั่วไปและสมาชิก โดยครอบคลุมฟีเจอร์หลักทั้งหมดของระบบ</p>
+
+  <h3>1.1 การเข้าถึงเว็บไซต์และการนำทาง (Navigation)</h3>
+  <ul>
+    <li>เปิด Browser พิมพ์ <strong>happympm.com</strong> เพื่อเข้าสู่หน้าหลัก</li>
+    <li>เมนูนำทางด้านบนรองรับการเข้าถึงทุกส่วนของเว็บไซต์</li>
+    <li>คลิกปุ่มเลือกภาษา (มุมบนขวา) เพื่อเปลี่ยนเป็น ไทย / English / Indonesia / Melayu / عربي</li>
+    <li>ระบบรองรับ Responsive บนทุกอุปกรณ์ ทั้ง Desktop, Tablet และ Mobile</li>
+  </ul>
+
+  <div class="img-placeholder">
+    <span class="img-icon">🖥️</span>
+    <span class="img-label">ภาพที่ ก.1 — หน้าจอหลักของเว็บไซต์ (Homepage)</span>
+    <span class="img-desc">แคป happympm.com เต็มหน้าจอ แสดง Hero Section (Banner/Video), เมนูด้านบน, ข้อมูลผลิตภัณฑ์ และ AI Chat Widget มุมขวาล่าง</span>
+    <span class="img-size">ขนาดแนะนำ: 1440×900px — แคปเต็มจอ Desktop</span>
+  </div>
+  <p class="img-caption">ภาพที่ ก.1 หน้าจอหลักของเว็บไซต์ happympm.com</p>
+
+  <h3>1.2 การใช้งานแผนที่สาขาอัจฉริยะ (Interactive Branch Map)</h3>
+  <ul>
+    <li>คลิกเมนู <strong>"แผนที่สาขา"</strong> เพื่อเข้าสู่ระบบแผนที่</li>
+    <li>คลิกจังหวัดบนแผนที่เพื่อดูรายละเอียดสาขา ที่อยู่ และเบอร์โทรศัพท์</li>
+    <li>สลับมุมมองระหว่าง <strong>แผนที่ประเทศไทย</strong> และ <strong>Globe View</strong> ด้วยปุ่มด้านบน</li>
+    <li>รองรับข้อมูลสาขาในไทย ลาว และกัมพูชา</li>
+  </ul>
+
+  <div class="img-placeholder">
+    <span class="img-icon">🗺️</span>
+    <span class="img-label">ภาพที่ ก.2 — ระบบแผนที่สาขาแบบ Interactive</span>
+    <span class="img-desc">แคปหน้า /branch-map แสดงแผนที่ประเทศไทย (amCharts 5) พร้อมหมุดสาขา และ Pop-up ข้อมูลสาขาเมื่อคลิก</span>
+    <span class="img-size">ขนาดแนะนำ: 1280×720px</span>
+  </div>
+  <p class="img-caption">ภาพที่ ก.2 ระบบแผนที่สาขาแบบ Interactive แสดงสาขาทั่วประเทศ</p>
+
+  <h3>1.3 การสนทนากับ AI Chat Assistant</h3>
+  <ul>
+    <li>คลิกไอคอนแชท (มุมล่างขวา) เพื่อเริ่มต้นการสนทนา</li>
+    <li>กรอกข้อมูล ชื่อ, เบอร์โทรศัพท์, อีเมล</li>
+    <li>เลือกหมวดหมู่ที่ต้องการสอบถาม: (1) สมัครธุรกิจ (2) ฝ่ายสนับสนุน (3) ผลิตภัณฑ์ (4) เรื่องอื่นๆ</li>
+    <li>พิมพ์คำถามแล้วกด Enter หรือปุ่มส่ง AI จะตอบกลับภายใน 5 วินาที</li>
+  </ul>
+
+  <div class="img-placeholder">
+    <span class="img-icon">🤖</span>
+    <span class="img-label">ภาพที่ ก.3 — AI Chat Widget และหน้าจอการสนทนา</span>
+    <span class="img-desc">แคป 2 ภาพ — ซ้าย: ปุ่ม Chat ที่มุมล่างขวา / ขวา: กล่อง Chat เปิดขึ้นมาพร้อมข้อความสนทนา 2-3 รอบ</span>
+    <span class="img-size">ขนาดแนะนำ: 400×600px (เฉพาะ Chat Box)</span>
+  </div>
+  <p class="img-caption">ภาพที่ ก.3 AI Chat Widget และหน้าจอการสนทนากับระบบ AI</p>
+</div>
+
+<div class="page">
+  <h2>ส่วนที่ 2 คู่มือสำหรับผู้ดูแลระบบ (Admin CMS Guide)</h2>
+
+  <h3>2.1 การเข้าสู่ระบบ (Login)</h3>
+  <ul>
+    <li>เปิด Browser ไปที่ <strong>happympm.com/ADMIN-CMS</strong></li>
+    <li>กรอก Email และ Password ที่ได้รับสิทธิ์ จากนั้นคลิก <strong>"เข้าสู่ระบบ"</strong></li>
+    <li>ระบบจะ Redirect ไปยัง Dashboard อัตโนมัติตามระดับสิทธิ์ที่กำหนด</li>
+  </ul>
+
+  <div class="img-placeholder">
+    <span class="img-icon">🔐</span>
+    <span class="img-label">ภาพที่ ก.4 — หน้าจอเข้าสู่ระบบ Admin (Login Form)</span>
+    <span class="img-desc">แคปหน้า Login ที่ happympm.com/ADMIN-CMS แสดง Form Email/Password, ปุ่ม Login และโลโก้บริษัท</span>
+    <span class="img-size">ขนาดแนะนำ: 900×600px</span>
+  </div>
+  <p class="img-caption">ภาพที่ ก.4 หน้าจอเข้าสู่ระบบสำหรับผู้ดูแลระบบ</p>
+
+  <h3>2.2 Dashboard หลัก</h3>
+  <ul>
+    <li>หลัง Login จะเข้าสู่หน้า <strong>Dashboard</strong> แสดงสถิติสรุป</li>
+    <li>แสดงจำนวนผู้เข้าชมวันนี้, สัปดาห์นี้, เดือนนี้</li>
+    <li>แสดงจำนวน AI Chat Session ทั้งหมดและล่าสุด</li>
+    <li>เมนูด้านซ้ายรายการเมนูทั้งหมดตามระดับสิทธิ์ที่มี</li>
+  </ul>
+
+  <div class="img-placeholder">
+    <span class="img-icon">📊</span>
+    <span class="img-label">ภาพที่ ก.5 — หน้า Dashboard หลักของ Admin CMS</span>
+    <span class="img-desc">แคปหน้า Dashboard แสดง Sidebar เมนูซ้าย, การ์ดสถิติ 4 ใบ และกราฟภาพรวม</span>
+    <span class="img-size">ขนาดแนะนำ: 1440×900px — แคปเต็มหน้าจอ</span>
+  </div>
+  <p class="img-caption">ภาพที่ ก.5 หน้า Dashboard หลักแสดงสถิติภาพรวมระบบ</p>
+
+  <h3>2.3 การแก้ไขเนื้อหาแบบ Real-time (Live Editor)</h3>
+  <ul>
+    <li>คลิก <strong>"Live Editor"</strong> ในเมนูซ้าย</li>
+    <li>เลือกหน้าที่ต้องการแก้ไขจาก Dropdown ด้านบน</li>
+    <li>Panel ซ้าย: รายการ Section ที่แก้ไขได้ (ข้อความ, รูปภาพ, ลิงก์)</li>
+    <li>Panel ขวา: แสดง Preview เว็บไซต์จริงแบบ Real-time ผ่าน iframe</li>
+    <li>คลิก <strong>"บันทึก"</strong> เพื่อบันทึกการเปลี่ยนแปลง ผลจะแสดงบนเว็บทันที</li>
+  </ul>
+
+  <div class="img-placeholder">
+    <span class="img-icon">✏️</span>
+    <span class="img-label">ภาพที่ ก.6 — Live Editor พร้อม Preview Real-time</span>
+    <span class="img-desc">แคปเต็มหน้าจอขณะใช้ Live Editor แสดง Panel แก้ไขด้านซ้าย และ iframe Preview เว็บไซต์จริงด้านขวา</span>
+    <span class="img-size">ขนาดแนะนำ: 1440×900px</span>
+  </div>
+  <p class="img-caption">ภาพที่ ก.6 หน้า Live Editor แสดงการแก้ไขเนื้อหาแบบ Real-time</p>
+
+  <h3>2.4 การจัดเรียง Section (Section Order — Drag & Drop)</h3>
+  <ul>
+    <li>คลิก <strong>"จัดเรียง Section"</strong> ในเมนูซ้าย</li>
+    <li>เลือกหน้าที่ต้องการจัดลำดับ (Home, About ฯลฯ)</li>
+    <li>ลากวาง (Drag &amp; Drop) แถบ Section เพื่อเปลี่ยนลำดับการแสดงผล</li>
+    <li>คลิก <strong>"บันทึกลำดับ"</strong> เพื่อยืนยัน ระบบจะอัปเดตหน้าเว็บทันที</li>
+  </ul>
+
+  <div class="img-placeholder">
+    <span class="img-icon">↕️</span>
+    <span class="img-label">ภาพที่ ก.7 — ระบบ Section Order (Drag &amp; Drop)</span>
+    <span class="img-desc">แคปหน้า Section Order แสดงรายการ Section ที่ลากได้ (มี Handle icon ด้านซ้าย) และหมายเลขลำดับ</span>
+    <span class="img-size">ขนาดแนะนำ: 900×700px</span>
+  </div>
+  <p class="img-caption">ภาพที่ ก.7 ระบบจัดลำดับ Section แบบ Drag &amp; Drop</p>
+</div>
+
+<div class="page">
+  <h3>2.5 การจัดการฐานความรู้และตั้งค่า AI (AI Knowledge Base &amp; Settings)</h3>
+  <ul>
+    <li>คลิก <strong>"จัดการ AI"</strong> หรือ <strong>"ฐานความรู้"</strong> ในเมนูซ้าย</li>
+    <li>เพิ่ม/แก้ไข/ลบบทความความรู้แต่ละหมวดหมู่ (สมัครธุรกิจ, ผลิตภัณฑ์, สนับสนุน, ทั่วไป)</li>
+    <li>หน้า <strong>"ตั้งค่า AI"</strong>: เลือกโมเดล (GPT-4o / GPT-4o-mini / GPT-4.1-mini / GPT-4.1-nano)</li>
+    <li>ปรับค่า Temperature (0.0 = ตอบตามความรู้ตรงๆ / 1.0 = สร้างสรรค์มากขึ้น)</li>
+    <li>แก้ไข System Prompt เพื่อกำหนดบุคลิกและขอบเขตการตอบ</li>
+  </ul>
+
+  <div class="img-placeholder">
+    <span class="img-icon">🧠</span>
+    <span class="img-label">ภาพที่ ก.8 — หน้าจัดการฐานความรู้ AI และหน้าตั้งค่า</span>
+    <span class="img-desc">แคป 2 ภาพ — (1) หน้ารายการ Knowledge Base พร้อมปุ่มเพิ่ม/แก้ไข/ลบ (2) หน้า AI Settings แสดง Dropdown โมเดลและ Slider Temperature</span>
+    <span class="img-size">ขนาดแนะนำ: 1280×720px</span>
+  </div>
+  <p class="img-caption">ภาพที่ ก.8 หน้าจัดการฐานความรู้ AI และการตั้งค่าโมเดล</p>
+
+  <h3>2.6 Analytics Dashboard — สถิติผู้เข้าชม 77 จังหวัด</h3>
+  <ul>
+    <li>คลิก <strong>"Analytics"</strong> หรือ <strong>"สถิติผู้เข้าชม"</strong> ในเมนูซ้าย</li>
+    <li>ดูสถิติแบบ Real-time: จำนวน Page Views, Unique Visitors รายวัน/สัปดาห์/เดือน</li>
+    <li>กราฟจังหวัด: แสดง Top 20 จังหวัดที่เข้าชมมากที่สุด</li>
+    <li>แผนที่ Heatmap: แสดงความเข้มข้นของผู้ชมในแต่ละจังหวัด</li>
+  </ul>
+
+  <div class="img-placeholder">
+    <span class="img-icon">📈</span>
+    <span class="img-label">ภาพที่ ก.9 — Analytics Dashboard แผนที่ 77 จังหวัด</span>
+    <span class="img-desc">แคปหน้า Analytics Dashboard เต็มจอ แสดงกราฟเส้นแนวโน้มผู้เข้าชม, กราฟแท่งจังหวัด Top 20 และตาราง</span>
+    <span class="img-size">ขนาดแนะนำ: 1440×900px</span>
+  </div>
+  <p class="img-caption">ภาพที่ ก.9 Analytics Dashboard แสดงสถิติผู้เข้าชมจำแนกตามจังหวัด</p>
+
+  <h3>2.7 ระบบจัดการไฟล์มีเดีย (Media Library)</h3>
+  <ul>
+    <li>คลิก <strong>"จัดการมีเดีย"</strong> ในเมนูซ้าย</li>
+    <li>คลิก <strong>"Upload"</strong> เพื่ออัปโหลดรูปภาพ (รองรับ jpg, png, webp, gif ขนาดไม่เกิน 10MB)</li>
+    <li>คลิกรูปภาพเพื่อ Copy URL นำไปใช้ใน Live Editor</li>
+    <li>คลิก <strong>"ลบ"</strong> เพื่อลบไฟล์ที่ไม่ใช้งาน</li>
+  </ul>
+
+  <div class="img-placeholder">
+    <span class="img-icon">🖼️</span>
+    <span class="img-label">ภาพที่ ก.10 — Media Library แสดงรายการรูปภาพทั้งหมด</span>
+    <span class="img-desc">แคปหน้า Media Library แสดง Grid รูปภาพ พร้อมปุ่ม Upload ด้านบน และ Hover Effect แสดง URL</span>
+    <span class="img-size">ขนาดแนะนำ: 1280×720px</span>
+  </div>
+  <p class="img-caption">ภาพที่ ก.10 หน้า Media Library สำหรับจัดการไฟล์รูปภาพ</p>
+
+  <h3>2.8 ระบบจัดการคำแปล (Translation Manager)</h3>
+  <ul>
+    <li>คลิก <strong>"จัดการคำแปล"</strong> ในเมนูซ้าย</li>
+    <li>ระบบแสดงรายการคำแปลแต่ละ Key แยกตาม Namespace (เมนู, ปุ่ม, ข้อความ)</li>
+    <li>คลิกช่อง TH / EN / ID / MS / AR เพื่อแก้ไขคำแปลแต่ละภาษา</li>
+    <li>คลิก <strong>"บันทึก"</strong> เพื่อยืนยัน คำแปลจะอัปเดตบนเว็บไซต์ทันที</li>
+  </ul>
+
+  <div class="img-placeholder">
+    <span class="img-icon">🌐</span>
+    <span class="img-label">ภาพที่ ก.11 — Translation Manager แสดงตารางคำแปล 5 ภาษา</span>
+    <span class="img-desc">แคปหน้า Translation Manager แสดงตารางมีคอลัมน์ Key, TH, EN, ID, MS, AR พร้อมช่องแก้ไข</span>
+    <span class="img-size">ขนาดแนะนำ: 1440×800px</span>
+  </div>
+  <p class="img-caption">ภาพที่ ก.11 หน้า Translation Manager สำหรับจัดการคำแปล 5 ภาษา</p>
+
+  <h3>2.9 ระบบสำรองข้อมูล (Backup &amp; Restore)</h3>
+  <ul>
+    <li>คลิก <strong>"Backup &amp; Restore"</strong> ในเมนูซ้าย (ต้องมีสิทธิ์ระดับ Super Admin ขึ้นไป)</li>
+    <li>คลิก <strong>"Export ข้อมูล"</strong> เพื่อดาวน์โหลดข้อมูลทั้งหมดเป็นไฟล์ JSON</li>
+    <li>คลิก <strong>"Import / Restore"</strong> แล้วเลือกไฟล์ JSON เพื่อกู้คืนข้อมูล</li>
+    <li><strong>คำเตือน:</strong> การ Restore จะเขียนทับข้อมูลปัจจุบัน กรุณาทำ Backup ก่อนเสมอ</li>
+  </ul>
+
+  <div class="img-placeholder">
+    <span class="img-icon">💾</span>
+    <span class="img-label">ภาพที่ ก.12 — หน้า Backup &amp; Restore</span>
+    <span class="img-desc">แคปหน้า Backup แสดงปุ่ม Export JSON, ปุ่ม Import/Restore และตารางประวัติการ Backup ที่ผ่านมา</span>
+    <span class="img-size">ขนาดแนะนำ: 1000×600px</span>
+  </div>
+  <p class="img-caption">ภาพที่ ก.12 หน้าระบบสำรองและกู้คืนข้อมูล</p>
+
+  <h3>2.10 ระบบจัดการผู้ใช้งาน (User Management)</h3>
+  <ul>
+    <li>คลิก <strong>"จัดการผู้ใช้"</strong> ในเมนูซ้าย (ต้องมีสิทธิ์ระดับ Super Admin)</li>
+    <li>เห็นรายชื่อผู้ใช้ทั้งหมด พร้อมอีเมล, ชื่อ, ระดับสิทธิ์ และวันที่สร้างบัญชี</li>
+    <li>คลิก <strong>"เพิ่มผู้ใช้"</strong> เพื่อสร้างบัญชีใหม่ กำหนด Role (Viewer/Editor/Admin/Super Admin)</li>
+    <li>คลิก <strong>"แก้ไข"</strong> เพื่อเปลี่ยน Role หรือข้อมูล / คลิก <strong>"ลบ"</strong> เพื่อลบบัญชี</li>
+  </ul>
+
+  <div class="img-placeholder">
+    <span class="img-icon">👥</span>
+    <span class="img-label">ภาพที่ ก.13 — หน้าจัดการผู้ใช้งาน (User Management)</span>
+    <span class="img-desc">แคปหน้า User Management แสดงตารางผู้ใช้ทั้งหมด พร้อม Badge สีของแต่ละ Role และปุ่มแก้ไข/ลบ</span>
+    <span class="img-size">ขนาดแนะนำ: 1280×720px</span>
+  </div>
+  <p class="img-caption">ภาพที่ ก.13 หน้าจัดการผู้ใช้งานและระดับสิทธิ์</p>
+</div>
+
+<!-- ==================== ภาคผนวก ข ==================== -->
+<div class="page">
+  <p class="appendix-title">ภาคผนวก ข</p>
+  <p class="appendix-subtitle">รูปภาพประกอบหน้าจอระบบทั้งหมด</p>
+  <hr class="section-divider">
+  <p>ส่วนนี้รวบรวมภาพหน้าจอ (Screenshots) ของระบบ Happy MPM Web Application &amp; CMS ที่พัฒนาเสร็จสมบูรณ์และ Deploy บนสภาพแวดล้อม Production จริง ครอบคลุมทั้งส่วนหน้าเว็บไซต์สาธารณะ (Public Website) และระบบจัดการเนื้อหา (Admin CMS)</p>
+
+  <h2>ส่วนที่ 1 Public Website Interface</h2>
+  <h3>กลุ่มที่ 1.1 หน้าหลักและส่วนประกอบ</h3>
+
+  <div class="img-placeholder">
+    <span class="img-icon">🏠</span>
+    <span class="img-label">ภาพที่ ข.1 — หน้าหลัก (Homepage) — Desktop View</span>
+    <span class="img-desc">happympm.com บน Desktop แสดง Hero Section, โปรโมชั่น, ข่าวสาร และ AI Chat Widget</span>
+    <span class="img-size">1440×900px — Full Page</span>
+  </div>
+  <p class="img-caption">ภาพที่ ข.1 หน้าหลักเว็บไซต์ happympm.com บนหน้าจอ Desktop</p>
+
+  <div class="img-placeholder">
+    <span class="img-icon">📱</span>
+    <span class="img-label">ภาพที่ ข.2 — หน้าหลัก (Homepage) — Mobile View (Responsive)</span>
+    <span class="img-desc">happympm.com บนมือถือ (375px) แสดง Hamburger Menu และ Layout แนวตั้ง</span>
+    <span class="img-size">390×844px — Portrait Mode</span>
+  </div>
+  <p class="img-caption">ภาพที่ ข.2 การแสดงผลแบบ Responsive Design บนโทรศัพท์มือถือ</p>
+
+  <div class="img-placeholder">
+    <span class="img-icon">🛍️</span>
+    <span class="img-label">ภาพที่ ข.3 — หน้าสินค้า (Products) — Carousel Layout</span>
+    <span class="img-desc">/products แสดง Carousel รายการสินค้า พร้อมรูปภาพ ชื่อ ราคา และปุ่มรายละเอียด</span>
+    <span class="img-size">1280×720px</span>
+  </div>
+  <p class="img-caption">ภาพที่ ข.3 หน้าแสดงรายการสินค้าในรูปแบบ Carousel</p>
+
+  <div class="img-placeholder">
+    <span class="img-icon">📰</span>
+    <span class="img-label">ภาพที่ ข.4 — หน้าข่าวสาร (News)</span>
+    <span class="img-desc">/news แสดงรายการข่าวสารล่าสุด พร้อมรูปภาพ วันที่ หัวข้อและ Pagination</span>
+    <span class="img-size">1280×720px</span>
+  </div>
+  <p class="img-caption">ภาพที่ ข.4 หน้าข่าวสารบริษัท</p>
+
+  <div class="img-placeholder">
+    <span class="img-icon">🎁</span>
+    <span class="img-label">ภาพที่ ข.4.1 — ส่วนแสดงโปรโมชั่น (Promotions Section) บนหน้าหลัก</span>
+    <span class="img-desc">แคปส่วน Promotions Banner บนหน้าหลัก (Home) แสดง Card โปรโมชั่นแบบ Carousel/Grid พร้อมรูปภาพและรายละเอียด</span>
+    <span class="img-size">1280×600px — เฉพาะส่วน Promotions Section</span>
+  </div>
+  <p class="img-caption">ภาพที่ ข.4.1 ส่วนแสดงโปรโมชั่นบนหน้าหลักของเว็บไซต์</p>
+
+  <p class="table-caption">ตารางที่ ข.1 ตัวอย่างข้อมูลโปรโมชั่นที่แสดงในระบบ</p>
+  <table>
+    <thead>
+      <tr><th style="width:5%">ที่</th><th style="width:30%">ชื่อโปรโมชั่น</th><th style="width:20%">ช่วงเวลา</th><th style="width:15%">กลุ่มเป้าหมาย</th><th>รายละเอียดสิทธิประโยชน์</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align:center">1</td>
+        <td><strong>โปรโมชั่นสมาชิกใหม่ Welcome Pack</strong></td>
+        <td style="text-align:center">ต.ค. – ธ.ค. 2568</td>
+        <td style="text-align:center">สมาชิกใหม่</td>
+        <td>สมาชิกใหม่ที่สมัครในช่วงนี้รับสิทธิ์ผลิตภัณฑ์ต้อนรับมูลค่า 500 บาท พร้อม Course ออนไลน์ฟรี 3 เดือน</td>
+      </tr>
+      <tr>
+        <td style="text-align:center">2</td>
+        <td><strong>Happy MPM Anniversary Sale</strong></td>
+        <td style="text-align:center">พ.ย. 2568</td>
+        <td style="text-align:center">สมาชิกทุกระดับ</td>
+        <td>ฉลองครบรอบบริษัท ลด 20% ทุกผลิตภัณฑ์ตลอดเดือนพฤศจิกายน เมื่อสั่งซื้อครบ 1,000 บาทขึ้นไป</td>
+      </tr>
+      <tr>
+        <td style="text-align:center">3</td>
+        <td><strong>โบนัสแนะนำสมาชิก (Referral Bonus)</strong></td>
+        <td style="text-align:center">ตลอดปี 2568</td>
+        <td style="text-align:center">สมาชิกที่แนะนำ</td>
+        <td>รับโบนัส 300 บาท ทุกครั้งที่แนะนำสมาชิกใหม่สำเร็จ ไม่จำกัดจำนวนครั้ง</td>
+      </tr>
+      <tr>
+        <td style="text-align:center">4</td>
+        <td><strong>ทริปท่องเที่ยวประจำปี 2569 (Early Bird)</strong></td>
+        <td style="text-align:center">ม.ค. – ก.พ. 2569</td>
+        <td style="text-align:center">สมาชิก Gold+</td>
+        <td>จองสิทธิ์ทริปต่างประเทศประจำปี 2569 ล่วงหน้า รับส่วนลด Early Bird 15% และที่นั่งพิเศษ</td>
+      </tr>
+      <tr>
+        <td style="text-align:center">5</td>
+        <td><strong>Happy New Year Promotion 2569</strong></td>
+        <td style="text-align:center">1–15 ม.ค. 2569</td>
+        <td style="text-align:center">สมาชิกทุกระดับ</td>
+        <td>สั่งซื้อผลิตภัณฑ์ในช่วงปีใหม่รับแต้มสะสมสองเท่า พร้อมของขวัญพิเศษเมื่อสั่งซื้อครบ 2,000 บาท</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="page">
+  <h3>กลุ่มที่ 1.2 หน้าเนื้อหาเฉพาะทาง</h3>
+
+  <div class="img-placeholder">
+    <span class="img-icon">🏆</span>
+    <span class="img-label">ภาพที่ ข.5 — หน้ารางวัลและความสำเร็จ (Awards)</span>
+    <span class="img-desc">/awards แสดงรายการรางวัลระดับชาติและนานาชาติ พร้อมรูปภาพและคำอธิบาย</span>
+    <span class="img-size">1280×720px</span>
+  </div>
+  <p class="img-caption">ภาพที่ ข.5 หน้าแสดงรางวัลและความสำเร็จของบริษัท</p>
+
+  <div class="img-placeholder">
+    <span class="img-icon">✈️</span>
+    <span class="img-label">ภาพที่ ข.6 — หน้าทริปท่องเที่ยว (Completed Trips)</span>
+    <span class="img-desc">/trips แสดงรายการทริปท่องเที่ยวที่ผ่านมา พร้อมรูปภาพสถานที่และรายละเอียด</span>
+    <span class="img-size">1280×720px</span>
+  </div>
+  <p class="img-caption">ภาพที่ ข.6 หน้าทริปท่องเที่ยวสำหรับสมาชิก</p>
+
+  <div class="img-placeholder">
+    <span class="img-icon">📚</span>
+    <span class="img-label">ภาพที่ ข.7 — หน้าคลังความรู้ (Knowledge Base)</span>
+    <span class="img-desc">/knowledge แสดง Grid บทความ พร้อมหมวดหมู่ ชื่อบทความ รูปปก และปุ่มอ่านเพิ่มเติม</span>
+    <span class="img-size">1280×720px</span>
+  </div>
+  <p class="img-caption">ภาพที่ ข.7 หน้าคลังความรู้สำหรับสมาชิก</p>
+
+  <div class="img-placeholder">
+    <span class="img-icon">🤝</span>
+    <span class="img-label">ภาพที่ ข.8 — หน้ากิจกรรมเพื่อสังคม (Social Activities / CSR)</span>
+    <span class="img-desc">/social-activities แสดงรายการกิจกรรม CSR พร้อมรูปภาพ วันที่จัด และรายละเอียดย่อ</span>
+    <span class="img-size">1280×720px</span>
+  </div>
+  <p class="img-caption">ภาพที่ ข.8 หน้ากิจกรรมเพื่อสังคม (Corporate Social Responsibility)</p>
+
+  <h3>กลุ่มที่ 1.3 ฟีเจอร์พิเศษ</h3>
+
+  <div class="img-placeholder">
+    <span class="img-icon">🗺️</span>
+    <span class="img-label">ภาพที่ ข.9 — แผนที่สาขาอัจฉริยะ (Interactive Branch Map)</span>
+    <span class="img-desc">/branch-map แสดงแผนที่ประเทศไทย พร้อม Heatmap จังหวัด และ Popup ข้อมูลสาขา</span>
+    <span class="img-size">1280×720px</span>
+  </div>
+  <p class="img-caption">ภาพที่ ข.9 ระบบแผนที่สาขาแบบ Interactive ครอบคลุม 77 จังหวัด</p>
+
+  <div class="img-placeholder">
+    <span class="img-icon">🌍</span>
+    <span class="img-label">ภาพที่ ข.10 — Globe View สำหรับมุมมองระดับภูมิภาค</span>
+    <span class="img-desc">แคปส่วน Globe View (ลูกโลกหมุนได้) แสดงตำแหน่งสาขาในอาเซียน</span>
+    <span class="img-size">800×600px</span>
+  </div>
+  <p class="img-caption">ภาพที่ ข.10 มุมมอง Globe View แสดงการขยายตัวในอาเซียน</p>
+
+  <div class="img-placeholder">
+    <span class="img-icon">🌐</span>
+    <span class="img-label">ภาพที่ ข.11 — การแสดงผล 5 ภาษา เปรียบเทียบ TH vs AR (RTL)</span>
+    <span class="img-desc">2 ภาพเคียงกัน — ซ้าย: เว็บภาษาไทย (LTR) / ขวา: เว็บภาษาอาหรับ (RTL Layout)</span>
+    <span class="img-size">2 ภาพ ขนาด 640×600px แต่ละภาพ</span>
+  </div>
+  <p class="img-caption">ภาพที่ ข.11 เปรียบเทียบการแสดงผลภาษาไทย (LTR) และภาษาอาหรับ (RTL)</p>
+</div>
+
+<div class="page">
+  <h2>ส่วนที่ 2 Admin CMS Interface</h2>
+  <h3>กลุ่มที่ 2.1 ระบบหลัก</h3>
+
+  <div class="img-placeholder">
+    <span class="img-icon">🔐</span>
+    <span class="img-label">ภาพที่ ข.12 — หน้า Login Admin CMS</span>
+    <span class="img-desc">happympm.com/ADMIN-CMS แสดง Form Login พร้อมโลโก้บริษัท</span>
+    <span class="img-size">900×600px</span>
+  </div>
+  <p class="img-caption">ภาพที่ ข.12 หน้าเข้าสู่ระบบ Admin CMS</p>
+
+  <div class="img-placeholder">
+    <span class="img-icon">📊</span>
+    <span class="img-label">ภาพที่ ข.13 — Admin Dashboard แสดงสถิติผู้เข้าชมรายวัน</span>
+    <span class="img-desc">Dashboard หลัก แสดงการ์ดสถิติ 4 ใบ กราฟผู้เข้าชม และรายการ AI Chat ล่าสุด</span>
+    <span class="img-size">1440×900px — Full Screen</span>
+  </div>
+  <p class="img-caption">ภาพที่ ข.13 หน้า Dashboard สรุปสถิติการใช้งานระบบ</p>
+
+  <div class="img-placeholder">
+    <span class="img-icon">✏️</span>
+    <span class="img-label">ภาพที่ ข.14 — Live Editor กำลังแก้ไขเนื้อหา Real-time</span>
+    <span class="img-desc">Live Editor เต็มหน้าจอ แสดง Panel ซ้าย (Form แก้ไข) + iframe Preview ขวา</span>
+    <span class="img-size">1440×900px</span>
+  </div>
+  <p class="img-caption">ภาพที่ ข.14 ระบบ Live Editor แสดง Preview เว็บไซต์แบบ Real-time</p>
+
+  <div class="img-placeholder">
+    <span class="img-icon">↕️</span>
+    <span class="img-label">ภาพที่ ข.15 — Section Order (Drag &amp; Drop)</span>
+    <span class="img-desc">หน้าจัดลำดับ Section แสดงรายการ Draggable พร้อม Handle และหมายเลขลำดับ</span>
+    <span class="img-size">900×700px</span>
+  </div>
+  <p class="img-caption">ภาพที่ ข.15 ระบบจัดลำดับ Section แบบ Drag &amp; Drop</p>
+
+  <h3>กลุ่มที่ 2.2 ระบบจัดการเนื้อหา</h3>
+
+  <div class="img-placeholder">
+    <span class="img-icon">📰</span>
+    <span class="img-label">ภาพที่ ข.16 — ระบบจัดการข่าวสาร (News Manager)</span>
+    <span class="img-desc">หน้า News Manager แสดงตารางรายการข่าว พร้อมปุ่มเพิ่ม/แก้ไข/ลบ และ Status Toggle</span>
+    <span class="img-size">1280×720px</span>
+  </div>
+  <p class="img-caption">ภาพที่ ข.16 ระบบจัดการข่าวสารและกิจกรรม</p>
+
+  <div class="img-placeholder">
+    <span class="img-icon">🎁</span>
+    <span class="img-label">ภาพที่ ข.16.1 — ระบบจัดการโปรโมชั่น (Promotions Manager) ใน Admin CMS</span>
+    <span class="img-desc">แคปหน้า Promotions Manager ใน Admin แสดงตารางรายการโปรโมชั่นทั้งหมด พร้อม ชื่อ, ช่วงเวลา, สถานะ (เปิด/ปิด) และปุ่มเพิ่ม/แก้ไข/ลบ</span>
+    <span class="img-size">1280×720px</span>
+  </div>
+  <p class="img-caption">ภาพที่ ข.16.1 ระบบจัดการโปรโมชั่นใน Admin CMS</p>
+
+  <p class="table-caption">ตารางที่ ข.2 รายละเอียดฟีเจอร์การจัดการโปรโมชั่นในระบบ Admin CMS</p>
+  <table>
+    <thead><tr><th style="width:5%">ที่</th><th style="width:28%">ฟีเจอร์</th><th style="width:20%">สิทธิ์ที่ใช้ได้</th><th>รายละเอียด</th></tr></thead>
+    <tbody>
+      <tr><td style="text-align:center">1</td><td>เพิ่มโปรโมชั่นใหม่</td><td>Editor, Admin, Super Admin</td><td>กรอกชื่อโปรโมชั่น, รายละเอียด, รูปภาพ Banner, วันเริ่ม–สิ้นสุด และกลุ่มเป้าหมาย</td></tr>
+      <tr><td style="text-align:center">2</td><td>แก้ไขโปรโมชั่น</td><td>Editor, Admin, Super Admin</td><td>แก้ไขข้อมูลทุกช่องได้ พร้อมอัปโหลดรูปภาพใหม่ผ่าน Media Library</td></tr>
+      <tr><td style="text-align:center">3</td><td>เปิด/ปิดการแสดงผล</td><td>Editor, Admin, Super Admin</td><td>Toggle สถานะ Active/Inactive เพื่อควบคุมการแสดงผลบนหน้าเว็บทันที</td></tr>
+      <tr><td style="text-align:center">4</td><td>ลบโปรโมชั่น</td><td>Admin, Super Admin</td><td>ลบโปรโมชั่นที่หมดอายุออกจากระบบ</td></tr>
+      <tr><td style="text-align:center">5</td><td>จัดลำดับการแสดงผล</td><td>Admin, Super Admin</td><td>กำหนดลำดับที่โปรโมชั่นจะปรากฏบน Carousel หน้าหลัก</td></tr>
+      <tr><td style="text-align:center">6</td><td>ตั้งวันหมดอายุอัตโนมัติ</td><td>Admin, Super Admin</td><td>ระบบซ่อนโปรโมชั่นโดยอัตโนมัติเมื่อถึงวันที่กำหนด</td></tr>
+    </tbody>
+  </table>
+
+  <div class="img-placeholder">
+    <span class="img-icon">🖼️</span>
+    <span class="img-label">ภาพที่ ข.17 — คลังไฟล์มีเดีย (Media Library)</span>
+    <span class="img-desc">Media Library แสดง Grid รูปภาพทั้งหมด พร้อมปุ่ม Upload และ Hover แสดง URL</span>
+    <span class="img-size">1280×720px</span>
+  </div>
+  <p class="img-caption">ภาพที่ ข.17 คลังไฟล์มีเดียสำหรับจัดเก็บรูปภาพระบบ</p>
+
+  <div class="img-placeholder">
+    <span class="img-icon">🌐</span>
+    <span class="img-label">ภาพที่ ข.18 — Translation Manager แสดงตารางคำแปล 5 ภาษา</span>
+    <span class="img-desc">ตาราง Translation Manager มีคอลัมน์ Key, TH, EN, ID, MS, AR พร้อมช่องแก้ไข Inline</span>
+    <span class="img-size">1440×800px</span>
+  </div>
+  <p class="img-caption">ภาพที่ ข.18 ระบบจัดการคำแปลรองรับ 5 ภาษา</p>
+
+  <div class="img-placeholder">
+    <span class="img-icon">💾</span>
+    <span class="img-label">ภาพที่ ข.19 — ระบบสำรองข้อมูล (Backup &amp; Restore)</span>
+    <span class="img-desc">หน้า Backup แสดงปุ่ม Export JSON, Import/Restore และ ตารางประวัติ Backup</span>
+    <span class="img-size">1000×600px</span>
+  </div>
+  <p class="img-caption">ภาพที่ ข.19 ระบบสำรองและกู้คืนข้อมูลแบบ JSON</p>
+
+  <h3>กลุ่มที่ 2.3 ระบบ AI และ Analytics</h3>
+
+  <div class="img-placeholder">
+    <span class="img-icon">🤖</span>
+    <span class="img-label">ภาพที่ ข.20 — ระบบจัดการ AI Chat Sessions</span>
+    <span class="img-desc">หน้า Chat Sessions แสดงตารางประวัติการสนทนาทั้งหมด พร้อมคลิกดูรายละเอียด</span>
+    <span class="img-size">1280×720px</span>
+  </div>
+  <p class="img-caption">ภาพที่ ข.20 ประวัติการสนทนา AI Chat ทั้งหมด</p>
+
+  <div class="img-placeholder">
+    <span class="img-icon">⚙️</span>
+    <span class="img-label">ภาพที่ ข.21 — หน้าตั้งค่า AI (AI Settings)</span>
+    <span class="img-desc">หน้า AI Settings แสดง Dropdown โมเดล, Slider Temperature, ช่อง System Prompt</span>
+    <span class="img-size">1000×700px</span>
+  </div>
+  <p class="img-caption">ภาพที่ ข.21 หน้าตั้งค่าระบบ AI เลือกโมเดลและ Temperature</p>
+
+  <div class="img-placeholder">
+    <span class="img-icon">📈</span>
+    <span class="img-label">ภาพที่ ข.22 — Analytics Dashboard กราฟจังหวัด Top 20</span>
+    <span class="img-desc">กราฟแท่งแนวนอน Top 20 จังหวัดที่มีผู้เข้าชมมากที่สุด พร้อมตัวเลขแต่ละจังหวัด</span>
+    <span class="img-size">1440×900px</span>
+  </div>
+  <p class="img-caption">ภาพที่ ข.22 กราฟวิเคราะห์สถิติผู้เข้าชมแยกตามจังหวัด</p>
+
+  <div class="img-placeholder">
+    <span class="img-icon">📋</span>
+    <span class="img-label">ภาพที่ ข.23 — User Management หน้าจัดการผู้ใช้งาน</span>
+    <span class="img-desc">หน้า User Management ตารางผู้ใช้ทั้งหมด Badge สีระดับ Role และปุ่มจัดการ</span>
+    <span class="img-size">1280×720px</span>
+  </div>
+  <p class="img-caption">ภาพที่ ข.23 หน้าจัดการผู้ใช้งานและระดับสิทธิ์ (RBAC)</p>
+</div>
+
+<!-- ==================== ภาคผนวก ค ==================== -->
+<div class="page">
+  <p class="appendix-title">ภาคผนวก ค</p>
+  <p class="appendix-subtitle">รายละเอียดทางเทคนิค — API, Environment Variables และการ Deploy</p>
+  <hr class="section-divider">
+
+  <h2>ส่วนที่ 1 โครงสร้างโฟลเดอร์โครงการ (Project File Structure)</h2>
+  <div class="code-block">HAPPYMPMWFH-MAIN/
+├── api/                        ← Express.js API Server (AI Chat, Geolocation)
+│   ├── server.js               ← Entry point ของ API Server
+│   ├── routes/                 ← API Route Handlers
+│   └── .env                    ← Environment Variables สำหรับ API
+├── src/                        ← Source Code หลัก (React)
+│   ├── admin/                  ← Admin CMS Components &amp; Pages (25+ หน้า)
+│   │   └── pages/              ← LiveEditor, Dashboard, News, Media ฯลฯ
+│   ├── components/             ← Shared UI Components (Hero, Map, Chat)
+│   ├── contexts/               ← Global State (AuthContext, LanguageContext)
+│   ├── hooks/                  ← Custom Hooks (useTranslations, useAnalytics)
+│   ├── lib/                    ← Library Config (supabase.js)
+│   ├── pages/                  ← Public Pages (Home, About, Products ฯลฯ)
+│   ├── routes/                 ← AppRoutes.jsx (Routing Logic)
+│   ├── App.js                  ← Root Component + State Management
+│   └── translations.js         ← Static Translation Layer
+├── public/                     ← Static Assets (favicon, index.html)
+├── deploy-public/              ← Build สำหรับ Public Website + .htaccess
+├── deploy-admin/               ← Build สำหรับ Admin CMS + .htaccess
+├── docs/                       ← เอกสารประกอบโครงการ
+├── .env.production.local       ← Environment Variables สำหรับ Build
+├── package.json                ← Dependencies และ Scripts
+└── start-local.bat             ← Script รัน Local Development (3 Server)</div>
+
+  <h2>ส่วนที่ 2 รายการ RESTful API Endpoints (15 Endpoints)</h2>
+  <p class="table-caption">ตารางที่ ค.1 รายละเอียด API Endpoints ทั้งหมดของระบบ</p>
+  <table>
+    <thead>
+      <tr><th style="width:8%">ที่</th><th style="width:12%">Method</th><th style="width:30%">Endpoint</th><th style="width:20%">โมดูล</th><th>คำอธิบาย</th></tr>
+    </thead>
+    <tbody>
+      <tr><td style="text-align:center">1</td><td style="text-align:center;color:#2e7d32;font-weight:700">POST</td><td>/api/chat</td><td>AI Chat</td><td>รับคำถาม ส่งไป OpenAI พร้อม Context, คืนคำตอบ</td></tr>
+      <tr><td style="text-align:center">2</td><td style="text-align:center;color:#2e7d32;font-weight:700">POST</td><td>/api/chat/session</td><td>AI Chat</td><td>สร้าง Chat Session ใหม่ใน Supabase</td></tr>
+      <tr><td style="text-align:center">3</td><td style="text-align:center;color:#1565c0;font-weight:700">GET</td><td>/api/chat/history/:id</td><td>AI Chat</td><td>ดึงประวัติการสนทนาตาม Session ID</td></tr>
+      <tr><td style="text-align:center">4</td><td style="text-align:center;color:#1565c0;font-weight:700">GET</td><td>/api/chat/sessions</td><td>AI Chat</td><td>ดึงรายการ Session ทั้งหมด (Admin Only)</td></tr>
+      <tr><td style="text-align:center">5</td><td style="text-align:center;color:#1565c0;font-weight:700">GET</td><td>/api/geolocation</td><td>Analytics</td><td>แปลง IP Address เป็นข้อมูลจังหวัด (Fallback Chain)</td></tr>
+      <tr><td style="text-align:center">6</td><td style="text-align:center;color:#2e7d32;font-weight:700">POST</td><td>/api/analytics/pageview</td><td>Analytics</td><td>บันทึก Page View พร้อมข้อมูลจังหวัดและ Device</td></tr>
+      <tr><td style="text-align:center">7</td><td style="text-align:center;color:#1565c0;font-weight:700">GET</td><td>/api/analytics/stats</td><td>Analytics</td><td>ดึงสถิติผู้เข้าชมรายวัน/สัปดาห์/เดือน</td></tr>
+      <tr><td style="text-align:center">8</td><td style="text-align:center;color:#1565c0;font-weight:700">GET</td><td>/api/analytics/provinces</td><td>Analytics</td><td>ดึงสถิติผู้เข้าชมจำแนกตาม 77 จังหวัด</td></tr>
+      <tr><td style="text-align:center">9</td><td style="text-align:center;color:#1565c0;font-weight:700">GET</td><td>/api/knowledge/:category</td><td>Knowledge</td><td>ดึง Knowledge Base ตามหมวดหมู่สำหรับ AI Context</td></tr>
+      <tr><td style="text-align:center">10</td><td style="text-align:center;color:#2e7d32;font-weight:700">POST</td><td>/api/knowledge</td><td>Knowledge</td><td>เพิ่ม/อัปเดต Knowledge Item (Admin Only)</td></tr>
+      <tr><td style="text-align:center">11</td><td style="text-align:center;color:#1565c0;font-weight:700">GET</td><td>/api/ai/settings</td><td>AI Settings</td><td>ดึงการตั้งค่า AI ปัจจุบัน (Model, Temperature)</td></tr>
+      <tr><td style="text-align:center">12</td><td style="text-align:center;color:#e65100;font-weight:700">PUT</td><td>/api/ai/settings</td><td>AI Settings</td><td>อัปเดตการตั้งค่า AI (Super Admin Only)</td></tr>
+      <tr><td style="text-align:center">13</td><td style="text-align:center;color:#2e7d32;font-weight:700">POST</td><td>/api/backup/export</td><td>Backup</td><td>Export ข้อมูลทั้งหมดเป็นไฟล์ JSON</td></tr>
+      <tr><td style="text-align:center">14</td><td style="text-align:center;color:#2e7d32;font-weight:700">POST</td><td>/api/backup/restore</td><td>Backup</td><td>Import ข้อมูลจากไฟล์ JSON (Super Admin Only)</td></tr>
+      <tr><td style="text-align:center">15</td><td style="text-align:center;color:#1565c0;font-weight:700">GET</td><td>/api/health</td><td>System</td><td>ตรวจสอบสถานะ API Server (Health Check)</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="page">
+  <h2>ส่วนที่ 3 Environment Variables (.env)</h2>
+  <p class="table-caption">ตารางที่ ค.2 รายการ Environment Variables ที่ต้องตั้งค่าก่อน Build/Deploy</p>
+  <table>
+    <thead><tr><th style="width:35%">Variable Name</th><th style="width:20%">ใช้ใน</th><th style="width:15%">ต้องระบุ</th><th>คำอธิบาย</th></tr></thead>
+    <tbody>
+      <tr><td><code>REACT_APP_SUPABASE_URL</code></td><td>React (Frontend)</td><td style="text-align:center;color:#c62828;font-weight:700">บังคับ</td><td>URL ของ Supabase Project เช่น https://xxx.supabase.co</td></tr>
+      <tr><td><code>REACT_APP_SUPABASE_ANON_KEY</code></td><td>React (Frontend)</td><td style="text-align:center;color:#c62828;font-weight:700">บังคับ</td><td>Supabase Anonymous Public Key</td></tr>
+      <tr><td><code>REACT_APP_API_URL</code></td><td>React (Frontend)</td><td style="text-align:center;color:#c62828;font-weight:700">บังคับ</td><td>URL ของ Express API Server เช่น https://api.vercel.app</td></tr>
+      <tr><td><code>REACT_APP_MODE</code></td><td>React (Frontend)</td><td style="text-align:center;color:#c62828;font-weight:700">บังคับ</td><td>โหมดการทำงาน: <code>public</code> หรือ <code>admin</code> หรือ <code>all</code></td></tr>
+      <tr><td><code>OPENAI_API_KEY</code></td><td>API Server</td><td style="text-align:center;color:#c62828;font-weight:700">บังคับ</td><td>OpenAI Secret API Key สำหรับเรียกใช้ GPT Models</td></tr>
+      <tr><td><code>SUPABASE_SERVICE_ROLE_KEY</code></td><td>API Server</td><td style="text-align:center;color:#c62828;font-weight:700">บังคับ</td><td>Supabase Service Role Key (สิทธิ์สูงสุด ห้ามเปิดเผย)</td></tr>
+      <tr><td><code>ALLOWED_ORIGINS</code></td><td>API Server</td><td style="text-align:center;color:#c62828;font-weight:700">บังคับ</td><td>Domain ที่อนุญาต CORS เช่น https://happympm.com</td></tr>
+      <tr><td><code>API_PORT</code></td><td>API Server (Local)</td><td style="text-align:center;color:#2e7d32;font-weight:700">ไม่บังคับ</td><td>Port ของ API Server เมื่อรันบน Local (Default: 3002)</td></tr>
+      <tr><td><code>REACT_APP_GA_ID</code></td><td>React (Frontend)</td><td style="text-align:center;color:#2e7d32;font-weight:700">ไม่บังคับ</td><td>Google Analytics ID (ถ้าต้องการ)</td></tr>
+    </tbody>
+  </table>
+
+  <h2>ส่วนที่ 4 ขั้นตอนการ Build และ Deploy ระบบ</h2>
+  <h3>4.1 การ Build สำหรับ Public Website</h3>
+  <div class="step-box"><span class="step-num">ขั้นตอนที่ 1</span> ตั้งค่า Environment Variables ใน .env.production.local</div>
+  <div class="code-block">REACT_APP_MODE=public
+REACT_APP_SUPABASE_URL=https://[project-id].supabase.co
+REACT_APP_SUPABASE_ANON_KEY=[your-anon-key]
+REACT_APP_API_URL=https://[vercel-app].vercel.app</div>
+  <div class="step-box"><span class="step-num">ขั้นตอนที่ 2</span> รัน Build Command</div>
+  <div class="code-block">set NODE_OPTIONS=--max-old-space-size=4096
+set REACT_APP_MODE=public
+npx react-scripts build</div>
+  <div class="step-box"><span class="step-num">ขั้นตอนที่ 3</span> Upload ไฟล์ใน /build ไปยัง cPanel public_html/ พร้อม .htaccess</div>
+
+  <h3>4.2 การ Build สำหรับ Admin CMS</h3>
+  <div class="step-box"><span class="step-num">ขั้นตอนที่ 1</span> เปลี่ยน REACT_APP_MODE เป็น admin</div>
+  <div class="code-block">set NODE_OPTIONS=--max-old-space-size=4096
+set REACT_APP_MODE=admin
+npx react-scripts build</div>
+  <div class="step-box"><span class="step-num">ขั้นตอนที่ 2</span> Upload ไฟล์ใน /build ไปยัง cPanel public_html/ADMIN-CMS/ พร้อม .htaccess ที่มี RewriteBase /ADMIN-CMS/</div>
+
+  <h3>4.3 การ Deploy API Server บน Vercel</h3>
+  <div class="step-box"><span class="step-num">ขั้นตอนที่ 1</span> Push โฟลเดอร์ /api ขึ้น GitHub Repository</div>
+  <div class="step-box"><span class="step-num">ขั้นตอนที่ 2</span> สร้าง Project ใหม่บน Vercel เชื่อมกับ Repository</div>
+  <div class="step-box"><span class="step-num">ขั้นตอนที่ 3</span> ตั้งค่า Environment Variables ใน Vercel Dashboard (OPENAI_API_KEY, SUPABASE_SERVICE_ROLE_KEY, ALLOWED_ORIGINS)</div>
+  <div class="step-box"><span class="step-num">ขั้นตอนที่ 4</span> Deploy และทดสอบ /api/health endpoint</div>
+
+  <h2>ส่วนที่ 5 ฐานข้อมูล 27 ตาราง (Database Schema)</h2>
+  <p class="table-caption">ตารางที่ ค.3 รายละเอียดโครงสร้างตารางฐานข้อมูลทั้งหมด (27 ตาราง)</p>
+  <table>
+    <thead><tr><th style="width:5%">ที่</th><th style="width:25%">ชื่อตาราง</th><th style="width:18%">กลุ่มโมดูล</th><th>หน้าที่และความสัมพันธ์</th></tr></thead>
+    <tbody>
+      <tr><td style="text-align:center">1</td><td>profiles</td><td>Auth</td><td>ข้อมูลผู้ใช้งาน (5 Roles), อ้างอิง auth.users</td></tr>
+      <tr><td style="text-align:center">2</td><td>activity_logs</td><td>Auth</td><td>บันทึกการกระทำทุกรายการของผู้ใช้</td></tr>
+      <tr><td style="text-align:center">3</td><td>site_content</td><td>CMS</td><td>เนื้อหาเว็บ 5 ภาษา (Upsert Pattern)</td></tr>
+      <tr><td style="text-align:center">4</td><td>pages</td><td>CMS</td><td>หน้าเพจ (slug, content JSONB)</td></tr>
+      <tr><td style="text-align:center">5</td><td>page_versions</td><td>CMS</td><td>ประวัติเวอร์ชันของหน้าเพจ</td></tr>
+      <tr><td style="text-align:center">6</td><td>section_order</td><td>CMS</td><td>ลำดับ Section บนหน้าเว็บ</td></tr>
+      <tr><td style="text-align:center">7</td><td>footer_links</td><td>CMS</td><td>ลิงก์ Footer 5 ภาษา</td></tr>
+      <tr><td style="text-align:center">8</td><td>chat_sessions</td><td>AI Chat</td><td>เซสชันการสนทนา, หมวดหมู่, สถานะ</td></tr>
+      <tr><td style="text-align:center">9</td><td>chat_messages</td><td>AI Chat</td><td>ข้อความ (visitor/admin/ai)</td></tr>
+      <tr><td style="text-align:center">10</td><td>page_views</td><td>Analytics</td><td>สถิติเข้าชม (77 จังหวัด)</td></tr>
+      <tr><td style="text-align:center">11</td><td>branches</td><td>Branches</td><td>ข้อมูลสาขา, จังหวัด, ภูมิภาค</td></tr>
+      <tr><td style="text-align:center">12</td><td>branch_map_positions</td><td>Branches</td><td>พิกัดแผนที่ (JSONB)</td></tr>
+      <tr><td style="text-align:center">13</td><td>calendar_events</td><td>Events</td><td>กิจกรรม/อีเวนต์ปฏิทิน</td></tr>
+      <tr><td style="text-align:center">14</td><td>completed_trips</td><td>Content</td><td>ทริปที่เสร็จสิ้น (รูปภาพ, รายละเอียด)</td></tr>
+      <tr><td style="text-align:center">15</td><td>contact_messages</td><td>Contact</td><td>ข้อความติดต่อจากผู้ใช้</td></tr>
+      <tr><td style="text-align:center">16</td><td>media</td><td>Media</td><td>ไฟล์สื่อ (รูป, วิดีโอ)</td></tr>
+      <tr><td style="text-align:center">17</td><td>categories</td><td>Learning</td><td>หมวดหมู่หลักสูตร</td></tr>
+      <tr><td style="text-align:center">18</td><td>subjects</td><td>Learning</td><td>วิชา/หลักสูตร</td></tr>
+      <tr><td style="text-align:center">19</td><td>episodes</td><td>Learning</td><td>บทเรียนย่อย</td></tr>
+      <tr><td style="text-align:center">20</td><td>user_episode_progress</td><td>Learning</td><td>ความก้าวหน้าการเรียนรู้</td></tr>
+      <tr><td style="text-align:center">21</td><td>user_wallet</td><td>Gamification</td><td>กระเป๋าเงินคะแนน</td></tr>
+      <tr><td style="text-align:center">22</td><td>user_streaks</td><td>Gamification</td><td>สถิติการเข้าต่อเนื่อง</td></tr>
+      <tr><td style="text-align:center">23</td><td>point_transactions</td><td>Gamification</td><td>รายการธุรกรรมคะแนน</td></tr>
+      <tr><td style="text-align:center">24</td><td>rooms</td><td>Booking</td><td>ข้อมูลห้อง</td></tr>
+      <tr><td style="text-align:center">25</td><td>room_categories</td><td>Booking</td><td>ประเภทห้อง</td></tr>
+      <tr><td style="text-align:center">26</td><td>room_bookings</td><td>Booking</td><td>การจองห้อง</td></tr>
+      <tr><td style="text-align:center">27</td><td>ai_settings</td><td>AI</td><td>ค่าตั้ง AI (โมเดล, Temperature)</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ==================== ภาคผนวก ง ==================== -->
+<div class="page">
+  <p class="appendix-title">ภาคผนวก ง</p>
+  <p class="appendix-subtitle">แบบสอบถามความพึงพอใจผู้ใช้งาน</p>
+  <hr class="section-divider">
+
+  <p style="text-indent:0;text-align:center;font-weight:700;font-size:15pt;margin-bottom:4pt">แบบสอบถามความพึงพอใจ</p>
+  <p style="text-indent:0;text-align:center;font-size:13pt;margin-bottom:4pt">ระบบเว็บแอปพลิเคชันและระบบจัดการเนื้อหา แฮ็ปปี้ เอ็มพีเอ็ม</p>
+  <p style="text-indent:0;text-align:center;font-size:12pt;margin-bottom:12pt">(Happy MPM Web Application &amp; Content Management System)</p>
+
+  <p>คำชี้แจง: แบบสอบถามนี้จัดทำขึ้นเพื่อประเมินความพึงพอใจในการใช้งานระบบเว็บไซต์ของบริษัท แฮ็ปปี้ เอ็มพีเอ็ม จำกัด โดยผลที่ได้จะนำไปใช้ในการพัฒนาและปรับปรุงระบบต่อไป กรุณาตอบตามความเป็นจริง ข้อมูลของท่านจะถูกเก็บรักษาเป็นความลับ</p>
+
+  <h3>ตอนที่ 1 ข้อมูลทั่วไปของผู้ตอบแบบสอบถาม</h3>
+
+  <p class="table-caption">1. เพศ</p>
+  <p class="no-indent">☐ ชาย &nbsp;&nbsp;&nbsp; ☐ หญิง &nbsp;&nbsp;&nbsp; ☐ ไม่ระบุ</p>
+
+  <p class="table-caption" style="margin-top:8pt">2. อายุ</p>
+  <p class="no-indent">☐ ต่ำกว่า 16 ปี &nbsp;&nbsp;&nbsp; ☐ 16–30 ปี &nbsp;&nbsp;&nbsp; ☐ 31–45 ปี &nbsp;&nbsp;&nbsp; ☐ 46–60 ปี &nbsp;&nbsp;&nbsp; ☐ มากกว่า 60 ปีขึ้นไป</p>
+
+  <p class="table-caption" style="margin-top:8pt">3. สถานะของผู้ตอบ</p>
+  <p class="no-indent">☐ เจ้าหน้าที่/แอดมิน (ใช้งานระบบหลังบ้านเพื่อจัดการเนื้อหา)</p>
+  <p class="no-indent">☐ บุคคลทั่วไป (เข้าชมเว็บไซต์/ทดลองใช้ระบบ)</p>
+
+  <p class="table-caption" style="margin-top:8pt">4. ระดับการศึกษา</p>
+  <p class="no-indent">☐ ต่ำกว่าปริญญาตรี &nbsp;&nbsp;&nbsp; ☐ ปริญญาตรี &nbsp;&nbsp;&nbsp; ☐ ปริญญาโท &nbsp;&nbsp;&nbsp; ☐ สูงกว่าปริญญาโท</p>
+
+  <p class="table-caption" style="margin-top:8pt">5. อาชีพ</p>
+  <p class="no-indent">☐ ข้าราชการ/พนักงานรัฐวิสาหกิจ &nbsp;&nbsp;&nbsp; ☐ พนักงานบริษัทเอกชน &nbsp;&nbsp;&nbsp; ☐ นักเรียน/นักศึกษา &nbsp;&nbsp;&nbsp; ☐ อื่นๆ</p>
+
+  <p class="table-caption" style="margin-top:8pt">6. อุปกรณ์ที่ใช้ในการเข้าเว็บไซต์นี้</p>
+  <p class="no-indent">☐ คอมพิวเตอร์/โน้ตบุ๊ก &nbsp;&nbsp;&nbsp; ☐ โทรศัพท์มือถือ &nbsp;&nbsp;&nbsp; ☐ แท็บเล็ต</p>
+
+  <p class="table-caption" style="margin-top:8pt">7. หากท่านเป็นบุคลากรภายในบริษัท Happy MPM กรุณาระบุตำแหน่งงาน</p>
+  <p class="no-indent">ตำแหน่ง: .........................................................................</p>
+
+  <h3 style="margin-top:16pt">ตอนที่ 2 ความพึงพอใจด้านการใช้งาน (Likert Scale 1–5)</h3>
+  <p class="no-indent" style="font-size:12pt">เกณฑ์การให้คะแนน: &nbsp; <strong>5</strong> = พึงพอใจมากที่สุด &nbsp; <strong>4</strong> = พึงพอใจมาก &nbsp; <strong>3</strong> = ปานกลาง &nbsp; <strong>2</strong> = น้อย &nbsp; <strong>1</strong> = ควรปรับปรุง</p>
+
+  <p class="table-caption" style="margin-top:10pt">ด้านที่ 1 การใช้งานทั่วไป (Functionality)</p>
+  <table>
+    <thead><tr><th style="width:8%">ข้อ</th><th>รายการประเมิน</th><th style="width:8%">5</th><th style="width:8%">4</th><th style="width:8%">3</th><th style="width:8%">2</th><th style="width:8%">1</th></tr></thead>
+    <tbody>
+      <tr><td style="text-align:center">1</td><td>ระบบเว็บไซต์แสดงผลข้อมูลได้ครบถ้วนและถูกต้อง</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td></tr>
+      <tr><td style="text-align:center">2</td><td>ระบบสามารถเปลี่ยนภาษาได้ถูกต้อง (5 ภาษา รวมอาหรับ)</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td></tr>
+      <tr><td style="text-align:center">3</td><td>ช่องแชทผู้ช่วยอัตโนมัติ (AI Chat) ตอบคำถามได้ตรงประเด็น</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td></tr>
+      <tr><td style="text-align:center">4</td><td>ระบบแผนที่สาขาแสดงผลถูกต้องและใช้งานง่าย</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td></tr>
+      <tr><td style="text-align:center">5</td><td>ระบบปฏิทินกิจกรรมแสดงข้อมูลเป็นปัจจุบัน</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td></tr>
+    </tbody>
+  </table>
+
+  <p class="table-caption" style="margin-top:8pt">ด้านที่ 2 การออกแบบส่วนติดต่อผู้ใช้ (UI/UX Design)</p>
+  <table>
+    <thead><tr><th style="width:8%">ข้อ</th><th>รายการประเมิน</th><th style="width:8%">5</th><th style="width:8%">4</th><th style="width:8%">3</th><th style="width:8%">2</th><th style="width:8%">1</th></tr></thead>
+    <tbody>
+      <tr><td style="text-align:center">6</td><td>หน้าตาเว็บไซต์มีความสวยงาม ทันสมัย ดูเป็นมืออาชีพ</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td></tr>
+      <tr><td style="text-align:center">7</td><td>การจัดวางเนื้อหาและเมนูเข้าใจง่าย ไม่สับสน</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td></tr>
+      <tr><td style="text-align:center">8</td><td>เว็บไซต์แสดงผลได้ดีทั้งบน Computer และมือถือ</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td></tr>
+      <tr><td style="text-align:center">9</td><td>ตัวอักษร สี และไอคอนอ่านง่าย สบายตา</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="page">
+  <p class="table-caption">ด้านที่ 3 ประสิทธิภาพการทำงาน (Performance)</p>
+  <table>
+    <thead><tr><th style="width:8%">ข้อ</th><th>รายการประเมิน</th><th style="width:8%">5</th><th style="width:8%">4</th><th style="width:8%">3</th><th style="width:8%">2</th><th style="width:8%">1</th></tr></thead>
+    <tbody>
+      <tr><td style="text-align:center">10</td><td>เว็บไซต์โหลดได้เร็ว ไม่ต้องรอนาน</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td></tr>
+      <tr><td style="text-align:center">11</td><td>การเปลี่ยนหน้าภายในเว็บราบรื่น ไม่มีอาการกระตุก</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td></tr>
+      <tr><td style="text-align:center">12</td><td>AI Chat ตอบกลับภายในเวลาที่รอได้ (ไม่เกิน 10 วินาที)</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td></tr>
+    </tbody>
+  </table>
+
+  <p class="table-caption" style="margin-top:8pt">ด้านที่ 4 ระบบจัดการเนื้อหา — Admin CMS (สำหรับเจ้าหน้าที่เท่านั้น)</p>
+  <table>
+    <thead><tr><th style="width:8%">ข้อ</th><th>รายการประเมิน</th><th style="width:8%">5</th><th style="width:8%">4</th><th style="width:8%">3</th><th style="width:8%">2</th><th style="width:8%">1</th></tr></thead>
+    <tbody>
+      <tr><td style="text-align:center">13</td><td>หน้าจอแก้ไขข้อความและรูปภาพ (Live Editor) ใช้งานสะดวก</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td></tr>
+      <tr><td style="text-align:center">14</td><td>หน้าสถิติผู้เข้าชม (Dashboard) เข้าใจง่าย อ่านข้อมูลได้ชัดเจน</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td></tr>
+      <tr><td style="text-align:center">15</td><td>ระบบควบคุมสิทธิ์ผู้ใช้งาน (กำหนดได้ว่าใครทำอะไรได้บ้าง) ทำงานได้ถูกต้อง</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td></tr>
+      <tr><td style="text-align:center">16</td><td>ระบบสำรองข้อมูล (Backup) ใช้งานง่ายและเชื่อถือได้</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td></tr>
+    </tbody>
+  </table>
+
+  <p class="table-caption" style="margin-top:8pt">ด้านที่ 5 ความพึงพอใจโดยรวม (Overall Satisfaction)</p>
+  <table>
+    <thead><tr><th style="width:8%">ข้อ</th><th>รายการประเมิน</th><th style="width:8%">5</th><th style="width:8%">4</th><th style="width:8%">3</th><th style="width:8%">2</th><th style="width:8%">1</th></tr></thead>
+    <tbody>
+      <tr><td style="text-align:center">17</td><td>ระบบโดยรวมตรงกับความต้องการของท่าน</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td></tr>
+      <tr><td style="text-align:center">18</td><td>ระบบมีความเสถียร ไม่ขัดข้องบ่อย</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td></tr>
+      <tr><td style="text-align:center">19</td><td>ท่านจะแนะนำให้ผู้อื่นใช้เว็บไซต์นี้</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td></tr>
+      <tr><td style="text-align:center">20</td><td>ท่านพึงพอใจต่อระบบโดยภาพรวม</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top:16pt">ตอนที่ 3 ข้อเสนอแนะเพิ่มเติม (Open-ended)</h3>
+
+  <p class="table-caption">21. สิ่งที่ท่านชอบมากที่สุดในการใช้งานระบบนี้คืออะไร</p>
+  <p class="no-indent" style="border-bottom:1px solid #999;margin-bottom:6pt">&nbsp;</p>
+  <p class="no-indent" style="border-bottom:1px solid #999;margin-bottom:6pt">&nbsp;</p>
+
+  <p class="table-caption">22. สิ่งที่ท่านคิดว่าควรปรับปรุงหรือเพิ่มเติมมากที่สุดคืออะไร</p>
+  <p class="no-indent" style="border-bottom:1px solid #999;margin-bottom:6pt">&nbsp;</p>
+  <p class="no-indent" style="border-bottom:1px solid #999;margin-bottom:6pt">&nbsp;</p>
+
+  <p class="table-caption">23. ท่านพบปัญหาหรือข้อผิดพลาดในการใช้งานระบบหรือไม่ ถ้ามีโปรดระบุ</p>
+  <p class="no-indent" style="border-bottom:1px solid #999;margin-bottom:6pt">&nbsp;</p>
+  <p class="no-indent" style="border-bottom:1px solid #999;margin-bottom:6pt">&nbsp;</p>
+
+  <p class="table-caption">24. ข้อเสนอแนะอื่นๆ สำหรับการพัฒนาระบบในอนาคต</p>
+  <p class="no-indent" style="border-bottom:1px solid #999;margin-bottom:6pt">&nbsp;</p>
+  <p class="no-indent" style="border-bottom:1px solid #999;margin-bottom:6pt">&nbsp;</p>
+
+  <p style="text-align:center;margin-top:20pt;font-size:13pt">ขอบพระคุณที่สละเวลาตอบแบบสอบถาม</p>
+  <p style="text-align:center;font-size:12pt">ข้อมูลของท่านจะเป็นประโยชน์อย่างยิ่งต่อการพัฒนาระบบให้ดียิ่งขึ้นต่อไป</p>
+</div>
+
+<!-- ==================== ภาคผนวก จ ==================== -->
+<div class="page">
+  <p class="appendix-title">ภาคผนวก จ</p>
+  <p class="appendix-subtitle">ผลการทดสอบประสิทธิภาพระบบด้วย Lighthouse</p>
+  <hr class="section-divider">
+
+  <p>การทดสอบประสิทธิภาพของระบบ Happy MPM Web Application ดำเนินการโดยใช้เครื่องมือ <strong>Google Lighthouse</strong> ซึ่งเป็นมาตรฐานการประเมินคุณภาพเว็บไซต์ที่ได้รับการยอมรับในอุตสาหกรรม ครอบคลุม 4 ด้านหลัก ได้แก่ Performance, Accessibility, Best Practices และ SEO โดยทำการทดสอบบนสภาพแวดล้อม Production ที่ happympm.com</p>
+
+  <h2>ผลการทดสอบ Public Website (happympm.com)</h2>
+
+  <div class="img-placeholder">
+    <span class="img-icon">🔦</span>
+    <span class="img-label">ภาพที่ จ.1 — Lighthouse Report: Public Website (happympm.com)</span>
+    <span class="img-desc">เปิด Chrome DevTools (F12) → Lighthouse → เลือก Categories: Performance, Accessibility, Best Practices, SEO → Mode: Navigation → Device: Desktop → คลิก "Analyze page load" แล้วแคปส่วน Score Overview (4 วงกลม)</span>
+    <span class="img-size">ขนาดแนะนำ: 900×400px — แคปเฉพาะส่วน Score Overview</span>
+  </div>
+  <p class="img-caption">ภาพที่ จ.1 ผล Lighthouse Report สำหรับหน้าหลักเว็บไซต์ happympm.com (Desktop)</p>
+
+  <div class="img-placeholder">
+    <span class="img-icon">📱</span>
+    <span class="img-label">ภาพที่ จ.2 — Lighthouse Report: Mobile Mode</span>
+    <span class="img-desc">ขั้นตอนเดียวกัน แต่เปลี่ยน Device เป็น "Mobile" แล้วแคปผล Score Overview</span>
+    <span class="img-size">ขนาดแนะนำ: 900×400px</span>
+  </div>
+  <p class="img-caption">ภาพที่ จ.2 ผล Lighthouse Report สำหรับ Mobile Mode</p>
+
+  <p class="table-caption">ตารางที่ จ.1 สรุปคะแนน Lighthouse ของ Public Website จำแนกตาม Device</p>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:5%">ที่</th>
+        <th style="width:28%">หัวข้อการประเมิน</th>
+        <th style="width:14%">Desktop</th>
+        <th style="width:14%">Mobile</th>
+        <th style="width:14%">เกณฑ์ผ่าน</th>
+        <th style="width:10%">สถานะ</th>
+        <th>หมายเหตุ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align:center">1</td>
+        <td>Performance</td>
+        <td style="text-align:center;font-weight:700;color:#e65100">81</td>
+        <td style="text-align:center;font-weight:700;color:#c62828">52</td>
+        <td style="text-align:center">&ge; 70</td>
+        <td style="text-align:center;color:#2e7d32;font-weight:700">✓ Desktop</td>
+        <td>Mobile ต่ำเนื่องจาก Hero Video ขนาดใหญ่และ YouTube Embed</td>
+      </tr>
+      <tr>
+        <td style="text-align:center">2</td>
+        <td>Accessibility</td>
+        <td style="text-align:center;font-weight:700;color:#e65100">87</td>
+        <td style="text-align:center;font-weight:700;color:#e65100">87</td>
+        <td style="text-align:center">&ge; 80</td>
+        <td style="text-align:center;color:#2e7d32;font-weight:700">✓ ผ่าน</td>
+        <td>ARIA Labels, Contrast Ratio, Alt Text ครบถ้วน</td>
+      </tr>
+      <tr>
+        <td style="text-align:center">3</td>
+        <td>Best Practices</td>
+        <td style="text-align:center;font-weight:700;color:#e65100">77</td>
+        <td style="text-align:center;font-weight:700;color:#e65100">77</td>
+        <td style="text-align:center">&ge; 70</td>
+        <td style="text-align:center;color:#2e7d32;font-weight:700">✓ ผ่าน</td>
+        <td>HTTPS, Modern APIs ครบ, บาง Third-party Script ลด Score</td>
+      </tr>
+      <tr>
+        <td style="text-align:center">4</td>
+        <td>SEO</td>
+        <td style="text-align:center;font-weight:700;color:#2e7d32">100</td>
+        <td style="text-align:center;font-weight:700;color:#2e7d32">100</td>
+        <td style="text-align:center">&ge; 80</td>
+        <td style="text-align:center;color:#2e7d32;font-weight:700">✓ ผ่าน</td>
+        <td>Meta Tags, react-helmet-async, Canonical URL ครบสมบูรณ์</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top:16pt">ผลการทดสอบ Admin CMS (happympm.com/ADMIN-CMS)</h2>
+
+  <div class="img-placeholder">
+    <span class="img-icon">🔦</span>
+    <span class="img-label">ภาพที่ จ.3 — Lighthouse Report: Admin CMS (happympm.com/ADMIN-CMS/)</span>
+    <span class="img-desc">แคปผล Lighthouse ที่ได้ทดสอบแล้ว แสดงคะแนน Performance 79, Accessibility 82, Best Practices 96, SEO 100</span>
+    <span class="img-size">แคปรูปที่ได้จาก Lighthouse</span>
+  </div>
+  <p class="img-caption">ภาพที่ จ.3 ผล Lighthouse Report สำหรับ Admin CMS (Desktop)</p>
+
+  <p class="table-caption">ตารางที่ จ.2 สรุปคะแนน Lighthouse ของ Admin CMS</p>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:5%">ที่</th>
+        <th style="width:28%">หัวข้อการประเมิน</th>
+        <th style="width:14%">คะแนน</th>
+        <th style="width:14%">เกณฑ์ผ่าน</th>
+        <th style="width:10%">สถานะ</th>
+        <th>หมายเหตุ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td style="text-align:center">1</td><td>Performance</td><td style="text-align:center;font-weight:700;color:#e65100">79</td><td style="text-align:center">&ge; 70</td><td style="text-align:center;color:#2e7d32;font-weight:700">✓ ผ่าน</td><td>SPA ขนาดใหญ่ (25+ หน้า) แต่ยังอยู่ในเกณฑ์ดี</td></tr>
+      <tr><td style="text-align:center">2</td><td>Accessibility</td><td style="text-align:center;font-weight:700;color:#e65100">82</td><td style="text-align:center">&ge; 80</td><td style="text-align:center;color:#2e7d32;font-weight:700">✓ ผ่าน</td><td>Form Labels, Button Descriptions ครบถ้วน</td></tr>
+      <tr><td style="text-align:center">3</td><td>Best Practices</td><td style="text-align:center;font-weight:700;color:#2e7d32">96</td><td style="text-align:center">&ge; 80</td><td style="text-align:center;color:#2e7d32;font-weight:700">✓ ผ่าน</td><td>Security Headers, HTTPS, Modern APIs ดีเยี่ยม</td></tr>
+      <tr><td style="text-align:center">4</td><td>SEO</td><td style="text-align:center;font-weight:700;color:#2e7d32">100</td><td style="text-align:center">&ge; 80</td><td style="text-align:center;color:#2e7d32;font-weight:700">✓ ผ่าน</td><td>Meta Tags และ Canonical URL สมบูรณ์</td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top:16pt">สรุปผลการทดสอบทั้งหมดและการวิเคราะห์</h2>
+  <p class="table-caption">ตารางที่ จ.3 เปรียบเทียบคะแนน Lighthouse ทั้ง 3 สภาพแวดล้อม</p>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:28%">หัวข้อ</th>
+        <th style="width:18%">Public (Desktop)</th>
+        <th style="width:18%">Public (Mobile)</th>
+        <th style="width:18%">Admin CMS</th>
+        <th>ระดับโดยรวม</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Performance</td><td style="text-align:center;font-weight:700;color:#e65100">81</td><td style="text-align:center;font-weight:700;color:#c62828">52</td><td style="text-align:center;font-weight:700;color:#e65100">79</td><td>Desktop ดี — Mobile ต้องปรับปรุง (Hero Video)</td></tr>
+      <tr><td>Accessibility</td><td style="text-align:center;font-weight:700;color:#e65100">87</td><td style="text-align:center;font-weight:700;color:#e65100">87</td><td style="text-align:center;font-weight:700;color:#e65100">82</td><td>ดี — ครบทุก ARIA และ Contrast</td></tr>
+      <tr><td>Best Practices</td><td style="text-align:center;font-weight:700;color:#e65100">77</td><td style="text-align:center;font-weight:700;color:#e65100">77</td><td style="text-align:center;font-weight:700;color:#2e7d32">96</td><td>ผ่านทุกสภาพแวดล้อม</td></tr>
+      <tr><td>SEO</td><td style="text-align:center;font-weight:700;color:#2e7d32">100</td><td style="text-align:center;font-weight:700;color:#2e7d32">100</td><td style="text-align:center;font-weight:700;color:#2e7d32">100</td><td>สมบูรณ์แบบทุก Device</td></tr>
+      <tr style="background:#f5f5f5"><td><strong>ค่าเฉลี่ย</strong></td><td style="text-align:center;font-weight:700">86.25</td><td style="text-align:center;font-weight:700">79.0</td><td style="text-align:center;font-weight:700">89.25</td><td><strong>ผ่านเกณฑ์มาตรฐานทุกด้าน</strong></td></tr>
+    </tbody>
+  </table>
+
+  <p>จากผลการทดสอบ Lighthouse พบว่าระบบ Happy MPM Web Application ผ่านเกณฑ์มาตรฐานในด้าน Accessibility, Best Practices และ SEO ครบทุกสภาพแวดล้อม โดยเฉพาะ SEO ได้คะแนนสูงสุด 100/100 ทุก URL แสดงว่าการใช้ react-helmet-async และการกำหนด Meta Tags มีความสมบูรณ์</p>
+  <p>ประเด็นที่ควรพัฒนาต่อคือ <strong>Performance บน Mobile (52/100)</strong> ซึ่งเกิดจาก Hero Section ที่ใช้ YouTube Video Embed และรูปภาพขนาดใหญ่ แนวทางแก้ไขในอนาคตคือการใช้ Lazy Loading, Next-gen Image Format (WebP) และการ Preload Critical Assets เพื่อเพิ่มคะแนนให้สูงกว่า 70 บนอุปกรณ์มือถือ</p>
+</div>
+
+</body>
+</html>

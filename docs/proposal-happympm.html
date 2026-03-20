@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ข้อเสนอบริการปรับปรุงระบบเว็บไซต์ — Happy MPM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Sarabun', 'Segoe UI', sans-serif;
+    color: #1a1a2e;
+    line-height: 1.6;
+    background: #e5e7eb;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .doc-wrapper {
+    width: 794px;
+    margin: 20px auto;
+    background: #fff;
+    box-shadow: 0 4px 24px rgba(0,0,0,.12);
+  }
+
+  /* ===== Cover ===== */
+  .cover {
+    width: 100%;
+    min-height: 1123px;
+    padding: 200px 100px 80px;
+    text-align: center;
+    background: #fff;
+  }
+
+  .cover-line {
+    width: 80px;
+    height: 4px;
+    background: #c9a84c;
+    margin: 0 auto 32px;
+  }
+
+  .cover .doc-type {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #c9a84c;
+    margin-bottom: 20px;
+  }
+
+  .cover h1 {
+    font-size: 30px;
+    font-weight: 800;
+    color: #1e3a5f;
+    margin-bottom: 6px;
+    line-height: 1.35;
+  }
+
+  .cover .cover-sub {
+    font-size: 16px;
+    color: #4b5563;
+    margin-bottom: 48px;
+    font-weight: 400;
+  }
+
+  .cover-info {
+    display: table;
+    width: 420px;
+    margin: 0 auto;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-size: 13px;
+    text-align: left;
+  }
+
+  .cover-info-row {
+    display: table-row;
+  }
+
+  .cover-info-label {
+    display: table-cell;
+    padding: 9px 14px;
+    background: #f9fafb;
+    font-weight: 600;
+    color: #4b5563;
+    border-bottom: 1px solid #d1d5db;
+    width: 50%;
+  }
+
+  .cover-info-value {
+    display: table-cell;
+    padding: 9px 14px;
+    border-bottom: 1px solid #d1d5db;
+    font-weight: 500;
+    color: #1a1a2e;
+  }
+
+  .cover-info-row:last-child .cover-info-label,
+  .cover-info-row:last-child .cover-info-value {
+    border-bottom: none;
+  }
+
+  .cover-note {
+    margin-top: 120px;
+    font-size: 11px;
+    color: #9ca3af;
+  }
+
+  /* ===== Content ===== */
+  .content {
+    padding: 60px 80px;
+  }
+
+  /* ===== Headings ===== */
+  h2 {
+    font-size: 18px;
+    font-weight: 800;
+    color: #1e3a5f;
+    margin: 24px 0 10px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #c9a84c;
+  }
+
+  .content > h2:first-child { margin-top: 0; }
+
+  h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1e3a5f;
+    margin: 0;
+  }
+
+  p {
+    font-size: 13px;
+    color: #1a1a2e;
+    margin-bottom: 8px;
+  }
+
+  /* ===== Scope Intro ===== */
+  .scope-intro {
+    font-size: 12.5px;
+    color: #4b5563;
+    margin-bottom: 14px;
+    padding: 10px 14px;
+    background: #f9fafb;
+    border-left: 3px solid #c9a84c;
+    border-radius: 0 4px 4px 0;
+  }
+
+  /* ===== Phase ===== */
+  .phase {
+    border: 1px solid #d1d5db;
+    border-radius: 5px;
+    margin: 12px 0;
+  }
+
+  .phase-header {
+    display: table;
+    width: 100%;
+    padding: 10px 14px;
+    background: #f9fafb;
+    border-bottom: 1px solid #d1d5db;
+  }
+
+  .phase-header-inner {
+    display: table-row;
+  }
+
+  .phase-num-cell {
+    display: table-cell;
+    width: 40px;
+    vertical-align: middle;
+  }
+
+  .phase-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #1e3a5f;
+    color: #fff;
+    font-weight: 800;
+    font-size: 13px;
+    text-align: center;
+    line-height: 28px;
+  }
+
+  .phase-title-cell {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .phase-sub {
+    font-size: 11px;
+    color: #4b5563;
+    font-weight: 400;
+  }
+
+  .phase-duration-cell {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: right;
+    width: 120px;
+  }
+
+  .phase-duration {
+    font-size: 11px;
+    font-weight: 700;
+    color: #2d5a8e;
+    background: #e0ecf9;
+    padding: 3px 10px;
+    border-radius: 20px;
+    display: inline-block;
+  }
+
+  .phase-body { padding: 8px 14px 12px; }
+
+  .task-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .task-list li {
+    padding: 4px 0 4px 14px;
+    border-bottom: 1px solid #f3f4f6;
+    font-size: 12px;
+    line-height: 1.55;
+    position: relative;
+    color: #1a1a2e;
+  }
+
+  .task-list li:last-child { border-bottom: none; }
+
+  .task-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 11px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #c9a84c;
+  }
+
+  /* ===== Table ===== */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 12px;
+  }
+
+  thead th {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: .5px;
+  }
+
+  tbody td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #e5e7eb;
+    color: #1a1a2e;
+  }
+
+  tbody tr:nth-child(even) { background: #f9fafb; }
+
+  .text-center { text-align: center; }
+
+  .total-row td {
+    font-weight: 800;
+    font-size: 13px;
+    border-top: 2px solid #1e3a5f;
+    background: #e0ecf9;
+    color: #1e3a5f;
+  }
+
+  /* ===== Timeline ===== */
+  .timeline {
+    position: relative;
+    margin: 14px 0 14px 12px;
+    padding-left: 20px;
+    border-left: 2px solid #d1d5db;
+  }
+
+  .tl-item {
+    padding: 0 0 14px 0;
+    position: relative;
+  }
+
+  .tl-item:last-child { padding-bottom: 0; }
+
+  .tl-dot {
+    position: absolute;
+    left: -27px;
+    top: 4px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #1e3a5f;
+    border: 2px solid #fff;
+  }
+
+  .tl-item .tl-week {
+    font-size: 10px;
+    font-weight: 700;
+    color: #2d5a8e;
+  }
+
+  .tl-item h4 {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 1px;
+  }
+
+  .tl-item p {
+    font-size: 11px;
+    color: #4b5563;
+    margin: 0;
+  }
+
+  /* ===== Note ===== */
+  .note-box {
+    margin-top: 20px;
+    padding: 12px 16px;
+    background: #f9fafb;
+    border: 1px solid #d1d5db;
+    border-radius: 5px;
+    font-size: 12px;
+    color: #4b5563;
+  }
+
+  .note-box strong { color: #1a1a2e; }
+
+  /* ===== Print ===== */
+  @page {
+    size: A4;
+    margin: 15mm 18mm 18mm;
+  }
+
+  @media print {
+    body { background: #fff; }
+    .doc-wrapper { width: 100%; margin: 0; box-shadow: none; }
+    .cover { min-height: 0; height: auto; padding: 140px 60px 60px; page-break-after: always; }
+    .content { padding: 0; }
+    .phase { page-break-inside: avoid; }
+    .note-box { page-break-inside: avoid; }
+    table { page-break-inside: avoid; }
+    .no-print { display: none !important; }
+  }
+
+  /* ===== Buttons ===== */
+  .btn-group {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    display: flex;
+    gap: 10px;
+    z-index: 99;
+  }
+
+  .btn-action {
+    padding: 12px 24px;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Sarabun', sans-serif;
+  }
+
+  .btn-print { background: #1e3a5f; }
+  .btn-print:hover { background: #2d5a8e; }
+  .btn-pdf { background: #dc2626; }
+  .btn-pdf:hover { background: #b91c1c; }
+
+  /* ===== Mobile ===== */
+  @media screen and (max-width: 820px) {
+    .doc-wrapper { width: 100%; margin: 0; box-shadow: none; }
+    .cover { min-height: 100vh; padding: 80px 24px 40px; }
+    .content { padding: 24px 20px; }
+    .cover-info { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="btn-group no-print">
+  <button class="btn-action btn-print" onclick="window.print()">&#9113; พิมพ์</button>
+</div>
+
+<div class="doc-wrapper" id="doc">
+
+  <!-- ===== COVER ===== -->
+  <div class="cover">
+    <div class="cover-line"></div>
+    <div class="doc-type">Proposal</div>
+    <h1>ข้อเสนอบริการปรับปรุงระบบเว็บไซต์<br>Happy MPM</h1>
+    <p class="cover-sub">Website System Improvement &amp; Maintenance Service</p>
+
+    <div class="cover-info">
+      <div class="cover-info-row">
+        <div class="cover-info-label">เลขที่เอกสาร</div>
+        <div class="cover-info-value">PRO-2026-001</div>
+      </div>
+      <div class="cover-info-row">
+        <div class="cover-info-label">วันที่จัดทำ</div>
+        <div class="cover-info-value">6 มีนาคม 2569</div>
+      </div>
+      <div class="cover-info-row">
+        <div class="cover-info-label">เสนอต่อ</div>
+        <div class="cover-info-value">บริษัท Happy MPM</div>
+      </div>
+      <div class="cover-info-row">
+        <div class="cover-info-label">ระยะเวลาดำเนินงาน</div>
+        <div class="cover-info-value">2 เดือน (8 สัปดาห์)</div>
+      </div>
+    </div>
+
+    <p class="cover-note">เอกสารฉบับนี้จัดทำขึ้นเพื่อเสนอขอบเขตงานและแผนการดำเนินงาน</p>
+  </div>
+
+  <!-- ===== CONTENT ===== -->
+  <div class="content">
+
+    <h2>1. บทนำ</h2>
+    <p>จากการตรวจสอบระบบเว็บไซต์ happympm.com อย่างละเอียด พบรายการที่ต้องดำเนินการแก้ไขและปรับปรุงรวมทั้งสิ้น <strong>106 รายการ</strong> ครอบคลุมด้านความปลอดภัย, ข้อผิดพลาดของระบบ, ประสิทธิภาพ และการพัฒนาระบบจัดการเนื้อหา (CMS) เพิ่มเติม</p>
+    <p>เอกสารฉบับนี้นำเสนอแผนการดำเนินงานแบ่งเป็น 5 ระยะ ภายในระยะเวลา 2 เดือน โดยมีรายละเอียดดังต่อไปนี้</p>
+
+    <h2>2. ขอบเขตงานและแผนการดำเนินงาน</h2>
+
+    <div class="scope-intro">
+      แผนงานแบ่งออกเป็น 5 ระยะ เรียงตามลำดับความสำคัญ เริ่มจากปัญหาวิกฤตที่ส่งผลกระทบต่อการใช้งานจริงบน Production ไปจนถึงการพัฒนาระบบ CMS เพิ่มเติมและการทดสอบส่งมอบ
+    </div>
+
+    <h3 style="margin-top:10px">2.1 ปัญหาที่ตรวจพบเพิ่มเติม (Deep Audit รอบล่าสุด)</h3>
+    <ul class="task-list">
+      <li><strong>API Server อาจเปิดใช้งานได้โดยไม่ต้องมี Key</strong> หากไม่ได้ตั้งค่า <span class="pill">API_KEYS</span> ใน environment (เสี่ยงโดนยิง API/กินค่าใช้จ่าย)</li>
+      <li><strong>พบไฟล์ <span class="pill">api/.env</span> อยู่ในโปรเจกต์</strong> (เสี่ยงหลุด Secret หากมีการอัปโหลด/แชร์ไฟล์)</li>
+      <li><strong>User Management พึ่งพา RLS ฝั่งฐานข้อมูล</strong> และมีบางงานทำจากฝั่ง client (ต้อง harden policy/ย้ายไป server/edge function)</li>
+      <li><strong>Section Order / Live Preview บน Production ยัง hardcode localhost</strong> ทำให้ใช้งานจริงไม่ได้และมีความเสี่ยงด้าน <span class="pill">postMessage</span></li>
+      <li><strong>ChatManager/Inbox ไม่มี pagination และมีการ reload ถี่</strong> เมื่อข้อมูลโตจะช้าหนัก/หน่วง (ควรทำ pagination + incremental update)</li>
+      <li><strong>Backup Import เป็น destructive</strong> (ลบทั้งตารางก่อน import) ต้องปรับให้ปลอดภัยเพื่อกันข้อมูลหายทั้งระบบ</li>
+    </ul>
+
+    <!-- Phase 1 -->
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-header-inner">
+          <div class="phase-num-cell"><div class="phase-num">1</div></div>
+          <div class="phase-title-cell">
+            <h3>แก้ไขปัญหาวิกฤต (Critical Fixes)</h3>
+            <span class="phase-sub">ระบบ Production, ความปลอดภัย, ป้องกันระบบล่ม</span>
+          </div>
+          <div class="phase-duration-cell"><span class="phase-duration">สัปดาห์ที่ 1–2</span></div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <ul class="task-list">
+          <li>ติดตั้ง API Server (Express/Node.js) บน Cloud Service พร้อมตั้งค่า CORS และ Environment Variables ให้รองรับ Production</li>
+          <li>แก้ไขระบบ AI Chat ให้ทำงานได้บน Production โดยกำหนด API URL ที่ถูกต้องในขั้นตอน Build</li>
+          <li>แก้ไขระบบ Live Preview ใน Admin Editor ทั้ง 6 หน้า ให้ตรวจจับ Production URL โดยอัตโนมัติ</li>
+          <li>เปลี่ยน API Keys ทั้งหมดที่อาจรั่วไหล และจัดการ Environment Variables ให้ปลอดภัย</li>
+          <li>ป้องกันช่องโหว่ XSS โดยเพิ่มการ Sanitize ข้อมูลก่อนแสดงผล HTML</li>
+          <li>เพิ่มการตรวจสอบ Origin ของ postMessage เพื่อป้องกันการโจมตีจากภายนอก</li>
+          <li>เพิ่ม Error Boundary เพื่อป้องกันปัญหาจอขาวเมื่อเกิดข้อผิดพลาด</li>
+          <li>แก้ไข JSON.parse Crash ในระบบ Chat และ Application หลัก</li>
+          <li>แก้ไขค่าเริ่มต้นสิทธิ์ผู้ใช้ (Role Default) ในระบบ Authentication</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Phase 2 -->
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-header-inner">
+          <div class="phase-num-cell"><div class="phase-num">2</div></div>
+          <div class="phase-title-cell">
+            <h3>แก้ไขข้อผิดพลาดทั้งหมด (Bug Fixes)</h3>
+            <span class="phase-sub">Null Checks, Memory Leaks, State Management, PostMessage</span>
+          </div>
+          <div class="phase-duration-cell"><span class="phase-duration">สัปดาห์ที่ 3–4</span></div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <ul class="task-list">
+          <li>แก้ไขรูปแบบข้อมูล postMessage ในระบบ BusinessTools เพื่อให้ CMS อัปเดตข้อมูลแบบ Real-time ได้</li>
+          <li>เพิ่ม postMessage Listener ในหน้าที่เกี่ยวข้องเพื่อรองรับ Live Preview</li>
+          <li>แก้ไขปัญหา Null/Undefined Crashes ทั้งระบบ (รูปภาพ, แท็ก, รายละเอียด, เมนูนำทาง)</li>
+          <li>แก้ไข Memory Leaks จาก Event Listener, Resize Observer และ setInterval ที่ไม่ได้ Cleanup</li>
+          <li>แก้ไขข้อผิดพลาดในระบบ Media Library, CompletedTripsEditor และ FooterLinksEditor</li>
+          <li>แก้ไขข้อผิดพลาดระดับ Medium ทั้งหมด รวม 18 รายการ</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Phase 3 -->
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-header-inner">
+          <div class="phase-num-cell"><div class="phase-num">3</div></div>
+          <div class="phase-title-cell">
+            <h3>ปรับปรุงประสิทธิภาพ (Performance Optimization)</h3>
+            <span class="phase-sub">Code Splitting, Refactoring, Lazy Loading</span>
+          </div>
+          <div class="phase-duration-cell"><span class="phase-duration">สัปดาห์ที่ 5–6</span></div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <ul class="task-list">
+          <li>Refactor ไฟล์ขนาดใหญ่ 3 ไฟล์ ที่มีมากกว่า 3,000 บรรทัด ให้แยกเป็น Components ย่อย</li>
+          <li>เปลี่ยนระบบ Import เป็น React.lazy() เพื่อลดขนาด Bundle เริ่มต้น</li>
+          <li>ตั้งค่า Lazy Loading สำหรับ Libraries ขนาดใหญ่</li>
+          <li>สร้างชุดฟังก์ชันกลาง (Shared Utilities) เพื่อลดโค้ดซ้ำซ้อนมากกว่า 10 ไฟล์</li>
+          <li>เพิ่ม Performance Optimization ด้วย React.memo, useCallback และ useMemo</li>
+          <li>เพิ่ม Image Lazy Loading, Input Validation และ Rate Limiting</li>
+          <li>ลบ Dependencies ที่ไม่ได้ใช้งาน และแก้ไขรายการ Low Priority (10 รายการ)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Phase 4 -->
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-header-inner">
+          <div class="phase-num-cell"><div class="phase-num">4</div></div>
+          <div class="phase-title-cell">
+            <h3>พัฒนาระบบ CMS เพิ่มเติม (CMS Integration)</h3>
+            <span class="phase-sub">Admin Editors ใหม่, เชื่อมฐานข้อมูล, รองรับ 5 ภาษา</span>
+          </div>
+          <div class="phase-duration-cell"><span class="phase-duration">สัปดาห์ที่ 6–8</span></div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <ul class="task-list">
+          <li><strong>Executive Editor</strong> &mdash; ระบบจัดการข้อมูลผู้บริหาร รองรับหลายภาษาพร้อม Live Preview</li>
+          <li><strong>Promotions Manager</strong> &mdash; ระบบจัดการโปรโมชัน (รูปภาพ, รายละเอียด, เงื่อนไข, ระยะเวลา)</li>
+          <li><strong>JoinBusiness Editor</strong> &mdash; ระบบจัดการการ์ดธุรกิจ 8 รายการพร้อม Live Preview</li>
+          <li><strong>TravelRewards CMS</strong> &mdash; เชื่อมต่อหน้าย่อยทั้งหมดเข้ากับฐานข้อมูล</li>
+          <li><strong>History / Vision Editor</strong> &mdash; ระบบอัปโหลดรูปภาพและจัดการสถิติการเติบโต</li>
+          <li><strong>Footer / ContactUs / NavBar Editor</strong> &mdash; ระบบจัดการที่อยู่, Social Media และเมนูสินค้า</li>
+          <li>เชื่อมต่อทุก Editor ใหม่เข้ากับระบบ LiveEditor และรองรับ 5 ภาษา</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Phase 5 -->
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-header-inner">
+          <div class="phase-num-cell"><div class="phase-num">5</div></div>
+          <div class="phase-title-cell">
+            <h3>ทดสอบระบบและส่งมอบงาน (Testing &amp; Deployment)</h3>
+            <span class="phase-sub">QA Testing, Responsive, Multi-language, Deployment</span>
+          </div>
+          <div class="phase-duration-cell"><span class="phase-duration">สัปดาห์ที่ 8</span></div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <ul class="task-list">
+          <li>ทดสอบการทำงานทุกหน้าและทุกฟีเจอร์บนเซิร์ฟเวอร์ Production จริง</li>
+          <li>ทดสอบการแสดงผลแบบ Responsive (Desktop, Tablet, Mobile)</li>
+          <li>ทดสอบระบบรองรับ 5 ภาษา (TH, EN, ID, MS, AR)</li>
+          <li>Build และ Deploy ระบบทั้งหน้าบ้านและหลังบ้านขึ้นเซิร์ฟเวอร์</li>
+          <li>จัดทำเอกสารสรุปการแก้ไขและส่งมอบงาน</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Timeline -->
+    <h2>3. แผนระยะเวลาดำเนินงาน (Timeline)</h2>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-week">สัปดาห์ที่ 1–2</div>
+        <h4>Phase 1 &mdash; แก้ไขปัญหาวิกฤต (Critical Fixes)</h4>
+        <p>ติดตั้ง API Server, แก้ไขระบบ AI Chat, Live Preview, ความปลอดภัย และ Error Boundary</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-week">สัปดาห์ที่ 3–4</div>
+        <h4>Phase 2 &mdash; แก้ไขข้อผิดพลาดทั้งหมด (Bug Fixes)</h4>
+        <p>Null Checks, Memory Leaks, PostMessage Format และ State Management Bugs</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-week">สัปดาห์ที่ 5–6</div>
+        <h4>Phase 3 &mdash; ปรับปรุงประสิทธิภาพ (Performance Optimization)</h4>
+        <p>Refactor ไฟล์ขนาดใหญ่, Lazy Loading, Shared Utilities และ Cleanup</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-week">สัปดาห์ที่ 6–8</div>
+        <h4>Phase 4 &mdash; พัฒนาระบบ CMS เพิ่มเติม (CMS Integration)</h4>
+        <p>สร้าง Admin Editors ใหม่ 7 ระบบ พร้อมเชื่อมต่อฐานข้อมูลและรองรับ 5 ภาษา</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-week">สัปดาห์ที่ 8</div>
+        <h4>Phase 5 &mdash; ทดสอบระบบและส่งมอบงาน</h4>
+        <p>QA Testing, ทดสอบ Responsive, Multi-language, Deploy และส่งมอบเอกสาร</p>
+      </div>
+    </div>
+
+    <!-- Summary Table -->
+    <h2>4. สรุปภาพรวม</h2>
+
+    <div class="note-box" style="margin-top:10px">
+      <strong>สรุปประเด็นที่ตรวจพบเพิ่มเติม (Deep Audit รอบล่าสุด):</strong>
+      <ul style="margin-top:8px; padding-left:18px">
+        <li><strong>API Server อาจเปิดใช้งานได้โดยไม่ต้องมี Key</strong> หากไม่ได้ตั้งค่า <span class="pill">API_KEYS</span> (เสี่ยงโดนยิง API/กินค่าใช้จ่าย) <span class="pill">เรท: 4,000 บาท</span></li>
+        <li><strong>พบไฟล์ <span class="pill">api/.env</span> ในโปรเจกต์</strong> (เสี่ยงหลุด Secret หากมีการอัปโหลด/แชร์ไฟล์) <span class="pill">เรท: 3,000 บาท</span></li>
+        <li><strong>User Management/Permissions พึ่งพา RLS ฝั่งฐานข้อมูล</strong> และบางส่วนทำจาก client (ต้อง harden policy/ย้ายงานเสี่ยงไป server/edge function) <span class="pill">เรท: 5,000 บาท</span></li>
+        <li><strong>Section Order / Live Preview บน Production ยัง hardcode localhost</strong> ทำให้ใช้งานจริงไม่ได้ และมีความเสี่ยงด้าน <span class="pill">postMessage</span> <span class="pill">เรท: 2,000 บาท</span> (Section Order) <span class="pill">6,000 บาท</span> (Live Preview)</li>
+        <li><strong>ChatManager/Inbox ไม่มี pagination และมีการ reload ถี่</strong> เมื่อข้อมูลโตจะช้าหนัก/หน่วง (ควรทำ pagination + incremental update) <span class="pill">เรท: 5,000 บาท</span></li>
+        <li><strong>Backup Import เป็น destructive</strong> (ลบทั้งตารางก่อน import) ต้องปรับให้ปลอดภัยเพื่อกันข้อมูลหายทั้งระบบ <span class="pill">เรท: 4,000 บาท</span></li>
+      </ul>
+      <div style="margin-top:8px; font-size:12px; color:#4b5563">
+        รายการข้างต้นถูกสะท้อนเป็น “เรทราคางานเพิ่มเติม” ในหัวข้อ <strong>5.1</strong> เพื่อให้ประเมินงบงานเสริม/งานต่อยอดได้ชัดเจน
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:70px">ระยะ</th>
+          <th>รายละเอียด</th>
+          <th class="text-center" style="width:80px">จำนวนงาน</th>
+          <th class="text-center" style="width:90px">ระยะเวลา</th>
+          <th class="text-center" style="width:90px">ค่าบริการ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Phase 1</strong></td>
+          <td>แก้ไขปัญหาวิกฤต &mdash; Production, Security, Crash</td>
+          <td class="text-center">9 รายการ</td>
+          <td class="text-center">สัปดาห์ 1–2</td>
+          <td class="text-center">15,000 บาท</td>
+        </tr>
+        <tr>
+          <td><strong>Phase 2</strong></td>
+          <td>แก้ไขข้อผิดพลาด &mdash; Bugs ทั้งหมดที่ตรวจพบ</td>
+          <td class="text-center">29 รายการ</td>
+          <td class="text-center">สัปดาห์ 3–4</td>
+          <td class="text-center">12,000 บาท</td>
+        </tr>
+        <tr>
+          <td><strong>Phase 3</strong></td>
+          <td>ปรับปรุงประสิทธิภาพ &mdash; Refactoring, Optimization</td>
+          <td class="text-center">7 รายการ</td>
+          <td class="text-center">สัปดาห์ 5–6</td>
+          <td class="text-center">10,000 บาท</td>
+        </tr>
+        <tr>
+          <td><strong>Phase 4</strong></td>
+          <td>พัฒนาระบบ CMS &mdash; Admin Editors ใหม่</td>
+          <td class="text-center">7 ระบบ</td>
+          <td class="text-center">สัปดาห์ 6–8</td>
+          <td class="text-center">18,000 บาท</td>
+        </tr>
+        <tr>
+          <td><strong>Phase 5</strong></td>
+          <td>ทดสอบระบบและส่งมอบงาน</td>
+          <td class="text-center">5 รายการ</td>
+          <td class="text-center">สัปดาห์ 8</td>
+          <td class="text-center">5,000 บาท</td>
+        </tr>
+        <tr class="total-row">
+          <td colspan="2"><strong>รวมทั้งหมด</strong></td>
+          <td class="text-center"><strong>106 รายการ</strong></td>
+          <td class="text-center"><strong>8 สัปดาห์</strong></td>
+          <td class="text-center"><strong>60,000 บาท</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note-box">
+      <strong>หมายเหตุ:</strong>
+      ระยะเวลาดำเนินงานรวม 8 สัปดาห์ (2 เดือน) นับจากวันเริ่มต้นสัญญา โดย Phase 3 และ Phase 4 อาจดำเนินการคู่ขนานบางส่วนเพื่อให้ทันกำหนดส่งมอบ ขอบเขตงานอาจมีการปรับเปลี่ยนตามสถานการณ์จริงโดยข้อตกลงร่วมกันของทั้งสองฝ่าย
+    </div>
+
+    <h3 style="margin-top:16px">สรุปราคางานเพิ่มเติมจากข้อ 5.1 (ไม่รวมอยู่ใน 60,000 บาท)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>งานเพิ่มเติม</th>
+          <th class="text-center" style="width:160px">เรทราคาโดยประมาณ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>แก้ Live Preview ให้ใช้งานบน Host จริง</td>
+          <td class="text-center">6,000 บาท</td>
+        </tr>
+        <tr>
+          <td>ติดตั้ง/ย้าย AI Chat API ไป Production</td>
+          <td class="text-center">8,000 บาท</td>
+        </tr>
+        <tr>
+          <td>API Hardening (API Key + Rate Limit)</td>
+          <td class="text-center">4,000 บาท</td>
+        </tr>
+        <tr>
+          <td>จัดการ Secret/ENV ให้ปลอดภัย</td>
+          <td class="text-center">3,000 บาท</td>
+        </tr>
+        <tr>
+          <td>Users/Permissions Hardening</td>
+          <td class="text-center">5,000 บาท</td>
+        </tr>
+        <tr>
+          <td>แก้ Section Order ให้ใช้งานบน Host จริง</td>
+          <td class="text-center">2,000 บาท</td>
+        </tr>
+        <tr>
+          <td>Hardening ความปลอดภัย (XSS / postMessage / Upload)</td>
+          <td class="text-center">6,000 บาท</td>
+        </tr>
+        <tr>
+          <td>ทำระบบ Backup/Restore ให้ปลอดภัย</td>
+          <td class="text-center">4,000 บาท</td>
+        </tr>
+        <tr>
+          <td>ปรับ Realtime/CRUD ให้ลื่นเมื่อข้อมูลโต</td>
+          <td class="text-center">5,000 บาท</td>
+        </tr>
+        <tr class="total-row">
+          <td><strong>รวมเรทราคางานเพิ่มเติม (กรณีเลือกทำครบทุกหัวข้อ)</strong></td>
+          <td class="text-center"><strong>43,000 บาท</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>5. เรทราคาสำหรับงานเพิ่มเติมในอนาคต</h2>
+    <p>หากมีงานเพิ่มเติมนอกเหนือจากขอบเขตที่ระบุในข้อ 2 (เช่น ฟีเจอร์ใหม่, ปรับดีไซน์ครั้งใหญ่, เชื่อมต่อระบบภายนอกเพิ่มเติม) สามารถใช้เรทราคาประเมินเบื้องต้นดังนี้</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ประเภทงานเพิ่มเติม</th>
+          <th>ตัวอย่างงาน</th>
+          <th class="text-center" style="width:120px">เรทราคาโดยประมาณ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>งานปรับหน้าจอ (UI/Content เล็กน้อย)</strong></td>
+          <td>แก้ Layout หน้าเดิม, ปรับข้อความ/รูปภาพ, เพิ่ม Section เล็กๆ</td>
+          <td class="text-center">3,000 – 7,000 บาท/ครั้ง</td>
+        </tr>
+        <tr>
+          <td><strong>งานเพิ่มฟีเจอร์ขนาดเล็ก</strong></td>
+          <td>เพิ่มปุ่ม/ฟอร์ม, Logic เพิ่มเติมในหน้าเดิม, รายงานเล็กๆ</td>
+          <td class="text-center">8,000 – 15,000 บาท/ฟีเจอร์</td>
+        </tr>
+        <tr>
+          <td><strong>งานเพิ่มฟีเจอร์ขนาดกลาง</strong></td>
+          <td>สร้างหน้าใหม่ 1 หน้าเชื่อม CMS, เพิ่ม Workflow ใหม่, เชื่อม API ภายนอก</td>
+          <td class="text-center">18,000 – 30,000 บาท/ฟีเจอร์</td>
+        </tr>
+        <tr>
+          <td><strong>งานปรับปรุงโครงสร้างระบบ</strong></td>
+          <td>Refactor ส่วนสำคัญ, แยก Service, ปรับ Performance เฉพาะส่วน</td>
+          <td class="text-center">25,000 – 45,000 บาท/รอบงาน</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note-box" style="margin-top:14px">
+      <strong>หมายเหตุ:</strong>
+      เรทราคาด้านล่างเป็น “เรทแยก” สำหรับงานแก้ปัญหา/งานระบบที่มักเกิดขึ้นเมื่อใช้งานจริงบน Production (นอกเหนือจากงานหลัก 2 เดือน) เพื่อใช้ประเมินงบเบื้องต้นให้หัวหน้า/ลูกค้า
+    </div>
+
+    <h3 style="margin-top:16px">5.1 เรทราคาโดยประมาณ — งานแก้ปัญหาที่มักเจอบน Production</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>ประเภทปัญหา/งานที่เพิ่ม</th>
+          <th>ขอบเขตตัวอย่าง</th>
+          <th class="text-center" style="width:140px">เรทราคาโดยประมาณ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>แก้ Live Preview ให้ใช้งานบน Host จริง</strong></td>
+          <td>ปรับ origin/targetOrigin, ตัด localhost detection, ทำ whitelist + validate `postMessage` ให้ปลอดภัย</td>
+          <td class="text-center">6,000 บาท</td>
+        </tr>
+        <tr>
+          <td><strong>ติดตั้ง/ย้าย AI Chat API ไป Production</strong></td>
+          <td>Deploy Node/Serverless, ตั้ง ENV, ปรับ CORS, ปรับ `REACT_APP_API_URL`, ตรวจ health/monitor</td>
+          <td class="text-center">8,000 บาท</td>
+        </tr>
+        <tr>
+          <td><strong>API Hardening (API Key + Rate Limit)</strong></td>
+          <td>บังคับใช้ API key ทุก endpoint ที่จำเป็น, เพิ่ม rate limit/throttle, ปรับ CORS origin whitelist และ logging ที่พอเหมาะ</td>
+          <td class="text-center">4,000 บาท</td>
+        </tr>
+        <tr>
+          <td><strong>จัดการ Secret/ENV ให้ปลอดภัย</strong></td>
+          <td>ลบไฟล์ .env ออกจากโปรเจกต์, ตั้งค่า .gitignore, rotate keys, ย้ายไปใช้ environment ของ host และตรวจไม่ให้ key hardcode ใน source</td>
+          <td class="text-center">3,000 บาท</td>
+        </tr>
+        <tr>
+          <td><strong>Users/Permissions Hardening</strong></td>
+          <td>ทบทวน RLS/Policy สำหรับ profiles/pages/settings, ย้ายงานเสี่ยงไป Edge Function/Server (เช่น delete auth user), ปรับ role guard ใน action สำคัญ</td>
+          <td class="text-center">5,000 บาท</td>
+        </tr>
+        <tr>
+          <td><strong>แก้ Section Order ให้ใช้งานบน Host จริง</strong></td>
+          <td>ตัดการ hardcode `http://localhost:3000`, ใช้ origin ที่ถูกต้องบน production, ปรับ refresh/preview ให้เสถียร</td>
+          <td class="text-center">2,000 บาท</td>
+        </tr>
+        <tr>
+          <td><strong>Hardening ความปลอดภัย (XSS / postMessage / Upload)</strong></td>
+          <td>เพิ่ม DOMPurify ในจุดเสี่ยง, validate origin, validate file type/size, ปรับ policy/RLS ที่จำเป็น</td>
+          <td class="text-center">6,000 บาท</td>
+        </tr>
+        <tr>
+          <td><strong>ทำระบบ Backup/Restore ให้ปลอดภัย</strong></td>
+          <td>ยกเลิก “ลบทิ้งทั้งตารางก่อน import”, ทำ staging + ตรวจ schema + rollback/restore point</td>
+          <td class="text-center">4,000 บาท</td>
+        </tr>
+        <tr>
+          <td><strong>ปรับ Realtime/CRUD ให้ลื่นเมื่อข้อมูลโต</strong></td>
+          <td>Pagination + incremental update, ลด `event:'*'` reload, optimize queries/select columns</td>
+          <td class="text-center">5,000 บาท</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- ===== Section 6: Travel Rewards Per-Trip CMS ===== -->
+    <h2 style="margin-top:40px">6. งานพัฒนาเพิ่มเติม — ระบบ Travel Rewards Per-Trip CMS</h2>
+
+    <p>งานต่อไปนี้เป็นการพัฒนา<strong>นอกเหนือจากขอบเขตงานหลัก</strong>ในข้อ 2 (Phase 1–5) โดยเป็นการยกระดับระบบ Travel Rewards จากหน้าเว็บ<strong>ทริปเดียว</strong>ที่ไม่มี CMS ให้กลายเป็น<strong>ระบบไมโครไซต์อิสระต่อทริป</strong>พร้อม CMS เต็มรูปแบบ</p>
+
+    <h3 style="margin-top:14px">6.1 สถานะก่อนพัฒนา (Before)</h3>
+    <div class="note-box" style="margin-top:6px">
+      <ul style="padding-left:18px; margin:0">
+        <li>Travel Rewards เป็น<strong>หน้าเว็บ static สำหรับทริปเดียว</strong> (<code>/travel-rewards</code>) มี 3 หน้าย่อย: Home, About, Habsburg — เนื้อหาเขียนตรงในโค้ด (hardcode)</li>
+        <li><strong>ไม่มีระบบ CMS</strong> สำหรับ Travel Rewards เลย — ไม่สามารถแก้ไขเนื้อหาจากหน้าแอดมินได้</li>
+        <li>ไม่มีตาราง <code>completed_trips</code> ในฐานข้อมูล — ไม่รองรับหลายทริป</li>
+        <li>หน้า <code>/business-tool/6</code> แสดงข้อมูลทริปแบบ hardcode ไม่ดึงจากฐานข้อมูล</li>
+        <li>ไม่มีระบบ Live Preview, ไม่มี slug, ไม่รองรับหลายภาษาในส่วน Travel Rewards</li>
+      </ul>
+      <div style="margin-top:8px; font-size:12px; color:#4b5563">
+        <strong>หมายเหตุ:</strong> ก่อนเริ่มงานส่วนนี้ ได้มีการเพิ่ม CMS พื้นฐานสำหรับหน้า Travel Rewards หลัก (Home/About/Habsburg ชุดเดียว) เชื่อมกับ <code>site_content</code> ไว้แล้ว — งานข้างล่างนี้คือการต่อยอดให้รองรับ<strong>หลายทริป</strong>โดยแต่ละทริปมี CMS ชุดของตัวเอง
+      </div>
+    </div>
+
+    <h3 style="margin-top:14px">6.2 สถานะหลังพัฒนา (After)</h3>
+    <div class="note-box" style="margin-top:6px; border-left:3px solid #22c55e">
+      <ul style="padding-left:18px; margin:0">
+        <li>แต่ละทริปมี<strong>ไมโครไซต์อิสระ</strong>ที่ <code>/travel-rewards/&lt;slug&gt;</code> พร้อม 3 หน้าย่อย (Home / About / Habsburg)</li>
+        <li>เนื้อหาแยกต่อทริป — แก้ไขทริป A ไม่กระทบทริป B</li>
+        <li>หน้า <code>/business-tool/6</code> ดึงทริปจากฐานข้อมูล แบ่งตามปี พร้อมลิงก์ไปหน้ารายละเอียด</li>
+        <li>ระบบ Admin CMS เต็มรูปแบบต่อทริป พร้อม Live Preview แบบ iframe</li>
+        <li>รองรับ 5 ภาษา (TH, EN, ID, MS, AR) ทั้งหน้าสาธารณะและแอดมิน</li>
+        <li>ระบบ Slug สำหรับ URL สาธารณะที่อ่านง่าย เช่น <code>/travel-rewards/happy-mpm-2025</code></li>
+        <li>ปุ่มเลือก preview ทริปใน CompletedTripsEditor</li>
+      </ul>
+    </div>
+
+    <h3 style="margin-top:14px">6.3 รายละเอียดงานที่ดำเนินการ</h3>
+
+    <!-- Sub-feature 1 -->
+    <div class="phase" style="margin-top:10px">
+      <div class="phase-header">
+        <div class="phase-header-inner">
+          <div class="phase-num-cell"><div class="phase-num" style="background:#c9a84c">A</div></div>
+          <div class="phase-title-cell">
+            <h3>ระบบ Per-Trip Microsite (Public)</h3>
+            <span class="phase-sub">Routing, Context, Layout Chrome, หน้าสาธารณะ</span>
+          </div>
+          <div class="phase-duration-cell"><span class="phase-duration">8,000 บาท</span></div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <ul class="task-list">
+          <li>สร้าง <code>TravelRewardsSiteContext</code> สำหรับสลับโหมด global/trip ให้ Header, Footer และทุกหน้าย่อยรู้ว่าอยู่ทริปไหน</li>
+          <li>สร้าง <code>GlobalTravelRewardsChrome</code> (layout หลัก) และ <code>TripSiteChrome</code> (layout ต่อทริป) เพื่อโหลดข้อมูลทริปจาก DB แล้วส่ง Context</li>
+          <li>Refactor <code>TravelRewards.jsx</code> ให้รองรับ Nested Routes: <code>/travel-rewards/:tripKey</code>, <code>/travel-rewards/:tripKey/about</code>, <code>/travel-rewards/:tripKey/habsburg</code></li>
+          <li>แก้ไข <code>Header.jsx</code>, <code>Footer.jsx</code>, <code>Home.jsx</code>, <code>About.jsx</code>, <code>Habsburg.jsx</code> ให้ใช้ sectionId แบบ dynamic ตาม Context (ไม่ hardcode)</li>
+          <li>ปุ่มย้อนกลับทุกหน้า (global + trip) นำทางไป <code>/business-tool/6</code> ตามต้องการ</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Sub-feature 2 -->
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-header-inner">
+          <div class="phase-num-cell"><div class="phase-num" style="background:#c9a84c">B</div></div>
+          <div class="phase-title-cell">
+            <h3>ระบบ Admin CMS ต่อทริป + Live Preview</h3>
+            <span class="phase-sub">Editor Page, iframe Preview, postMessage, UX/UI Design</span>
+          </div>
+          <div class="phase-duration-cell"><span class="phase-duration">12,000 บาท</span></div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <ul class="task-list">
+          <li>สร้าง <code>CompletedTripTravelRewardsCms.jsx</code> — หน้าแก้ไขเนื้อหา Home/About/Habsburg เฉพาะทริป พร้อม Tab สลับหน้า + เลือกภาษา</li>
+          <li>ออกแบบ UX/UI ใหม่ทั้งหน้า — Top bar, Toolbar, Editor/Preview split layout, Toast notification, Loading/Error states, Responsive</li>
+          <li>สร้างไฟล์ CSS เฉพาะ (<code>CompletedTripTravelRewardsCms.css</code>) ให้เข้ากับ Admin theme (White &amp; Blue)</li>
+          <li>ระบบ Live Preview ด้วย iframe — ตรวจจับ URL ไซต์สาธารณะอัตโนมัติ, รีโหลด preview เมื่อบันทึก, ปุ่มเปิดแท็บใหม่</li>
+          <li>แก้ไข <code>TravelRewardsContentEditor.jsx</code> ให้รับ <code>tripId</code> prop → สร้าง sectionId, uploadFolder, seed target แบบ dynamic ต่อทริป</li>
+          <li>สร้าง <code>travelRewardsTripCms.js</code> — utility functions สร้าง section IDs (<code>tr-trip-&lt;uuid&gt;-home|about|habsburg</code>) และ seed templates</li>
+          <li>เพิ่ม Routes ใน <code>AdminApp.jsx</code>: <code>/admin/completed-trips/:tripId/cms</code></li>
+          <li>เพิ่มปุ่ม "แก้ไขหน้าเว็บทริป" ในการ์ดทริปบน CompletedTripsEditor</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Sub-feature 3 -->
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-header-inner">
+          <div class="phase-num-cell"><div class="phase-num" style="background:#c9a84c">C</div></div>
+          <div class="phase-title-cell">
+            <h3>ระบบ Completed Trips + หน้าสาธารณะ Business Tool</h3>
+            <span class="phase-sub">Database, Slug, Year Filter, Public Display</span>
+          </div>
+          <div class="phase-duration-cell"><span class="phase-duration">6,000 บาท</span></div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <ul class="task-list">
+          <li>สร้างตาราง <code>completed_trips</code> — รองรับ 5 ภาษา (title, description, destination × 5), image, year, trip_date, is_active</li>
+          <li>เพิ่มคอลัมน์ <code>slug</code> พร้อม unique index สำหรับ URL สาธารณะ (<code>/travel-rewards/&lt;slug&gt;</code>)</li>
+          <li>สร้าง RLS Policies — anon อ่านได้เฉพาะ active trips, authenticated CRUD ทั้งหมด</li>
+          <li>สร้าง <code>completedTrips.js</code> — helper functions: <code>getCompletedTripField</code>, <code>travelRewardsTripDetailPath</code>, <code>suggestTripSlug</code>, <code>isValidTripSlug</code></li>
+          <li>แก้ไข <code>BusinessToolDetail.jsx</code> ให้ดึงทริปจาก DB, แบ่งตามปี (year filter), เปรียบเทียบปีแบบ type-safe, แสดง loading state</li>
+          <li>เพิ่มปุ่มเลือกทริปใน Live Preview ของ CompletedTripsEditor — ดู preview ทริปใดก็ได้จาก dropdown</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Sub-feature 4 -->
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-header-inner">
+          <div class="phase-num-cell"><div class="phase-num" style="background:#c9a84c">D</div></div>
+          <div class="phase-title-cell">
+            <h3>แก้ไข Bug &amp; Cross-Origin Preview</h3>
+            <span class="phase-sub">PostgREST 400, ERR_BLOCKED_BY_RESPONSE, RLS, Port Detection</span>
+          </div>
+          <div class="phase-duration-cell"><span class="phase-duration">4,000 บาท</span></div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <ul class="task-list">
+          <li>แก้ไข PostgREST 400 Error — <code>COMPLETED_TRIPS_SELECT</code> ใช้ชื่อคอลัมน์ผิด (<code>title</code> แทน <code>title_th</code>)</li>
+          <li>แก้ไข <code>ERR_BLOCKED_BY_RESPONSE.NotSameOrigin</code> — ระบบ detect port ผิด (port 3002 = API server ไม่ใช่ frontend)</li>
+          <li>แก้ไข <code>publicSiteUrl.js</code> — ลบ port 3002 ออกจาก detection, เคลียร์ sessionStorage ที่ cache ค่าผิด</li>
+          <li>แก้ไขปัญหาทริปไม่แสดงบนหน้าสาธารณะ — ตรวจสอบ RLS policy, type mismatch ในตัวกรองปี, initial state ผิด</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="margin-top:14px">6.4 สรุปค่าบริการ — ระบบ Travel Rewards Per-Trip CMS</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:50px">ลำดับ</th>
+          <th>รายละเอียดงาน</th>
+          <th>ไฟล์ที่สร้าง/แก้ไข</th>
+          <th class="text-center" style="width:100px">ค่าบริการ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="text-center"><strong>A</strong></td>
+          <td>ระบบ Per-Trip Microsite (Public) — Routing, Context, Layout Chrome, Refactor 5+ components</td>
+          <td style="font-size:11px">TravelRewardsSiteContext.jsx, GlobalTravelRewardsChrome.jsx, TripSiteChrome.jsx, TravelRewards.jsx, Header.jsx, Footer.jsx, Home.jsx, About.jsx, Habsburg.jsx</td>
+          <td class="text-center">8,000 บาท</td>
+        </tr>
+        <tr>
+          <td class="text-center"><strong>B</strong></td>
+          <td>ระบบ Admin CMS ต่อทริป + Live Preview — Editor Page, UX/UI Design, iframe Preview</td>
+          <td style="font-size:11px">CompletedTripTravelRewardsCms.jsx/.css, TravelRewardsContentEditor.jsx, travelRewardsTripCms.js, AdminApp.jsx, CompletedTripsEditor.jsx</td>
+          <td class="text-center">12,000 บาท</td>
+        </tr>
+        <tr>
+          <td class="text-center"><strong>C</strong></td>
+          <td>ระบบ Completed Trips + หน้าสาธารณะ — Database, Slug, Year Filter, Public Display</td>
+          <td style="font-size:11px">completed_trips.sql, add_completed_trips_slug.sql, completedTrips.js, BusinessToolDetail.jsx</td>
+          <td class="text-center">6,000 บาท</td>
+        </tr>
+        <tr>
+          <td class="text-center"><strong>D</strong></td>
+          <td>แก้ไข Bug &amp; Cross-Origin Preview — PostgREST 400, ERR_BLOCKED, RLS, Port Detection</td>
+          <td style="font-size:11px">completedTrips.js, publicSiteUrl.js, BusinessToolDetail.jsx</td>
+          <td class="text-center">4,000 บาท</td>
+        </tr>
+        <tr class="total-row">
+          <td colspan="3"><strong>รวมค่าบริการ — ระบบ Travel Rewards Per-Trip CMS</strong></td>
+          <td class="text-center"><strong>30,000 บาท</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note-box" style="margin-top:12px">
+      <strong>หมายเหตุ:</strong>
+      งานข้างต้นจัดอยู่ในระดับ "ฟีเจอร์ขนาดกลาง–ใหญ่" ตามเรทราคาข้อ 5 (18,000–30,000 บาท/ฟีเจอร์) เนื่องจากประกอบด้วย: การออกแบบสถาปัตยกรรมระบบใหม่ (Context + Chrome pattern), สร้างหน้าแอดมินพร้อม UX/UI, ระบบ Live Preview ข้ามพอร์ต, แก้ไข Schema ฐานข้อมูล + RLS, Refactor components เดิม 8+ ไฟล์, รองรับ 5 ภาษา และแก้ไข Bug ที่เกี่ยวข้อง — รวมไฟล์ที่สร้างใหม่/แก้ไข <strong>20+ ไฟล์</strong>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
+<script>
+function savePDF() {
+  var btns = document.querySelector('.btn-group');
+  btns.style.display = 'none';
+
+  var el = document.getElementById('doc');
+
+  html2pdf()
+    .set({
+      margin:      [8, 8, 10, 8],
+      filename:    'Proposal-HappyMPM-2026.pdf',
+      image:       { type: 'jpeg', quality: 0.95 },
+      html2canvas: {
+        scale: 2,
+        useCORS: true,
+        width: 794,
+        windowWidth: 794,
+        scrollY: 0,
+        scrollX: 0
+      },
+      jsPDF:       { unit: 'mm', format: 'a4', orientation: 'portrait' },
+      pagebreak:   { mode: ['css'], avoid: ['.phase', '.note-box', 'table', '.timeline'] }
+    })
+    .from(el)
+    .save()
+    .then(function() {
+      btns.style.display = 'flex';
+    })
+    .catch(function() {
+      btns.style.display = 'flex';
+      alert('เกิดข้อผิดพลาด กรุณาลองอีกครั้ง');
+    });
+}
+</script>
+
+</body>
+</html>

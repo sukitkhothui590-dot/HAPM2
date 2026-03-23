@@ -3,1053 +3,1269 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ข้อเสนอบริการปรับปรุงระบบเว็บไซต์ — Happy MPM</title>
+<title>ใบเสนอราคาค่าพัฒนาแพลตฟอร์มเว็บไซต์องค์กร Happy MPM</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --ink: #111827;
+    --muted: #4b5563;
+    --line: #cbd5e1;
+    --soft: #f5f5f5;
+    --paper: #ffffff;
+    --screen: #d1d5db;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
   body {
     font-family: 'Sarabun', 'Segoe UI', sans-serif;
-    color: #1a1a2e;
-    line-height: 1.6;
-    background: #e5e7eb;
+    background: var(--screen);
+    color: var(--ink);
+    line-height: 1.58;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
 
-  .doc-wrapper {
+  .toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding: 14px;
+    background: rgba(209, 213, 219, 0.94);
+    backdrop-filter: blur(8px);
+  }
+
+  .toolbar button {
+    border: 1px solid var(--ink);
+    background: #fff;
+    color: var(--ink);
+    border-radius: 999px;
+    padding: 10px 18px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .document {
+    padding: 12px 0 28px;
+  }
+
+  .page {
     width: 794px;
-    margin: 20px auto;
-    background: #fff;
-    box-shadow: 0 4px 24px rgba(0,0,0,.12);
-  }
-
-  /* ===== Cover ===== */
-  .cover {
-    width: 100%;
     min-height: 1123px;
-    padding: 200px 100px 80px;
-    text-align: center;
-    background: #fff;
+    margin: 0 auto 16px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.10);
+    padding: 56px 52px 44px;
+    display: flex;
+    flex-direction: column;
+    page-break-after: always;
   }
 
-  .cover-line {
-    width: 80px;
-    height: 4px;
-    background: #c9a84c;
-    margin: 0 auto 32px;
+  .page:last-child {
+    page-break-after: auto;
   }
 
-  .cover .doc-type {
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 22px;
+  }
+
+  .page-header.compact {
+    margin-bottom: 18px;
+  }
+
+  .doc-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .doc-subject {
     font-size: 13px;
     font-weight: 600;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    color: #c9a84c;
-    margin-bottom: 20px;
+    color: var(--ink);
   }
 
-  .cover h1 {
-    font-size: 30px;
-    font-weight: 800;
-    color: #1e3a5f;
+  .page-meta {
+    min-width: 210px;
+    font-size: 12px;
+  }
+
+  .page-meta-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
     margin-bottom: 6px;
-    line-height: 1.35;
   }
 
-  .cover .cover-sub {
-    font-size: 16px;
-    color: #4b5563;
-    margin-bottom: 48px;
-    font-weight: 400;
+  .page-meta-row span {
+    color: var(--muted);
   }
 
-  .cover-info {
-    display: table;
-    width: 420px;
-    margin: 0 auto;
-    border: 1px solid #d1d5db;
-    border-radius: 4px;
+  .page-meta-row strong {
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  .cover-title {
+    font-size: 29px;
+    line-height: 1.34;
+    font-weight: 800;
+    margin-bottom: 16px;
+  }
+
+  .cover-intro {
+    font-size: 14px;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+
+  .cover-letter {
+    margin-bottom: 18px;
     font-size: 13px;
+  }
+
+  .cover-letter p {
+    margin-bottom: 10px;
+  }
+
+  .section-title {
+    font-size: 19px;
+    font-weight: 800;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--ink);
+    margin-bottom: 12px;
+  }
+
+  .subsection-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 16px 0 8px;
+  }
+
+  .text {
+    font-size: 13px;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+
+  .note-box {
+    margin: 14px 0;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    background: #fafafa;
+    font-size: 12.5px;
+    color: var(--ink);
+  }
+
+  .summary-box {
+    margin-top: 18px;
+    padding: 14px 16px;
+    border: 1.5px solid var(--ink);
+    background: #fcfcfc;
+  }
+
+  .summary-box p {
+    font-size: 13px;
+    margin-bottom: 6px;
+  }
+
+  .amount-box {
+    margin-top: 18px;
+    border: 2px solid var(--ink);
+    padding: 18px 20px;
+    text-align: center;
+  }
+
+  .amount-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .amount-value {
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 1.1;
+    margin: 8px 0;
+  }
+
+  .amount-words {
+    font-size: 13px;
+  }
+
+  .info-table,
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .info-table td,
+  .data-table td,
+  .data-table th {
+    border: 1px solid var(--line);
+    padding: 8px 10px;
+    vertical-align: top;
+  }
+
+  .info-table td:first-child {
+    width: 180px;
+    background: var(--soft);
+    font-weight: 700;
+  }
+
+  .data-table th {
+    background: var(--soft);
+    font-size: 12px;
+    font-weight: 700;
     text-align: left;
   }
 
-  .cover-info-row {
-    display: table-row;
+  .data-table {
+    margin-top: 10px;
+    font-size: 12.2px;
   }
 
-  .cover-info-label {
-    display: table-cell;
-    padding: 9px 14px;
-    background: #f9fafb;
-    font-weight: 600;
-    color: #4b5563;
-    border-bottom: 1px solid #d1d5db;
-    width: 50%;
+  .reference-table {
+    margin-top: 8px;
+    font-size: 10.8px;
   }
 
-  .cover-info-value {
-    display: table-cell;
-    padding: 9px 14px;
-    border-bottom: 1px solid #d1d5db;
-    font-weight: 500;
-    color: #1a1a2e;
+  .reference-table td,
+  .reference-table th {
+    padding: 6px 7px;
   }
 
-  .cover-info-row:last-child .cover-info-label,
-  .cover-info-row:last-child .cover-info-value {
-    border-bottom: none;
+  .reference-label {
+    font-size: 12px;
+    font-weight: 700;
+    margin: 14px 0 6px;
   }
 
-  .cover-note {
-    margin-top: 120px;
-    font-size: 11px;
-    color: #9ca3af;
+  .data-table .text-center {
+    text-align: center;
   }
 
-  /* ===== Content ===== */
-  .content {
-    padding: 60px 80px;
+  .grid-two {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 12px;
   }
 
-  /* ===== Headings ===== */
-  h2 {
-    font-size: 18px;
-    font-weight: 800;
-    color: #1e3a5f;
-    margin: 24px 0 10px;
-    padding-bottom: 5px;
-    border-bottom: 2px solid #c9a84c;
+  .panel {
+    border: 1px solid var(--line);
+    padding: 14px 14px 10px;
+    background: #fff;
   }
 
-  .content > h2:first-child { margin-top: 0; }
-
-  h3 {
+  .panel h3 {
     font-size: 14px;
     font-weight: 700;
-    color: #1e3a5f;
-    margin: 0;
-  }
-
-  p {
-    font-size: 13px;
-    color: #1a1a2e;
     margin-bottom: 8px;
   }
 
-  /* ===== Scope Intro ===== */
-  .scope-intro {
-    font-size: 12.5px;
-    color: #4b5563;
-    margin-bottom: 14px;
-    padding: 10px 14px;
-    background: #f9fafb;
-    border-left: 3px solid #c9a84c;
-    border-radius: 0 4px 4px 0;
+  .panel ul,
+  .standard-list,
+  .scope-list {
+    padding-left: 18px;
   }
 
-  /* ===== Phase ===== */
-  .phase {
-    border: 1px solid #d1d5db;
-    border-radius: 5px;
-    margin: 12px 0;
-  }
-
-  .phase-header {
-    display: table;
-    width: 100%;
-    padding: 10px 14px;
-    background: #f9fafb;
-    border-bottom: 1px solid #d1d5db;
-  }
-
-  .phase-header-inner {
-    display: table-row;
-  }
-
-  .phase-num-cell {
-    display: table-cell;
-    width: 40px;
-    vertical-align: middle;
-  }
-
-  .phase-num {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: #1e3a5f;
-    color: #fff;
-    font-weight: 800;
+  .panel li,
+  .standard-list li,
+  .scope-list li {
     font-size: 13px;
-    text-align: center;
-    line-height: 28px;
+    margin-bottom: 6px;
   }
 
-  .phase-title-cell {
-    display: table-cell;
-    vertical-align: middle;
+  .standard-list {
+    margin-top: 8px;
   }
 
-  .phase-sub {
-    font-size: 11px;
-    color: #4b5563;
-    font-weight: 400;
-  }
-
-  .phase-duration-cell {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: right;
-    width: 120px;
-  }
-
-  .phase-duration {
-    font-size: 11px;
-    font-weight: 700;
-    color: #2d5a8e;
-    background: #e0ecf9;
-    padding: 3px 10px;
-    border-radius: 20px;
-    display: inline-block;
-  }
-
-  .phase-body { padding: 8px 14px 12px; }
-
-  .task-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .task-list li {
-    padding: 4px 0 4px 14px;
-    border-bottom: 1px solid #f3f4f6;
-    font-size: 12px;
+  .scope-cell {
+    font-size: 12.2px;
     line-height: 1.55;
-    position: relative;
-    color: #1a1a2e;
   }
 
-  .task-list li:last-child { border-bottom: none; }
-
-  .task-list li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 11px;
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: #c9a84c;
+  .scope-cell strong {
+    font-weight: 700;
   }
 
-  /* ===== Table ===== */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 12px 0;
-    font-size: 12px;
+  .payment-table td:first-child {
+    width: 90px;
+    font-weight: 700;
+    background: var(--soft);
   }
 
-  thead th {
-    background: #1e3a5f;
-    color: #fff;
-    padding: 8px 12px;
-    text-align: left;
-    font-weight: 600;
-    font-size: 11px;
-    letter-spacing: .5px;
+  .payment-table td:last-child {
+    width: 130px;
+    text-align: right;
+    font-weight: 700;
   }
 
-  tbody td {
-    padding: 8px 12px;
-    border-bottom: 1px solid #e5e7eb;
-    color: #1a1a2e;
-  }
-
-  tbody tr:nth-child(even) { background: #f9fafb; }
-
-  .text-center { text-align: center; }
-
-  .total-row td {
+  .price-total-row td {
+    background: #f3f4f6;
     font-weight: 800;
+  }
+
+  .signature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    margin-top: 18px;
+  }
+
+  .signature-box {
+    border: 1px solid var(--line);
+    min-height: 150px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .signature-title {
     font-size: 13px;
-    border-top: 2px solid #1e3a5f;
-    background: #e0ecf9;
-    color: #1e3a5f;
-  }
-
-  /* ===== Timeline ===== */
-  .timeline {
-    position: relative;
-    margin: 14px 0 14px 12px;
-    padding-left: 20px;
-    border-left: 2px solid #d1d5db;
-  }
-
-  .tl-item {
-    padding: 0 0 14px 0;
-    position: relative;
-  }
-
-  .tl-item:last-child { padding-bottom: 0; }
-
-  .tl-dot {
-    position: absolute;
-    left: -27px;
-    top: 4px;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #1e3a5f;
-    border: 2px solid #fff;
-  }
-
-  .tl-item .tl-week {
-    font-size: 10px;
     font-weight: 700;
-    color: #2d5a8e;
   }
 
-  .tl-item h4 {
-    font-size: 12.5px;
-    font-weight: 700;
-    color: #1a1a2e;
-    margin-bottom: 1px;
-  }
-
-  .tl-item p {
-    font-size: 11px;
-    color: #4b5563;
-    margin: 0;
-  }
-
-  /* ===== Note ===== */
-  .note-box {
-    margin-top: 20px;
-    padding: 12px 16px;
-    background: #f9fafb;
-    border: 1px solid #d1d5db;
-    border-radius: 5px;
+  .signature-line {
+    border-top: 1px solid var(--ink);
+    padding-top: 8px;
+    text-align: center;
     font-size: 12px;
-    color: #4b5563;
   }
 
-  .note-box strong { color: #1a1a2e; }
+  .page-footer {
+    margin-top: auto;
+    padding-top: 10px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 11px;
+    color: var(--muted);
+  }
 
-  /* ===== Print ===== */
+  .small-text {
+    font-size: 12px;
+  }
+
   @page {
     size: A4;
-    margin: 15mm 18mm 18mm;
+    margin: 0;
   }
 
   @media print {
-    body { background: #fff; }
-    .doc-wrapper { width: 100%; margin: 0; box-shadow: none; }
-    .cover { min-height: 0; height: auto; padding: 140px 60px 60px; page-break-after: always; }
-    .content { padding: 0; }
-    .phase { page-break-inside: avoid; }
-    .note-box { page-break-inside: avoid; }
-    table { page-break-inside: avoid; }
-    .no-print { display: none !important; }
-  }
+    body {
+      background: #fff;
+    }
 
-  /* ===== Buttons ===== */
-  .btn-group {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    display: flex;
-    gap: 10px;
-    z-index: 99;
-  }
+    .toolbar {
+      display: none !important;
+    }
 
-  .btn-action {
-    padding: 12px 24px;
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    font-family: 'Sarabun', sans-serif;
-  }
+    .document {
+      padding: 0;
+    }
 
-  .btn-print { background: #1e3a5f; }
-  .btn-print:hover { background: #2d5a8e; }
-  .btn-pdf { background: #dc2626; }
-  .btn-pdf:hover { background: #b91c1c; }
+    .page {
+      width: 794px;
+      margin: 0 auto;
+      border: none;
+      box-shadow: none;
+      page-break-after: always;
+    }
 
-  /* ===== Mobile ===== */
-  @media screen and (max-width: 820px) {
-    .doc-wrapper { width: 100%; margin: 0; box-shadow: none; }
-    .cover { min-height: 100vh; padding: 80px 24px 40px; }
-    .content { padding: 24px 20px; }
-    .cover-info { width: 100%; }
+    .page:last-child {
+      page-break-after: auto;
+    }
   }
 </style>
 </head>
 <body>
 
-<div class="btn-group no-print">
-  <button class="btn-action btn-print" onclick="window.print()">&#9113; พิมพ์</button>
+<div class="toolbar">
+  <button onclick="savePDF()">บันทึกเป็น PDF</button>
+  <button onclick="window.print()">พิมพ์เอกสาร</button>
 </div>
 
-<div class="doc-wrapper" id="doc">
-
-  <!-- ===== COVER ===== -->
-  <div class="cover">
-    <div class="cover-line"></div>
-    <div class="doc-type">Proposal</div>
-    <h1>ข้อเสนอบริการปรับปรุงระบบเว็บไซต์<br>Happy MPM</h1>
-    <p class="cover-sub">Website System Improvement &amp; Maintenance Service</p>
-
-    <div class="cover-info">
-      <div class="cover-info-row">
-        <div class="cover-info-label">เลขที่เอกสาร</div>
-        <div class="cover-info-value">PRO-2026-001</div>
+<div class="document" id="doc">
+  <section class="page">
+    <div class="page-header">
+      <div>
+        <div class="doc-label">ใบเสนอราคา / quotation</div>
+        <div class="doc-subject">เรื่อง: เสนอราคาค่าพัฒนาแพลตฟอร์มเว็บไซต์องค์กรแบบครบวงจร</div>
       </div>
-      <div class="cover-info-row">
-        <div class="cover-info-label">วันที่จัดทำ</div>
-        <div class="cover-info-value">6 มีนาคม 2569</div>
-      </div>
-      <div class="cover-info-row">
-        <div class="cover-info-label">เสนอต่อ</div>
-        <div class="cover-info-value">บริษัท Happy MPM</div>
-      </div>
-      <div class="cover-info-row">
-        <div class="cover-info-label">ระยะเวลาดำเนินงาน</div>
-        <div class="cover-info-value">2 เดือน (8 สัปดาห์)</div>
+      <div class="page-meta">
+        <div class="page-meta-row"><span>เลขที่ใบเสนอราคา</span><strong>HMPM-QT-2026-001</strong></div>
+        <div class="page-meta-row"><span>วันที่เสนอราคา</span><strong>20 มีนาคม 2569</strong></div>
+        <div class="page-meta-row"><span>อายุใบเสนอราคา</span><strong>30 วัน</strong></div>
       </div>
     </div>
 
-    <p class="cover-note">เอกสารฉบับนี้จัดทำขึ้นเพื่อเสนอขอบเขตงานและแผนการดำเนินงาน</p>
-  </div>
+    <h1 class="cover-title">ใบเสนอราคาค่าพัฒนาแพลตฟอร์มเว็บไซต์องค์กร<br>Happy MPM</h1>
 
-  <!-- ===== CONTENT ===== -->
-  <div class="content">
-
-    <h2>1. บทนำ</h2>
-    <p>จากการตรวจสอบระบบเว็บไซต์ happympm.com อย่างละเอียด พบรายการที่ต้องดำเนินการแก้ไขและปรับปรุงรวมทั้งสิ้น <strong>106 รายการ</strong> ครอบคลุมด้านความปลอดภัย, ข้อผิดพลาดของระบบ, ประสิทธิภาพ และการพัฒนาระบบจัดการเนื้อหา (CMS) เพิ่มเติม</p>
-    <p>เอกสารฉบับนี้นำเสนอแผนการดำเนินงานแบ่งเป็น 5 ระยะ ภายในระยะเวลา 2 เดือน โดยมีรายละเอียดดังต่อไปนี้</p>
-
-    <h2>2. ขอบเขตงานและแผนการดำเนินงาน</h2>
-
-    <div class="scope-intro">
-      แผนงานแบ่งออกเป็น 5 ระยะ เรียงตามลำดับความสำคัญ เริ่มจากปัญหาวิกฤตที่ส่งผลกระทบต่อการใช้งานจริงบน Production ไปจนถึงการพัฒนาระบบ CMS เพิ่มเติมและการทดสอบส่งมอบ
+    <div class="cover-letter">
+      <p><strong>เรียน</strong> คณะผู้บริหารและผู้มีอำนาจพิจารณาอนุมัติ บริษัท Happy MPM</p>
+      <p>ตามที่ได้มีการหารือเกี่ยวกับการยกระดับเว็บไซต์องค์กรและระบบหลังบ้านของ Happy MPM ให้สามารถใช้งานได้อย่างครบถ้วนในเชิงธุรกิจ ผู้เสนอราคาขอเสนอราคาสำหรับงานออกแบบ พัฒนา ปรับปรุง ทดสอบ และส่งมอบระบบตามขอบเขตที่ระบุในเอกสารฉบับนี้</p>
+      <p>ขอบเขตงานครอบคลุมเว็บไซต์องค์กร, ระบบจัดการคอนเทนต์หลายภาษา, ระบบ Travel Rewards, ระบบติดต่อและ Live Chat, ระบบ SEO และ Analytics, ระบบเชื่อมต่อข้อมูลผ่าน API, ระบบดูแลงานหลังบ้าน และระบบคุกกี้ระดับ High-Level ตามแนวทาง PDPA พร้อมมอบบริการ MA ฟรี 6 เดือนหลังส่งมอบ</p>
     </div>
 
-    <h3 style="margin-top:10px">2.1 ปัญหาที่ตรวจพบเพิ่มเติม (Deep Audit รอบล่าสุด)</h3>
-    <ul class="task-list">
-      <li><strong>API Server อาจเปิดใช้งานได้โดยไม่ต้องมี Key</strong> หากไม่ได้ตั้งค่า <span class="pill">API_KEYS</span> ใน environment (เสี่ยงโดนยิง API/กินค่าใช้จ่าย)</li>
-      <li><strong>พบไฟล์ <span class="pill">api/.env</span> อยู่ในโปรเจกต์</strong> (เสี่ยงหลุด Secret หากมีการอัปโหลด/แชร์ไฟล์)</li>
-      <li><strong>User Management พึ่งพา RLS ฝั่งฐานข้อมูล</strong> และมีบางงานทำจากฝั่ง client (ต้อง harden policy/ย้ายไป server/edge function)</li>
-      <li><strong>Section Order / Live Preview บน Production ยัง hardcode localhost</strong> ทำให้ใช้งานจริงไม่ได้และมีความเสี่ยงด้าน <span class="pill">postMessage</span></li>
-      <li><strong>ChatManager/Inbox ไม่มี pagination และมีการ reload ถี่</strong> เมื่อข้อมูลโตจะช้าหนัก/หน่วง (ควรทำ pagination + incremental update)</li>
-      <li><strong>Backup Import เป็น destructive</strong> (ลบทั้งตารางก่อน import) ต้องปรับให้ปลอดภัยเพื่อกันข้อมูลหายทั้งระบบ</li>
+    <table class="info-table">
+      <tbody>
+        <tr>
+          <td>ชื่อลูกค้า</td>
+          <td>บริษัท Happy MPM</td>
+        </tr>
+        <tr>
+          <td>ชื่อโครงการ</td>
+          <td>โครงการพัฒนาแพลตฟอร์มเว็บไซต์องค์กรแบบครบวงจร พร้อมระบบคุกกี้ระดับ High-Level และ PDPA</td>
+        </tr>
+        <tr>
+          <td>ขอบเขตงานหลัก</td>
+          <td>เว็บไซต์องค์กร, CMS หลังบ้าน, Travel Rewards, Contact/Chat, SEO/Analytics, API Integration, Governance/Backup และ High-Level Cookie + PDPA</td>
+        </tr>
+        <tr>
+          <td>ระยะเวลาดำเนินงาน</td>
+          <td>12 สัปดาห์โดยประมาณ นับจากวันที่ยืนยันเริ่มโครงการและส่งมอบข้อมูลที่จำเป็นครบถ้วน</td>
+        </tr>
+        <tr>
+          <td>บริการเพิ่มเติม</td>
+          <td>MA (Maintenance Agreement) ฟรี ระยะเวลา 6 เดือน ภายใต้ขอบเขตเดิมหลังส่งมอบ</td>
+        </tr>
+        <tr>
+          <td>รูปแบบการชำระเงิน</td>
+          <td>แบ่งชำระ 2 งวด ตามสัดส่วน 60% / 40% โดยอ้างอิงสถานะงานปัจจุบันที่ดำเนินการแล้วประมาณ 98%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="amount-box">
+      <div class="amount-label">มูลค่ารวมสุทธิตามใบเสนอราคา</div>
+      <div class="amount-value">192,000 บาท</div>
+      <div class="amount-words">(หนึ่งแสนเก้าหมื่นสองพันบาทถ้วน)</div>
+    </div>
+
+    <div class="summary-box">
+      <p><strong>สาระสำคัญ:</strong> ใบเสนอราคาฉบับนี้ครอบคลุมงานพัฒนาตามขอบเขตทั้งหมดที่ระบุในเอกสาร รวมถึงระบบคุกกี้ระดับ High-Level และ PDPA ในมูลค่าโครงการแล้ว</p>
+      <p><strong>สิทธิประโยชน์เพิ่มเติม:</strong> ผู้ว่าจ้างจะได้รับบริการ MA ฟรี 6 เดือน สำหรับการดูแลปัญหาในขอบเขตเดิม การให้คำปรึกษา และการตรวจสอบประเด็นเบื้องต้นหลังส่งมอบ</p>
+    </div>
+
+    <div class="page-footer">
+      <span>เอกสารประกอบการพิจารณาอนุมัติงบประมาณ</span>
+      <span>หน้า 1 / 10</span>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="page-header compact">
+      <div>
+        <div class="doc-label">ใบเสนอราคา / quotation</div>
+        <div class="doc-subject">รายละเอียดวัตถุประสงค์และผลลัพธ์ของโครงการ</div>
+      </div>
+      <div class="page-meta">
+        <div class="page-meta-row"><span>เลขที่ใบเสนอราคา</span><strong>HMPM-QT-2026-001</strong></div>
+      </div>
+    </div>
+
+    <h2 class="section-title">1. วัตถุประสงค์ของโครงการ</h2>
+    <ul class="standard-list">
+      <li>ยกระดับเว็บไซต์ขององค์กรให้เป็นแพลตฟอร์มกลางสำหรับการสื่อสารแบรนด์ ข่าวสาร โปรโมชัน บทความ ความน่าเชื่อถือขององค์กร และข้อมูลสาขา</li>
+      <li>จัดทำระบบหลังบ้านเพื่อให้ทีมงานสามารถบริหารคอนเทนต์ ปรับปรุงข้อมูล และจัดการหน้าเว็บไซต์ได้ด้วยตนเองอย่างเป็นระบบ ลดการพึ่งพาการแก้ไขโค้ดโดยตรง</li>
+      <li>สร้างโครงสร้างรองรับการดูแลลูกค้าและการเก็บ lead ผ่าน Contact Form, Live Chat, Inbox และระบบติดตามผลที่เกี่ยวข้อง</li>
+      <li>เพิ่มความสามารถด้าน SEO และ Analytics เพื่อใช้ติดตามผล วัดประสิทธิภาพของคอนเทนต์และแคมเปญ และรองรับการตัดสินใจเชิงบริหารจากข้อมูลจริง</li>
+      <li>เพิ่มระบบคุกกี้ระดับ High-Level และแนวทางการกำกับข้อมูลตาม PDPA เพื่อให้การเก็บข้อมูลเชิงวิเคราะห์และการขอความยินยอมมีความชัดเจนยิ่งขึ้นในระดับองค์กร</li>
     </ul>
 
-    <!-- Phase 1 -->
-    <div class="phase">
-      <div class="phase-header">
-        <div class="phase-header-inner">
-          <div class="phase-num-cell"><div class="phase-num">1</div></div>
-          <div class="phase-title-cell">
-            <h3>แก้ไขปัญหาวิกฤต (Critical Fixes)</h3>
-            <span class="phase-sub">ระบบ Production, ความปลอดภัย, ป้องกันระบบล่ม</span>
-          </div>
-          <div class="phase-duration-cell"><span class="phase-duration">สัปดาห์ที่ 1–2</span></div>
-        </div>
+    <h2 class="section-title">2. ผลลัพธ์ที่องค์กรจะได้รับ</h2>
+    <div class="grid-two">
+      <div class="panel">
+        <h3>ผลลัพธ์ด้านธุรกิจและภาพลักษณ์</h3>
+        <ul>
+          <li>เว็บไซต์องค์กรที่มีความเป็นทางการ ใช้งานง่าย และรองรับการสื่อสารแบรนด์อย่างครบถ้วน</li>
+          <li>หน้าเนื้อหาหลัก เช่น ข่าว โปรโมชัน บทความ รางวัล และกิจกรรม สามารถนำเสนอได้อย่างต่อเนื่อง</li>
+          <li>Travel Rewards และ Completed Trips ถูกยกระดับให้เป็นส่วนหนึ่งของระบบที่ดูแลต่อได้จริง</li>
+          <li>รองรับการขยายงานในอนาคตโดยไม่ต้องเริ่มต้นโครงสร้างใหม่ทั้งหมด</li>
+        </ul>
       </div>
-      <div class="phase-body">
-        <ul class="task-list">
-          <li>ติดตั้ง API Server (Express/Node.js) บน Cloud Service พร้อมตั้งค่า CORS และ Environment Variables ให้รองรับ Production</li>
-          <li>แก้ไขระบบ AI Chat ให้ทำงานได้บน Production โดยกำหนด API URL ที่ถูกต้องในขั้นตอน Build</li>
-          <li>แก้ไขระบบ Live Preview ใน Admin Editor ทั้ง 6 หน้า ให้ตรวจจับ Production URL โดยอัตโนมัติ</li>
-          <li>เปลี่ยน API Keys ทั้งหมดที่อาจรั่วไหล และจัดการ Environment Variables ให้ปลอดภัย</li>
-          <li>ป้องกันช่องโหว่ XSS โดยเพิ่มการ Sanitize ข้อมูลก่อนแสดงผล HTML</li>
-          <li>เพิ่มการตรวจสอบ Origin ของ postMessage เพื่อป้องกันการโจมตีจากภายนอก</li>
-          <li>เพิ่ม Error Boundary เพื่อป้องกันปัญหาจอขาวเมื่อเกิดข้อผิดพลาด</li>
-          <li>แก้ไข JSON.parse Crash ในระบบ Chat และ Application หลัก</li>
-          <li>แก้ไขค่าเริ่มต้นสิทธิ์ผู้ใช้ (Role Default) ในระบบ Authentication</li>
+      <div class="panel">
+        <h3>ผลลัพธ์ด้านการปฏิบัติงานและข้อมูล</h3>
+        <ul>
+          <li>ทีมงานสามารถอัปเดตข้อมูลสำคัญจากระบบหลังบ้านได้เอง</li>
+          <li>มีระบบดูแล lead และการติดต่อสื่อสารกับผู้สนใจผ่าน Contact และ Live Chat</li>
+          <li>มีเครื่องมือวิเคราะห์ผลการใช้งานเพื่อช่วยวางแผนด้านการตลาดและคอนเทนต์</li>
+          <li>มีแนวทางการควบคุมคุกกี้ระดับ High-Level และการขอความยินยอมตาม PDPA</li>
         </ul>
       </div>
     </div>
 
-    <!-- Phase 2 -->
-    <div class="phase">
-      <div class="phase-header">
-        <div class="phase-header-inner">
-          <div class="phase-num-cell"><div class="phase-num">2</div></div>
-          <div class="phase-title-cell">
-            <h3>แก้ไขข้อผิดพลาดทั้งหมด (Bug Fixes)</h3>
-            <span class="phase-sub">Null Checks, Memory Leaks, State Management, PostMessage</span>
-          </div>
-          <div class="phase-duration-cell"><span class="phase-duration">สัปดาห์ที่ 3–4</span></div>
-        </div>
-      </div>
-      <div class="phase-body">
-        <ul class="task-list">
-          <li>แก้ไขรูปแบบข้อมูล postMessage ในระบบ BusinessTools เพื่อให้ CMS อัปเดตข้อมูลแบบ Real-time ได้</li>
-          <li>เพิ่ม postMessage Listener ในหน้าที่เกี่ยวข้องเพื่อรองรับ Live Preview</li>
-          <li>แก้ไขปัญหา Null/Undefined Crashes ทั้งระบบ (รูปภาพ, แท็ก, รายละเอียด, เมนูนำทาง)</li>
-          <li>แก้ไข Memory Leaks จาก Event Listener, Resize Observer และ setInterval ที่ไม่ได้ Cleanup</li>
-          <li>แก้ไขข้อผิดพลาดในระบบ Media Library, CompletedTripsEditor และ FooterLinksEditor</li>
-          <li>แก้ไขข้อผิดพลาดระดับ Medium ทั้งหมด รวม 18 รายการ</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Phase 3 -->
-    <div class="phase">
-      <div class="phase-header">
-        <div class="phase-header-inner">
-          <div class="phase-num-cell"><div class="phase-num">3</div></div>
-          <div class="phase-title-cell">
-            <h3>ปรับปรุงประสิทธิภาพ (Performance Optimization)</h3>
-            <span class="phase-sub">Code Splitting, Refactoring, Lazy Loading</span>
-          </div>
-          <div class="phase-duration-cell"><span class="phase-duration">สัปดาห์ที่ 5–6</span></div>
-        </div>
-      </div>
-      <div class="phase-body">
-        <ul class="task-list">
-          <li>Refactor ไฟล์ขนาดใหญ่ 3 ไฟล์ ที่มีมากกว่า 3,000 บรรทัด ให้แยกเป็น Components ย่อย</li>
-          <li>เปลี่ยนระบบ Import เป็น React.lazy() เพื่อลดขนาด Bundle เริ่มต้น</li>
-          <li>ตั้งค่า Lazy Loading สำหรับ Libraries ขนาดใหญ่</li>
-          <li>สร้างชุดฟังก์ชันกลาง (Shared Utilities) เพื่อลดโค้ดซ้ำซ้อนมากกว่า 10 ไฟล์</li>
-          <li>เพิ่ม Performance Optimization ด้วย React.memo, useCallback และ useMemo</li>
-          <li>เพิ่ม Image Lazy Loading, Input Validation และ Rate Limiting</li>
-          <li>ลบ Dependencies ที่ไม่ได้ใช้งาน และแก้ไขรายการ Low Priority (10 รายการ)</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Phase 4 -->
-    <div class="phase">
-      <div class="phase-header">
-        <div class="phase-header-inner">
-          <div class="phase-num-cell"><div class="phase-num">4</div></div>
-          <div class="phase-title-cell">
-            <h3>พัฒนาระบบ CMS เพิ่มเติม (CMS Integration)</h3>
-            <span class="phase-sub">Admin Editors ใหม่, เชื่อมฐานข้อมูล, รองรับ 5 ภาษา</span>
-          </div>
-          <div class="phase-duration-cell"><span class="phase-duration">สัปดาห์ที่ 6–8</span></div>
-        </div>
-      </div>
-      <div class="phase-body">
-        <ul class="task-list">
-          <li><strong>Executive Editor</strong> &mdash; ระบบจัดการข้อมูลผู้บริหาร รองรับหลายภาษาพร้อม Live Preview</li>
-          <li><strong>Promotions Manager</strong> &mdash; ระบบจัดการโปรโมชัน (รูปภาพ, รายละเอียด, เงื่อนไข, ระยะเวลา)</li>
-          <li><strong>JoinBusiness Editor</strong> &mdash; ระบบจัดการการ์ดธุรกิจ 8 รายการพร้อม Live Preview</li>
-          <li><strong>TravelRewards CMS</strong> &mdash; เชื่อมต่อหน้าย่อยทั้งหมดเข้ากับฐานข้อมูล</li>
-          <li><strong>History / Vision Editor</strong> &mdash; ระบบอัปโหลดรูปภาพและจัดการสถิติการเติบโต</li>
-          <li><strong>Footer / ContactUs / NavBar Editor</strong> &mdash; ระบบจัดการที่อยู่, Social Media และเมนูสินค้า</li>
-          <li>เชื่อมต่อทุก Editor ใหม่เข้ากับระบบ LiveEditor และรองรับ 5 ภาษา</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Phase 5 -->
-    <div class="phase">
-      <div class="phase-header">
-        <div class="phase-header-inner">
-          <div class="phase-num-cell"><div class="phase-num">5</div></div>
-          <div class="phase-title-cell">
-            <h3>ทดสอบระบบและส่งมอบงาน (Testing &amp; Deployment)</h3>
-            <span class="phase-sub">QA Testing, Responsive, Multi-language, Deployment</span>
-          </div>
-          <div class="phase-duration-cell"><span class="phase-duration">สัปดาห์ที่ 8</span></div>
-        </div>
-      </div>
-      <div class="phase-body">
-        <ul class="task-list">
-          <li>ทดสอบการทำงานทุกหน้าและทุกฟีเจอร์บนเซิร์ฟเวอร์ Production จริง</li>
-          <li>ทดสอบการแสดงผลแบบ Responsive (Desktop, Tablet, Mobile)</li>
-          <li>ทดสอบระบบรองรับ 5 ภาษา (TH, EN, ID, MS, AR)</li>
-          <li>Build และ Deploy ระบบทั้งหน้าบ้านและหลังบ้านขึ้นเซิร์ฟเวอร์</li>
-          <li>จัดทำเอกสารสรุปการแก้ไขและส่งมอบงาน</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Timeline -->
-    <h2>3. แผนระยะเวลาดำเนินงาน (Timeline)</h2>
-
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-week">สัปดาห์ที่ 1–2</div>
-        <h4>Phase 1 &mdash; แก้ไขปัญหาวิกฤต (Critical Fixes)</h4>
-        <p>ติดตั้ง API Server, แก้ไขระบบ AI Chat, Live Preview, ความปลอดภัย และ Error Boundary</p>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-week">สัปดาห์ที่ 3–4</div>
-        <h4>Phase 2 &mdash; แก้ไขข้อผิดพลาดทั้งหมด (Bug Fixes)</h4>
-        <p>Null Checks, Memory Leaks, PostMessage Format และ State Management Bugs</p>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-week">สัปดาห์ที่ 5–6</div>
-        <h4>Phase 3 &mdash; ปรับปรุงประสิทธิภาพ (Performance Optimization)</h4>
-        <p>Refactor ไฟล์ขนาดใหญ่, Lazy Loading, Shared Utilities และ Cleanup</p>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-week">สัปดาห์ที่ 6–8</div>
-        <h4>Phase 4 &mdash; พัฒนาระบบ CMS เพิ่มเติม (CMS Integration)</h4>
-        <p>สร้าง Admin Editors ใหม่ 7 ระบบ พร้อมเชื่อมต่อฐานข้อมูลและรองรับ 5 ภาษา</p>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-week">สัปดาห์ที่ 8</div>
-        <h4>Phase 5 &mdash; ทดสอบระบบและส่งมอบงาน</h4>
-        <p>QA Testing, ทดสอบ Responsive, Multi-language, Deploy และส่งมอบเอกสาร</p>
-      </div>
-    </div>
-
-    <!-- Summary Table -->
-    <h2>4. สรุปภาพรวม</h2>
-
-    <div class="note-box" style="margin-top:10px">
-      <strong>สรุปประเด็นที่ตรวจพบเพิ่มเติม (Deep Audit รอบล่าสุด):</strong>
-      <ul style="margin-top:8px; padding-left:18px">
-        <li><strong>API Server อาจเปิดใช้งานได้โดยไม่ต้องมี Key</strong> หากไม่ได้ตั้งค่า <span class="pill">API_KEYS</span> (เสี่ยงโดนยิง API/กินค่าใช้จ่าย) <span class="pill">เรท: 4,000 บาท</span></li>
-        <li><strong>พบไฟล์ <span class="pill">api/.env</span> ในโปรเจกต์</strong> (เสี่ยงหลุด Secret หากมีการอัปโหลด/แชร์ไฟล์) <span class="pill">เรท: 3,000 บาท</span></li>
-        <li><strong>User Management/Permissions พึ่งพา RLS ฝั่งฐานข้อมูล</strong> และบางส่วนทำจาก client (ต้อง harden policy/ย้ายงานเสี่ยงไป server/edge function) <span class="pill">เรท: 5,000 บาท</span></li>
-        <li><strong>Section Order / Live Preview บน Production ยัง hardcode localhost</strong> ทำให้ใช้งานจริงไม่ได้ และมีความเสี่ยงด้าน <span class="pill">postMessage</span> <span class="pill">เรท: 2,000 บาท</span> (Section Order) <span class="pill">6,000 บาท</span> (Live Preview)</li>
-        <li><strong>ChatManager/Inbox ไม่มี pagination และมีการ reload ถี่</strong> เมื่อข้อมูลโตจะช้าหนัก/หน่วง (ควรทำ pagination + incremental update) <span class="pill">เรท: 5,000 บาท</span></li>
-        <li><strong>Backup Import เป็น destructive</strong> (ลบทั้งตารางก่อน import) ต้องปรับให้ปลอดภัยเพื่อกันข้อมูลหายทั้งระบบ <span class="pill">เรท: 4,000 บาท</span></li>
-      </ul>
-      <div style="margin-top:8px; font-size:12px; color:#4b5563">
-        รายการข้างต้นถูกสะท้อนเป็น “เรทราคางานเพิ่มเติม” ในหัวข้อ <strong>5.1</strong> เพื่อให้ประเมินงบงานเสริม/งานต่อยอดได้ชัดเจน
-      </div>
-    </div>
-
-    <table>
+    <h2 class="section-title">3. รายการส่งมอบหลัก</h2>
+    <table class="data-table">
       <thead>
         <tr>
-          <th style="width:70px">ระยะ</th>
-          <th>รายละเอียด</th>
-          <th class="text-center" style="width:80px">จำนวนงาน</th>
-          <th class="text-center" style="width:90px">ระยะเวลา</th>
-          <th class="text-center" style="width:90px">ค่าบริการ</th>
+          <th style="width: 48px;">#</th>
+          <th style="width: 210px;">หมวดส่งมอบ</th>
+          <th>รายละเอียดส่งมอบ</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><strong>Phase 1</strong></td>
-          <td>แก้ไขปัญหาวิกฤต &mdash; Production, Security, Crash</td>
-          <td class="text-center">9 รายการ</td>
-          <td class="text-center">สัปดาห์ 1–2</td>
-          <td class="text-center">15,000 บาท</td>
+          <td class="text-center">1</td>
+          <td>เว็บไซต์องค์กรและหน้าเนื้อหาหลัก</td>
+          <td>หน้าเว็บไซต์องค์กรหลัก, หน้าแบรนด์, ข่าวสาร, โปรโมชัน, บทความ, รางวัล, สาขา และกิจกรรมในรูปแบบที่พร้อมใช้งานจริง</td>
         </tr>
         <tr>
-          <td><strong>Phase 2</strong></td>
-          <td>แก้ไขข้อผิดพลาด &mdash; Bugs ทั้งหมดที่ตรวจพบ</td>
-          <td class="text-center">29 รายการ</td>
-          <td class="text-center">สัปดาห์ 3–4</td>
-          <td class="text-center">12,000 บาท</td>
+          <td class="text-center">2</td>
+          <td>ระบบ CMS หลังบ้าน</td>
+          <td>ระบบแก้ไขคอนเทนต์, เมนู, ฟุตเตอร์, ข้อมูลติดต่อ, media library, live preview และการจัดการหลายภาษาในขอบเขตที่กำหนด</td>
         </tr>
         <tr>
-          <td><strong>Phase 3</strong></td>
-          <td>ปรับปรุงประสิทธิภาพ &mdash; Refactoring, Optimization</td>
-          <td class="text-center">7 รายการ</td>
-          <td class="text-center">สัปดาห์ 5–6</td>
-          <td class="text-center">10,000 บาท</td>
+          <td class="text-center">3</td>
+          <td>ระบบดูแลลูกค้าและ lead</td>
+          <td>Contact Form, Live Chat, Inbox, Chat Manager และ workflow พื้นฐานสำหรับติดตามการติดต่อจากผู้ใช้งาน</td>
         </tr>
         <tr>
-          <td><strong>Phase 4</strong></td>
-          <td>พัฒนาระบบ CMS &mdash; Admin Editors ใหม่</td>
-          <td class="text-center">7 ระบบ</td>
-          <td class="text-center">สัปดาห์ 6–8</td>
-          <td class="text-center">18,000 บาท</td>
+          <td class="text-center">4</td>
+          <td>ระบบวิเคราะห์ผลและ compliance</td>
+          <td>SEO, Analytics, High-Level Cookie + PDPA, Backup/Restore, สิทธิ์ผู้ใช้, กิจกรรมการใช้งาน และเอกสารประกอบการส่งมอบ</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="page-footer">
+      <span>รายละเอียดวัตถุประสงค์และผลลัพธ์ของโครงการ</span>
+      <span>หน้า 2 / 10</span>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="page-header compact">
+      <div>
+        <div class="doc-label">ขอบเขตงาน</div>
+        <div class="doc-subject">รายละเอียดระบบหลักในขอบเขตงาน (ส่วนที่ 1)</div>
+      </div>
+      <div class="page-meta">
+        <div class="page-meta-row"><span>หมวดระบบ</span><strong>1 - 4</strong></div>
+      </div>
+    </div>
+
+    <h2 class="section-title">4. ขอบเขตงานระบบหลัก (ส่วนที่ 1)</h2>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width: 48px;">#</th>
+          <th style="width: 180px;">หมวดระบบ</th>
+          <th>ขอบเขตงานโดยย่อ</th>
+          <th style="width: 190px;">ผลลัพธ์ที่คาดว่าจะได้รับ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="text-center">1</td>
+          <td><strong>เว็บไซต์องค์กรและหน้าสื่อสารแบรนด์</strong></td>
+          <td class="scope-cell">
+            1) หน้าแรกและหน้าองค์กรหลัก<br>
+            2) หน้าแบรนด์ ประวัติ วิสัยทัศน์ ผู้บริหาร และรางวัล<br>
+            3) ข่าว โปรโมชัน บทความ สาขา และกิจกรรม<br>
+            4) จัดรูปแบบให้พร้อมนำเสนอภาพลักษณ์องค์กรอย่างเป็นทางการ
+          </td>
+          <td class="scope-cell">องค์กรมีเว็บไซต์สื่อสารแบรนด์ที่ครบถ้วน และสามารถอัปเดตข้อมูลสำคัญได้อย่างต่อเนื่อง</td>
         </tr>
         <tr>
-          <td><strong>Phase 5</strong></td>
-          <td>ทดสอบระบบและส่งมอบงาน</td>
-          <td class="text-center">5 รายการ</td>
-          <td class="text-center">สัปดาห์ 8</td>
-          <td class="text-center">5,000 บาท</td>
+          <td class="text-center">2</td>
+          <td><strong>ระบบ CMS หลังบ้านและหลายภาษา</strong></td>
+          <td class="scope-cell">
+            1) ระบบแก้ไขคอนเทนต์หลายส่วนจากหลังบ้าน<br>
+            2) Media Library, Live Preview และ Visual Builder ในขอบเขตที่กำหนด<br>
+            3) การจัดการเมนู ฟุตเตอร์ ข้อมูลติดต่อ และองค์ประกอบหลักของเว็บไซต์<br>
+            4) รองรับหลายภาษาในส่วนที่จำเป็นของระบบ
+          </td>
+          <td class="scope-cell">ทีมงานสามารถแก้ไขข้อมูลหน้าเว็บไซต์ได้เอง ลดระยะเวลาการปรับคอนเทนต์และการพึ่งพาการแก้ไขโค้ด</td>
         </tr>
-        <tr class="total-row">
-          <td colspan="2"><strong>รวมทั้งหมด</strong></td>
-          <td class="text-center"><strong>106 รายการ</strong></td>
-          <td class="text-center"><strong>8 สัปดาห์</strong></td>
-          <td class="text-center"><strong>60,000 บาท</strong></td>
+        <tr>
+          <td class="text-center">3</td>
+          <td><strong>ระบบ Travel Rewards และ Completed Trips</strong></td>
+          <td class="scope-cell">
+            1) ยกระดับ Travel Rewards ให้รองรับการจัดการต่อทริป<br>
+            2) รองรับ slug URL และหน้าสาธารณะสำหรับแต่ละทริป<br>
+            3) รองรับการแก้ไขผ่าน CMS และ Live Preview ในขอบเขตที่เกี่ยวข้อง
+          </td>
+          <td class="scope-cell">สามารถบริหารข้อมูลทริปย้อนหลังและทริปใหม่ได้อย่างเป็นระบบ พร้อมใช้งานเชิงการตลาดและส่งเสริมการขาย</td>
+        </tr>
+        <tr>
+          <td class="text-center">4</td>
+          <td><strong>ระบบ Contact, Live Chat และ Inbox</strong></td>
+          <td class="scope-cell">
+            1) แบบฟอร์มติดต่อและการจัดการข้อมูลติดต่อสำคัญขององค์กร<br>
+            2) Live Chat สำหรับรับข้อความจากผู้ใช้งาน<br>
+            3) Inbox และเครื่องมือพื้นฐานสำหรับการติดตาม lead หรือการติดต่อที่เกิดขึ้น
+          </td>
+          <td class="scope-cell">ช่วยให้องค์กรมีช่องทางรับข้อความจากลูกค้าและผู้สนใจอย่างเป็นระบบ และสามารถติดตามผลต่อได้จริง</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="page-footer">
+      <span>รายละเอียดระบบหลักในขอบเขตงาน (ส่วนที่ 1)</span>
+      <span>หน้า 3 / 10</span>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="page-header compact">
+      <div>
+        <div class="doc-label">ขอบเขตงาน</div>
+        <div class="doc-subject">รายละเอียดระบบหลักในขอบเขตงาน (ส่วนที่ 2)</div>
+      </div>
+      <div class="page-meta">
+        <div class="page-meta-row"><span>หมวดระบบ</span><strong>5 - 8</strong></div>
+      </div>
+    </div>
+
+    <h2 class="section-title">4. ขอบเขตงานระบบหลัก (ส่วนที่ 2)</h2>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width: 48px;">#</th>
+          <th style="width: 180px;">หมวดระบบ</th>
+          <th>ขอบเขตงานโดยย่อ</th>
+          <th style="width: 190px;">ผลลัพธ์ที่คาดว่าจะได้รับ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="text-center">5</td>
+          <td><strong>ระบบ SEO และ Analytics</strong></td>
+          <td class="scope-cell">
+            1) จัดการชื่อหน้า คำอธิบาย รูปแชร์ และข้อมูล SEO ที่เกี่ยวข้อง<br>
+            2) จัดทำ Dashboard สำหรับดูข้อมูลการเข้าชม, source, device, landing page และ conversion<br>
+            3) วางโครงสร้างข้อมูลเพื่อรองรับการวัดผลทางการตลาด
+          </td>
+          <td class="scope-cell">องค์กรสามารถติดตามประสิทธิภาพของหน้าเว็บและคอนเทนต์ได้จากข้อมูลจริง เพื่อใช้วางแผนและตัดสินใจได้แม่นยำขึ้น</td>
+        </tr>
+        <tr>
+          <td class="text-center">6</td>
+          <td><strong>ระบบสาขา, ปฏิทินกิจกรรม และ API Integration</strong></td>
+          <td class="scope-cell">
+            1) จัดการข้อมูลสาขาและกิจกรรมที่เกี่ยวข้องกับเว็บไซต์<br>
+            2) รองรับปฏิทินกิจกรรมสำหรับการนำเสนอข้อมูลบนหน้าเว็บ<br>
+            3) รองรับการเชื่อมต่อข้อมูลผ่าน API ในขอบเขตที่กำหนด
+          </td>
+          <td class="scope-cell">ช่วยให้องค์กรบริหารข้อมูลที่ใช้ซ้ำหลายส่วนได้สะดวก และเตรียมความพร้อมต่อยอดการเชื่อมระบบภายนอกในอนาคต</td>
+        </tr>
+        <tr>
+          <td class="text-center">7</td>
+          <td><strong>ระบบดูแลงานหลังบ้าน, ความปลอดภัย และการสำรองข้อมูล</strong></td>
+          <td class="scope-cell">
+            1) สิทธิ์ผู้ใช้ บทบาท และการควบคุมการเข้าถึงในขอบเขตงานเดิม<br>
+            2) Activity Log, Help Guide และเครื่องมือประกอบการดูแลระบบ<br>
+            3) Backup/Restore และจุดตรวจสอบที่จำเป็นต่อการใช้งานจริง
+          </td>
+          <td class="scope-cell">ช่วยให้งานดูแลระบบมีมาตรฐาน ลดความเสี่ยงจากความผิดพลาดในการใช้งาน และรองรับการดูแลระยะยาวได้ดีขึ้น</td>
+        </tr>
+        <tr>
+          <td class="text-center">8</td>
+          <td><strong>ระบบคุกกี้ระดับ High-Level และการกำกับตามแนวทาง PDPA</strong></td>
+          <td class="scope-cell">
+            1) ระบบแจ้งเตือนคุกกี้ระดับ High-Level และศูนย์จัดการความยินยอม<br>
+            2) การกำหนดหมวดหมู่ consent และการบันทึก consent log<br>
+            3) แนวทางควบคุม analytics ก่อน consent และหน้า Policy / Privacy ที่เกี่ยวข้อง
+          </td>
+          <td class="scope-cell">องค์กรมีพื้นฐานการจัดการคุกกี้และข้อมูลที่เกี่ยวข้องกับ PDPA อย่างเป็นระบบมากขึ้นในมุมมองการใช้งานบนเว็บไซต์</td>
         </tr>
       </tbody>
     </table>
 
     <div class="note-box">
-      <strong>หมายเหตุ:</strong>
-      ระยะเวลาดำเนินงานรวม 8 สัปดาห์ (2 เดือน) นับจากวันเริ่มต้นสัญญา โดย Phase 3 และ Phase 4 อาจดำเนินการคู่ขนานบางส่วนเพื่อให้ทันกำหนดส่งมอบ ขอบเขตงานอาจมีการปรับเปลี่ยนตามสถานการณ์จริงโดยข้อตกลงร่วมกันของทั้งสองฝ่าย
+      <strong>หมายเหตุ:</strong> ข้อความทางกฎหมายในส่วน PDPA / Privacy Notice ควรได้รับการตรวจสอบและอนุมัติจากทีมกฎหมายหรือผู้รับผิดชอบขององค์กรก่อนนำขึ้นใช้งานจริง
     </div>
 
-    <h3 style="margin-top:16px">สรุปราคางานเพิ่มเติมจากข้อ 5.1 (ไม่รวมอยู่ใน 60,000 บาท)</h3>
-    <table>
+    <div class="page-footer">
+      <span>รายละเอียดระบบหลักในขอบเขตงาน (ส่วนที่ 2)</span>
+      <span>หน้า 4 / 10</span>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="page-header compact">
+      <div>
+        <div class="doc-label">High-Level Cookie + PDPA</div>
+        <div class="doc-subject">รายละเอียดระบบคุกกี้ระดับ High-Level และแนวทาง PDPA</div>
+      </div>
+      <div class="page-meta">
+        <div class="page-meta-row"><span>หมวดงาน</span><strong>ระบบที่ 8</strong></div>
+      </div>
+    </div>
+
+    <h2 class="section-title">5. รายละเอียดระบบคุกกี้ระดับ High-Level และ PDPA</h2>
+    <p class="text">ระบบในส่วนนี้ถูกออกแบบเพื่อรองรับการแสดงผล การขอความยินยอม และการจัดการคุกกี้ในระดับที่เหมาะสมกับการใช้งานบนเว็บไซต์องค์กร โดยเน้นความชัดเจนของขั้นตอนและการควบคุมการเก็บข้อมูลที่ไม่จำเป็นต่อการให้บริการ</p>
+
+    <table class="data-table">
       <thead>
         <tr>
-          <th>งานเพิ่มเติม</th>
-          <th class="text-center" style="width:160px">เรทราคาโดยประมาณ</th>
+          <th style="width: 52px;">#</th>
+          <th style="width: 190px;">รายการ</th>
+          <th>รายละเอียด</th>
+          <th style="width: 180px;">ผลลัพธ์ที่คาดว่าจะได้รับ</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>แก้ Live Preview ให้ใช้งานบน Host จริง</td>
-          <td class="text-center">6,000 บาท</td>
+          <td class="text-center">1</td>
+          <td><strong>High-Level Cookie Banner</strong></td>
+          <td>แสดงแถบแจ้งเตือนคุกกี้ตั้งแต่ครั้งแรกที่ผู้ใช้งานเข้าเว็บไซต์ พร้อมทางเลือกยอมรับ ปฏิเสธ หรือเปิดหน้าตั้งค่ารายละเอียด</td>
+          <td>ผู้ใช้งานรับทราบการใช้คุกกี้ตั้งแต่ต้นทาง</td>
         </tr>
         <tr>
-          <td>ติดตั้ง/ย้าย AI Chat API ไป Production</td>
-          <td class="text-center">8,000 บาท</td>
+          <td class="text-center">2</td>
+          <td><strong>Consent Categories</strong></td>
+          <td>แยกประเภทคุกกี้เป็นหมวด เช่น จำเป็นต่อระบบ, Analytics และหมวดอื่นที่เกี่ยวข้องตามแนวทางขององค์กร</td>
+          <td>ช่วยให้องค์กรควบคุมการเก็บข้อมูลได้เป็นหมวดหมู่</td>
         </tr>
         <tr>
-          <td>API Hardening (API Key + Rate Limit)</td>
-          <td class="text-center">4,000 บาท</td>
+          <td class="text-center">3</td>
+          <td><strong>Preference Center</strong></td>
+          <td>มีหน้าหรือกล่องสำหรับให้ผู้ใช้งานกลับมาเปลี่ยนแปลงการเลือกความยินยอมได้ภายหลัง</td>
+          <td>รองรับการจัดการสิทธิ์ของผู้ใช้งานได้ดีขึ้น</td>
         </tr>
         <tr>
-          <td>จัดการ Secret/ENV ให้ปลอดภัย</td>
-          <td class="text-center">3,000 บาท</td>
+          <td class="text-center">4</td>
+          <td><strong>Consent Log</strong></td>
+          <td>บันทึกสถานะความยินยอม วันที่ เวลา และเวอร์ชันข้อความที่เกี่ยวข้องในระดับที่ระบบกำหนด</td>
+          <td>ช่วยให้ตรวจสอบประวัติการยินยอมได้ง่ายขึ้น</td>
         </tr>
         <tr>
-          <td>Users/Permissions Hardening</td>
-          <td class="text-center">5,000 บาท</td>
+          <td class="text-center">5</td>
+          <td><strong>Analytics Gating</strong></td>
+          <td>ควบคุมการทำงานของคุกกี้หรือ tracker ที่ไม่จำเป็นก่อนที่จะได้รับความยินยอมจากผู้ใช้งาน</td>
+          <td>ลดความเสี่ยงด้านการประมวลผลข้อมูลที่เกินความจำเป็น</td>
         </tr>
         <tr>
-          <td>แก้ Section Order ให้ใช้งานบน Host จริง</td>
-          <td class="text-center">2,000 บาท</td>
+          <td class="text-center">6</td>
+          <td><strong>Cookie Policy / PDPA Notice</strong></td>
+          <td>จัดทำหน้าข้อมูลประกอบเกี่ยวกับคุกกี้และข้อมูลส่วนบุคคลในเชิงระบบ เพื่อให้ผู้ใช้งานเข้าถึงรายละเอียดได้ง่าย</td>
+          <td>เพิ่มความโปร่งใสและความเข้าใจในการใช้งานข้อมูล</td>
         </tr>
         <tr>
-          <td>Hardening ความปลอดภัย (XSS / postMessage / Upload)</td>
-          <td class="text-center">6,000 บาท</td>
-        </tr>
-        <tr>
-          <td>ทำระบบ Backup/Restore ให้ปลอดภัย</td>
-          <td class="text-center">4,000 บาท</td>
-        </tr>
-        <tr>
-          <td>ปรับ Realtime/CRUD ให้ลื่นเมื่อข้อมูลโต</td>
-          <td class="text-center">5,000 บาท</td>
-        </tr>
-        <tr class="total-row">
-          <td><strong>รวมเรทราคางานเพิ่มเติม (กรณีเลือกทำครบทุกหัวข้อ)</strong></td>
-          <td class="text-center"><strong>43,000 บาท</strong></td>
+          <td class="text-center">7</td>
+          <td><strong>Admin Setting</strong></td>
+          <td>รองรับจุดจัดการข้อความหรือเวอร์ชันของนโยบายจากหลังบ้านในระดับที่กำหนดไว้ในขอบเขตงาน</td>
+          <td>ช่วยให้ทีมงานอัปเดตข้อความหรือเวอร์ชันนโยบายได้สะดวกขึ้น</td>
         </tr>
       </tbody>
     </table>
 
-    <h2>5. เรทราคาสำหรับงานเพิ่มเติมในอนาคต</h2>
-    <p>หากมีงานเพิ่มเติมนอกเหนือจากขอบเขตที่ระบุในข้อ 2 (เช่น ฟีเจอร์ใหม่, ปรับดีไซน์ครั้งใหญ่, เชื่อมต่อระบบภายนอกเพิ่มเติม) สามารถใช้เรทราคาประเมินเบื้องต้นดังนี้</p>
+    <div class="note-box">
+      <strong>ข้อควรทราบ:</strong> งานในส่วนนี้เป็นการเตรียมระบบและการแสดงผลสำหรับการจัดการคุกกี้ในระดับ High-Level และแนวทาง PDPA บนเว็บไซต์ ทั้งนี้ ข้อความทางกฎหมายสุดท้ายควรผ่านการตรวจสอบของฝ่ายกฎหมายหรือผู้รับผิดชอบขององค์กรก่อนใช้งานจริง
+    </div>
 
-    <table>
+    <div class="page-footer">
+      <span>รายละเอียดระบบคุกกี้ระดับ High-Level และแนวทาง PDPA</span>
+      <span>หน้า 5 / 10</span>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="page-header compact">
+      <div>
+        <div class="doc-label">timeline &amp; implementation</div>
+        <div class="doc-subject">แผนการดำเนินงานและเกณฑ์การส่งมอบ</div>
+      </div>
+      <div class="page-meta">
+        <div class="page-meta-row"><span>ระยะเวลาดำเนินงาน</span><strong>12 สัปดาห์</strong></div>
+      </div>
+    </div>
+
+    <h2 class="section-title">6. แผนการดำเนินงานโดยประมาณ</h2>
+    <table class="data-table">
       <thead>
         <tr>
-          <th>ประเภทงานเพิ่มเติม</th>
-          <th>ตัวอย่างงาน</th>
-          <th class="text-center" style="width:120px">เรทราคาโดยประมาณ</th>
+          <th style="width: 68px;">ระยะ</th>
+          <th style="width: 116px;">ช่วงเวลา</th>
+          <th>ขอบเขตดำเนินงาน</th>
+          <th style="width: 180px;">ผลลัพธ์หลัก</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><strong>งานปรับหน้าจอ (UI/Content เล็กน้อย)</strong></td>
-          <td>แก้ Layout หน้าเดิม, ปรับข้อความ/รูปภาพ, เพิ่ม Section เล็กๆ</td>
-          <td class="text-center">3,000 – 7,000 บาท/ครั้ง</td>
+          <td><strong>Phase 1</strong></td>
+          <td>สัปดาห์ 1 - 2</td>
+          <td>สรุป requirement, โครงสร้างข้อมูล, การจัดกลุ่มระบบ, UX overview และแนวทางการพัฒนาเชิงภาพรวม</td>
+          <td>ได้ขอบเขตงานและแผนดำเนินงานที่ชัดเจนก่อนเริ่มพัฒนา</td>
         </tr>
         <tr>
-          <td><strong>งานเพิ่มฟีเจอร์ขนาดเล็ก</strong></td>
-          <td>เพิ่มปุ่ม/ฟอร์ม, Logic เพิ่มเติมในหน้าเดิม, รายงานเล็กๆ</td>
-          <td class="text-center">8,000 – 15,000 บาท/ฟีเจอร์</td>
+          <td><strong>Phase 2</strong></td>
+          <td>สัปดาห์ 3 - 5</td>
+          <td>พัฒนาส่วนเว็บไซต์องค์กรและระบบ CMS หลัก รวมถึงการจัดการเนื้อหาและองค์ประกอบสำคัญของเว็บไซต์</td>
+          <td>โครงสร้างเว็บไซต์และหลังบ้านเริ่มพร้อมใช้งาน</td>
         </tr>
         <tr>
-          <td><strong>งานเพิ่มฟีเจอร์ขนาดกลาง</strong></td>
-          <td>สร้างหน้าใหม่ 1 หน้าเชื่อม CMS, เพิ่ม Workflow ใหม่, เชื่อม API ภายนอก</td>
-          <td class="text-center">18,000 – 30,000 บาท/ฟีเจอร์</td>
+          <td><strong>Phase 3</strong></td>
+          <td>สัปดาห์ 6 - 8</td>
+          <td>พัฒนาระบบ Travel Rewards, Completed Trips, Contact Form, Live Chat, Inbox และ flow ที่เกี่ยวข้องกับ lead</td>
+          <td>ระบบสำหรับผู้ใช้งานและทีมบริการลูกค้าพร้อมใช้งานมากขึ้น</td>
         </tr>
         <tr>
-          <td><strong>งานปรับปรุงโครงสร้างระบบ</strong></td>
-          <td>Refactor ส่วนสำคัญ, แยก Service, ปรับ Performance เฉพาะส่วน</td>
-          <td class="text-center">25,000 – 45,000 บาท/รอบงาน</td>
+          <td><strong>Phase 4</strong></td>
+          <td>สัปดาห์ 9 - 10</td>
+          <td>พัฒนา SEO, Analytics, API Integration และระบบคุกกี้ระดับ High-Level พร้อมแนวทาง PDPA</td>
+          <td>ได้ระบบวิเคราะห์ผลและระบบ consent ที่พร้อมใช้งานเชิงระบบ</td>
+        </tr>
+        <tr>
+          <td><strong>Phase 5</strong></td>
+          <td>สัปดาห์ 11</td>
+          <td>ทดสอบร่วมกับทีมงาน, UAT, เก็บ feedback และปรับแก้รอบก่อนขึ้นระบบจริง</td>
+          <td>ได้ความพร้อมก่อนใช้งานจริงและลดความเสี่ยงจากปัญหาหลังส่งมอบ</td>
+        </tr>
+        <tr>
+          <td><strong>Phase 6</strong></td>
+          <td>สัปดาห์ 12</td>
+          <td>Deploy, อบรมการใช้งาน, ส่งมอบเอกสาร และเริ่มระยะ MA ฟรี 6 เดือน</td>
+          <td>ระบบขึ้นใช้งานจริงและเข้าสู่ระยะดูแลหลังส่งมอบ</td>
         </tr>
       </tbody>
     </table>
 
-    <div class="note-box" style="margin-top:14px">
-      <strong>หมายเหตุ:</strong>
-      เรทราคาด้านล่างเป็น “เรทแยก” สำหรับงานแก้ปัญหา/งานระบบที่มักเกิดขึ้นเมื่อใช้งานจริงบน Production (นอกเหนือจากงานหลัก 2 เดือน) เพื่อใช้ประเมินงบเบื้องต้นให้หัวหน้า/ลูกค้า
+    <h2 class="section-title">7. เกณฑ์การส่งมอบหลัก</h2>
+    <ul class="standard-list">
+      <li>ส่งมอบระบบตามขอบเขตที่ระบุในเอกสารฉบับนี้ พร้อมใช้งานตามสภาพแวดล้อมที่ตกลงร่วมกัน</li>
+      <li>มีการทดสอบ UAT ร่วมกับทีมงานผู้ว่าจ้างก่อนขึ้นใช้งานจริง</li>
+      <li>มีการส่งมอบเอกสารประกอบการใช้งานในระดับที่จำเป็นต่อการบริหารเว็บไซต์และระบบหลังบ้าน</li>
+      <li>เริ่มนับระยะ MA ฟรี 6 เดือนหลังการส่งมอบและยืนยันใช้งานจริงของระบบ</li>
+    </ul>
+
+    <div class="page-footer">
+      <span>แผนการดำเนินงานและเกณฑ์การส่งมอบ</span>
+      <span>หน้า 6 / 10</span>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="page-header compact">
+      <div>
+        <div class="doc-label">commercial proposal</div>
+        <div class="doc-subject">รายละเอียดราคาและเงื่อนไขการชำระเงิน</div>
+      </div>
+      <div class="page-meta">
+        <div class="page-meta-row"><span>มูลค่ารวม</span><strong>192,000 บาท</strong></div>
+      </div>
     </div>
 
-    <h3 style="margin-top:16px">5.1 เรทราคาโดยประมาณ — งานแก้ปัญหาที่มักเจอบน Production</h3>
-    <table>
+    <h2 class="section-title">8. ตารางเสนอราคา</h2>
+    <table class="data-table">
       <thead>
         <tr>
-          <th>ประเภทปัญหา/งานที่เพิ่ม</th>
-          <th>ขอบเขตตัวอย่าง</th>
-          <th class="text-center" style="width:140px">เรทราคาโดยประมาณ</th>
+          <th style="width: 48px;">#</th>
+          <th style="width: 230px;">หมวดงาน</th>
+          <th>รายละเอียดที่รวมอยู่ในราคา</th>
+          <th style="width: 120px;">ราคา</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><strong>แก้ Live Preview ให้ใช้งานบน Host จริง</strong></td>
-          <td>ปรับ origin/targetOrigin, ตัด localhost detection, ทำ whitelist + validate `postMessage` ให้ปลอดภัย</td>
-          <td class="text-center">6,000 บาท</td>
+          <td class="text-center">1</td>
+          <td><strong>เว็บไซต์องค์กรและหน้าสื่อสารแบรนด์</strong></td>
+          <td>หน้าองค์กรหลัก ข่าว โปรโมชัน บทความ รางวัล วิสัยทัศน์ สาขา และหน้าเนื้อหาหลัก</td>
+          <td>22,000 บาท</td>
         </tr>
         <tr>
-          <td><strong>ติดตั้ง/ย้าย AI Chat API ไป Production</strong></td>
-          <td>Deploy Node/Serverless, ตั้ง ENV, ปรับ CORS, ปรับ `REACT_APP_API_URL`, ตรวจ health/monitor</td>
-          <td class="text-center">8,000 บาท</td>
+          <td class="text-center">2</td>
+          <td><strong>ระบบ CMS หลังบ้านและการจัดการหลายภาษา</strong></td>
+          <td>Editor หลายส่วน, media library, live preview, visual builder และการจัดการเมนู/ฟุตเตอร์/ข้อมูลติดต่อ</td>
+          <td>32,000 บาท</td>
         </tr>
         <tr>
-          <td><strong>API Hardening (API Key + Rate Limit)</strong></td>
-          <td>บังคับใช้ API key ทุก endpoint ที่จำเป็น, เพิ่ม rate limit/throttle, ปรับ CORS origin whitelist และ logging ที่พอเหมาะ</td>
-          <td class="text-center">4,000 บาท</td>
+          <td class="text-center">3</td>
+          <td><strong>ระบบ Travel Rewards และ Completed Trips</strong></td>
+          <td>Microsite ต่อทริป, completed trips, slug URL, CMS ต่อทริป, live preview และหน้าสาธารณะ</td>
+          <td>30,000 บาท</td>
         </tr>
         <tr>
-          <td><strong>จัดการ Secret/ENV ให้ปลอดภัย</strong></td>
-          <td>ลบไฟล์ .env ออกจากโปรเจกต์, ตั้งค่า .gitignore, rotate keys, ย้ายไปใช้ environment ของ host และตรวจไม่ให้ key hardcode ใน source</td>
-          <td class="text-center">3,000 บาท</td>
+          <td class="text-center">4</td>
+          <td><strong>ระบบ Contact, Live Chat และ Inbox</strong></td>
+          <td>ฟอร์มติดต่อ, Live Chat, chat sessions, inbox และ workflow พื้นฐานสำหรับการติดตาม lead</td>
+          <td>14,000 บาท</td>
         </tr>
         <tr>
-          <td><strong>Users/Permissions Hardening</strong></td>
-          <td>ทบทวน RLS/Policy สำหรับ profiles/pages/settings, ย้ายงานเสี่ยงไป Edge Function/Server (เช่น delete auth user), ปรับ role guard ใน action สำคัญ</td>
-          <td class="text-center">5,000 บาท</td>
+          <td class="text-center">5</td>
+          <td><strong>ระบบ SEO และ Analytics</strong></td>
+          <td>SEO manager, metadata, favicon / global head, analytics dashboard และ conversion summary</td>
+          <td>16,000 บาท</td>
         </tr>
         <tr>
-          <td><strong>แก้ Section Order ให้ใช้งานบน Host จริง</strong></td>
-          <td>ตัดการ hardcode `http://localhost:3000`, ใช้ origin ที่ถูกต้องบน production, ปรับ refresh/preview ให้เสถียร</td>
-          <td class="text-center">2,000 บาท</td>
+          <td class="text-center">6</td>
+          <td><strong>ระบบสาขา, กิจกรรม และ API Integration</strong></td>
+          <td>ข้อมูลสาขา, calendar/events, API integration page, calendar API และโครงสร้างสำหรับเชื่อมต่อระบบในอนาคต</td>
+          <td>14,000 บาท</td>
         </tr>
         <tr>
-          <td><strong>Hardening ความปลอดภัย (XSS / postMessage / Upload)</strong></td>
-          <td>เพิ่ม DOMPurify ในจุดเสี่ยง, validate origin, validate file type/size, ปรับ policy/RLS ที่จำเป็น</td>
-          <td class="text-center">6,000 บาท</td>
+          <td class="text-center">7</td>
+          <td><strong>ระบบดูแลงานหลังบ้านและความปลอดภัย</strong></td>
+          <td>Users / roles, activity log, backup / restore, help guide และเครื่องมือที่จำเป็นต่อการดูแลระบบจริง</td>
+          <td>18,000 บาท</td>
         </tr>
         <tr>
-          <td><strong>ทำระบบ Backup/Restore ให้ปลอดภัย</strong></td>
-          <td>ยกเลิก “ลบทิ้งทั้งตารางก่อน import”, ทำ staging + ตรวจ schema + rollback/restore point</td>
-          <td class="text-center">4,000 บาท</td>
+          <td class="text-center">8</td>
+          <td><strong>ระบบคุกกี้ระดับ High-Level และ PDPA Package</strong></td>
+          <td>High-level cookie banner, consent center, consent categories, consent log, analytics gating และหน้า policy / privacy ที่เกี่ยวข้อง</td>
+          <td>30,000 บาท</td>
         </tr>
         <tr>
-          <td><strong>ปรับ Realtime/CRUD ให้ลื่นเมื่อข้อมูลโต</strong></td>
-          <td>Pagination + incremental update, ลด `event:'*'` reload, optimize queries/select columns</td>
-          <td class="text-center">5,000 บาท</td>
+          <td class="text-center">9</td>
+          <td><strong>การทดสอบระบบ, อบรมการใช้งาน, นำขึ้นใช้งานจริง และส่งมอบเอกสาร</strong></td>
+          <td>ทดสอบก่อนขึ้นจริง, เก็บ feedback, ปรับแก้รอบส่งมอบ, อบรมการใช้งาน และส่งมอบเอกสารประกอบ</td>
+          <td>16,000 บาท</td>
+        </tr>
+        <tr>
+          <td class="text-center">10</td>
+          <td><strong>บริการ MA (Maintenance Agreement) ระยะเวลา 6 เดือน</strong></td>
+          <td>ดูแลปัญหาในขอบเขตเดิม ให้คำปรึกษา และตรวจสอบประเด็นเบื้องต้นหลังส่งมอบ</td>
+          <td>ฟรี</td>
+        </tr>
+        <tr class="price-total-row">
+          <td colspan="3"><strong>ราคารวมทั้งโครงการ</strong></td>
+          <td><strong>192,000 บาท</strong></td>
         </tr>
       </tbody>
     </table>
 
-    <!-- ===== Section 6: Travel Rewards Per-Trip CMS ===== -->
-    <h2 style="margin-top:40px">6. งานพัฒนาเพิ่มเติม — ระบบ Travel Rewards Per-Trip CMS</h2>
+    <div class="amount-box">
+      <div class="amount-label">ยอดรวมตามใบเสนอราคา</div>
+      <div class="amount-value">192,000 บาท</div>
+      <div class="amount-words">ราคานี้รวมระบบคุกกี้ระดับ High-Level และ PDPA แล้ว พร้อมมอบ MA ฟรี 6 เดือน</div>
+    </div>
 
-    <p>งานต่อไปนี้เป็นการพัฒนา<strong>นอกเหนือจากขอบเขตงานหลัก</strong>ในข้อ 2 (Phase 1–5) โดยเป็นการยกระดับระบบ Travel Rewards จากหน้าเว็บ<strong>ทริปเดียว</strong>ที่ไม่มี CMS ให้กลายเป็น<strong>ระบบไมโครไซต์อิสระต่อทริป</strong>พร้อม CMS เต็มรูปแบบ</p>
+    <div class="page-footer">
+      <span>รายละเอียดราคาเสนอและมูลค่าโครงการ</span>
+      <span>หน้า 7 / 10</span>
+    </div>
+  </section>
 
-    <h3 style="margin-top:14px">6.1 สถานะก่อนพัฒนา (Before)</h3>
-    <div class="note-box" style="margin-top:6px">
-      <ul style="padding-left:18px; margin:0">
-        <li>Travel Rewards เป็น<strong>หน้าเว็บ static สำหรับทริปเดียว</strong> (<code>/travel-rewards</code>) มี 3 หน้าย่อย: Home, About, Habsburg — เนื้อหาเขียนตรงในโค้ด (hardcode)</li>
-        <li><strong>ไม่มีระบบ CMS</strong> สำหรับ Travel Rewards เลย — ไม่สามารถแก้ไขเนื้อหาจากหน้าแอดมินได้</li>
-        <li>ไม่มีตาราง <code>completed_trips</code> ในฐานข้อมูล — ไม่รองรับหลายทริป</li>
-        <li>หน้า <code>/business-tool/6</code> แสดงข้อมูลทริปแบบ hardcode ไม่ดึงจากฐานข้อมูล</li>
-        <li>ไม่มีระบบ Live Preview, ไม่มี slug, ไม่รองรับหลายภาษาในส่วน Travel Rewards</li>
-      </ul>
-      <div style="margin-top:8px; font-size:12px; color:#4b5563">
-        <strong>หมายเหตุ:</strong> ก่อนเริ่มงานส่วนนี้ ได้มีการเพิ่ม CMS พื้นฐานสำหรับหน้า Travel Rewards หลัก (Home/About/Habsburg ชุดเดียว) เชื่อมกับ <code>site_content</code> ไว้แล้ว — งานข้างล่างนี้คือการต่อยอดให้รองรับ<strong>หลายทริป</strong>โดยแต่ละทริปมี CMS ชุดของตัวเอง
+  <section class="page">
+    <div class="page-header compact">
+      <div>
+        <div class="doc-label">project vs external</div>
+        <div class="doc-subject">เปรียบเทียบงานของโครงการนี้กับบริการภายนอกที่มีการเผยแพร่ราคาสาธารณะ</div>
+      </div>
+      <div class="page-meta">
+        <div class="page-meta-row"><span>วิธีเปรียบเทียบ</span><strong>งานของโครงการนี้เทียบกับภายนอก</strong></div>
       </div>
     </div>
 
-    <h3 style="margin-top:14px">6.2 สถานะหลังพัฒนา (After)</h3>
-    <div class="note-box" style="margin-top:6px; border-left:3px solid #22c55e">
-      <ul style="padding-left:18px; margin:0">
-        <li>แต่ละทริปมี<strong>ไมโครไซต์อิสระ</strong>ที่ <code>/travel-rewards/&lt;slug&gt;</code> พร้อม 3 หน้าย่อย (Home / About / Habsburg)</li>
-        <li>เนื้อหาแยกต่อทริป — แก้ไขทริป A ไม่กระทบทริป B</li>
-        <li>หน้า <code>/business-tool/6</code> ดึงทริปจากฐานข้อมูล แบ่งตามปี พร้อมลิงก์ไปหน้ารายละเอียด</li>
-        <li>ระบบ Admin CMS เต็มรูปแบบต่อทริป พร้อม Live Preview แบบ iframe</li>
-        <li>รองรับ 5 ภาษา (TH, EN, ID, MS, AR) ทั้งหน้าสาธารณะและแอดมิน</li>
-        <li>ระบบ Slug สำหรับ URL สาธารณะที่อ่านง่าย เช่น <code>/travel-rewards/happy-mpm-2025</code></li>
-        <li>ปุ่มเลือก preview ทริปใน CompletedTripsEditor</li>
-      </ul>
-    </div>
+    <h2 class="section-title">8.1 ตารางเปรียบเทียบงานของโครงการนี้กับภายนอก</h2>
+    <p class="text">ตารางนี้จัดให้เห็นแบบตรงกันระหว่างหมวดงานในโครงการนี้กับบริการภายนอกที่มีการเผยแพร่ราคาสาธารณะ เพื่อใช้ประกอบการพิจารณาความคุ้มค่าและระดับขอบเขตงาน</p>
 
-    <h3 style="margin-top:14px">6.3 รายละเอียดงานที่ดำเนินการ</h3>
-
-    <!-- Sub-feature 1 -->
-    <div class="phase" style="margin-top:10px">
-      <div class="phase-header">
-        <div class="phase-header-inner">
-          <div class="phase-num-cell"><div class="phase-num" style="background:#c9a84c">A</div></div>
-          <div class="phase-title-cell">
-            <h3>ระบบ Per-Trip Microsite (Public)</h3>
-            <span class="phase-sub">Routing, Context, Layout Chrome, หน้าสาธารณะ</span>
-          </div>
-          <div class="phase-duration-cell"><span class="phase-duration">8,000 บาท</span></div>
-        </div>
-      </div>
-      <div class="phase-body">
-        <ul class="task-list">
-          <li>สร้าง <code>TravelRewardsSiteContext</code> สำหรับสลับโหมด global/trip ให้ Header, Footer และทุกหน้าย่อยรู้ว่าอยู่ทริปไหน</li>
-          <li>สร้าง <code>GlobalTravelRewardsChrome</code> (layout หลัก) และ <code>TripSiteChrome</code> (layout ต่อทริป) เพื่อโหลดข้อมูลทริปจาก DB แล้วส่ง Context</li>
-          <li>Refactor <code>TravelRewards.jsx</code> ให้รองรับ Nested Routes: <code>/travel-rewards/:tripKey</code>, <code>/travel-rewards/:tripKey/about</code>, <code>/travel-rewards/:tripKey/habsburg</code></li>
-          <li>แก้ไข <code>Header.jsx</code>, <code>Footer.jsx</code>, <code>Home.jsx</code>, <code>About.jsx</code>, <code>Habsburg.jsx</code> ให้ใช้ sectionId แบบ dynamic ตาม Context (ไม่ hardcode)</li>
-          <li>ปุ่มย้อนกลับทุกหน้า (global + trip) นำทางไป <code>/business-tool/6</code> ตามต้องการ</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Sub-feature 2 -->
-    <div class="phase">
-      <div class="phase-header">
-        <div class="phase-header-inner">
-          <div class="phase-num-cell"><div class="phase-num" style="background:#c9a84c">B</div></div>
-          <div class="phase-title-cell">
-            <h3>ระบบ Admin CMS ต่อทริป + Live Preview</h3>
-            <span class="phase-sub">Editor Page, iframe Preview, postMessage, UX/UI Design</span>
-          </div>
-          <div class="phase-duration-cell"><span class="phase-duration">12,000 บาท</span></div>
-        </div>
-      </div>
-      <div class="phase-body">
-        <ul class="task-list">
-          <li>สร้าง <code>CompletedTripTravelRewardsCms.jsx</code> — หน้าแก้ไขเนื้อหา Home/About/Habsburg เฉพาะทริป พร้อม Tab สลับหน้า + เลือกภาษา</li>
-          <li>ออกแบบ UX/UI ใหม่ทั้งหน้า — Top bar, Toolbar, Editor/Preview split layout, Toast notification, Loading/Error states, Responsive</li>
-          <li>สร้างไฟล์ CSS เฉพาะ (<code>CompletedTripTravelRewardsCms.css</code>) ให้เข้ากับ Admin theme (White &amp; Blue)</li>
-          <li>ระบบ Live Preview ด้วย iframe — ตรวจจับ URL ไซต์สาธารณะอัตโนมัติ, รีโหลด preview เมื่อบันทึก, ปุ่มเปิดแท็บใหม่</li>
-          <li>แก้ไข <code>TravelRewardsContentEditor.jsx</code> ให้รับ <code>tripId</code> prop → สร้าง sectionId, uploadFolder, seed target แบบ dynamic ต่อทริป</li>
-          <li>สร้าง <code>travelRewardsTripCms.js</code> — utility functions สร้าง section IDs (<code>tr-trip-&lt;uuid&gt;-home|about|habsburg</code>) และ seed templates</li>
-          <li>เพิ่ม Routes ใน <code>AdminApp.jsx</code>: <code>/admin/completed-trips/:tripId/cms</code></li>
-          <li>เพิ่มปุ่ม "แก้ไขหน้าเว็บทริป" ในการ์ดทริปบน CompletedTripsEditor</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Sub-feature 3 -->
-    <div class="phase">
-      <div class="phase-header">
-        <div class="phase-header-inner">
-          <div class="phase-num-cell"><div class="phase-num" style="background:#c9a84c">C</div></div>
-          <div class="phase-title-cell">
-            <h3>ระบบ Completed Trips + หน้าสาธารณะ Business Tool</h3>
-            <span class="phase-sub">Database, Slug, Year Filter, Public Display</span>
-          </div>
-          <div class="phase-duration-cell"><span class="phase-duration">6,000 บาท</span></div>
-        </div>
-      </div>
-      <div class="phase-body">
-        <ul class="task-list">
-          <li>สร้างตาราง <code>completed_trips</code> — รองรับ 5 ภาษา (title, description, destination × 5), image, year, trip_date, is_active</li>
-          <li>เพิ่มคอลัมน์ <code>slug</code> พร้อม unique index สำหรับ URL สาธารณะ (<code>/travel-rewards/&lt;slug&gt;</code>)</li>
-          <li>สร้าง RLS Policies — anon อ่านได้เฉพาะ active trips, authenticated CRUD ทั้งหมด</li>
-          <li>สร้าง <code>completedTrips.js</code> — helper functions: <code>getCompletedTripField</code>, <code>travelRewardsTripDetailPath</code>, <code>suggestTripSlug</code>, <code>isValidTripSlug</code></li>
-          <li>แก้ไข <code>BusinessToolDetail.jsx</code> ให้ดึงทริปจาก DB, แบ่งตามปี (year filter), เปรียบเทียบปีแบบ type-safe, แสดง loading state</li>
-          <li>เพิ่มปุ่มเลือกทริปใน Live Preview ของ CompletedTripsEditor — ดู preview ทริปใดก็ได้จาก dropdown</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Sub-feature 4 -->
-    <div class="phase">
-      <div class="phase-header">
-        <div class="phase-header-inner">
-          <div class="phase-num-cell"><div class="phase-num" style="background:#c9a84c">D</div></div>
-          <div class="phase-title-cell">
-            <h3>แก้ไข Bug &amp; Cross-Origin Preview</h3>
-            <span class="phase-sub">PostgREST 400, ERR_BLOCKED_BY_RESPONSE, RLS, Port Detection</span>
-          </div>
-          <div class="phase-duration-cell"><span class="phase-duration">4,000 บาท</span></div>
-        </div>
-      </div>
-      <div class="phase-body">
-        <ul class="task-list">
-          <li>แก้ไข PostgREST 400 Error — <code>COMPLETED_TRIPS_SELECT</code> ใช้ชื่อคอลัมน์ผิด (<code>title</code> แทน <code>title_th</code>)</li>
-          <li>แก้ไข <code>ERR_BLOCKED_BY_RESPONSE.NotSameOrigin</code> — ระบบ detect port ผิด (port 3002 = API server ไม่ใช่ frontend)</li>
-          <li>แก้ไข <code>publicSiteUrl.js</code> — ลบ port 3002 ออกจาก detection, เคลียร์ sessionStorage ที่ cache ค่าผิด</li>
-          <li>แก้ไขปัญหาทริปไม่แสดงบนหน้าสาธารณะ — ตรวจสอบ RLS policy, type mismatch ในตัวกรองปี, initial state ผิด</li>
-        </ul>
-      </div>
-    </div>
-
-    <h3 style="margin-top:14px">6.4 สรุปค่าบริการ — ระบบ Travel Rewards Per-Trip CMS</h3>
-
-    <table>
+    <div class="reference-label">8.1.1 เปรียบเทียบงานเว็บไซต์องค์กร, CMS และหลายภาษา</div>
+    <table class="data-table reference-table">
       <thead>
         <tr>
-          <th style="width:50px">ลำดับ</th>
-          <th>รายละเอียดงาน</th>
-          <th>ไฟล์ที่สร้าง/แก้ไข</th>
-          <th class="text-center" style="width:100px">ค่าบริการ</th>
+          <th style="width: 120px;">หมวดงานของโครงการนี้</th>
+          <th>งานของโครงการนี้</th>
+          <th style="width: 86px;">ราคาในใบเสนอราคา</th>
+          <th style="width: 160px;">งานภายนอกที่ใช้อ้างอิง</th>
+          <th style="width: 92px;">ราคาภายนอก</th>
+          <th style="width: 150px;">ข้อเปรียบเทียบ</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td class="text-center"><strong>A</strong></td>
-          <td>ระบบ Per-Trip Microsite (Public) — Routing, Context, Layout Chrome, Refactor 5+ components</td>
-          <td style="font-size:11px">TravelRewardsSiteContext.jsx, GlobalTravelRewardsChrome.jsx, TripSiteChrome.jsx, TravelRewards.jsx, Header.jsx, Footer.jsx, Home.jsx, About.jsx, Habsburg.jsx</td>
-          <td class="text-center">8,000 บาท</td>
+          <td><strong>เว็บไซต์องค์กรและหน้าสื่อสารแบรนด์</strong></td>
+          <td>หน้าองค์กรหลัก ข่าว โปรโมชัน บทความ รางวัล วิสัยทัศน์ สาขา และหน้าเนื้อหาหลัก</td>
+          <td>22,000 บาท</td>
+          <td>RSR Tech Group<br>Corporate Website</td>
+          <td>20,000 - 80,000 บาท</td>
+          <td>ราคาของโครงการนี้อยู่ในช่วงล่างของตลาดเว็บไซต์องค์กร แม้ขอบเขตรวมหลายหน้าหลักของแบรนด์</td>
         </tr>
         <tr>
-          <td class="text-center"><strong>B</strong></td>
-          <td>ระบบ Admin CMS ต่อทริป + Live Preview — Editor Page, UX/UI Design, iframe Preview</td>
-          <td style="font-size:11px">CompletedTripTravelRewardsCms.jsx/.css, TravelRewardsContentEditor.jsx, travelRewardsTripCms.js, AdminApp.jsx, CompletedTripsEditor.jsx</td>
-          <td class="text-center">12,000 บาท</td>
+          <td><strong>เว็บไซต์องค์กรและหน้าสื่อสารแบรนด์</strong></td>
+          <td>รองรับงานภาพลักษณ์องค์กรและโครงสร้างเนื้อหาจำนวนมากภายใต้เว็บไซต์เดียว</td>
+          <td>22,000 บาท</td>
+          <td>Amustelement<br>เว็บภาพลักษณ์ + SEO</td>
+          <td>40,000 - 80,000 บาท</td>
+          <td>ต่ำกว่าระดับราคาของงานภาพลักษณ์องค์กรแบบเน้นแบรนด์และ SEO ที่พบในตลาดภายนอก</td>
         </tr>
         <tr>
-          <td class="text-center"><strong>C</strong></td>
-          <td>ระบบ Completed Trips + หน้าสาธารณะ — Database, Slug, Year Filter, Public Display</td>
-          <td style="font-size:11px">completed_trips.sql, add_completed_trips_slug.sql, completedTrips.js, BusinessToolDetail.jsx</td>
-          <td class="text-center">6,000 บาท</td>
+          <td><strong>CMS หลังบ้านและการจัดการหลายภาษา</strong></td>
+          <td>Editor หลายส่วน, media library, live preview, visual builder และการจัดการเมนู/ฟุตเตอร์/ข้อมูลติดต่อ</td>
+          <td>32,000 บาท</td>
+          <td>WebOneWeek<br>ONLY WEB</td>
+          <td>15,000 บาท</td>
+          <td>แพ็กเกจภายนอกเป็น CMS สำเร็จรูปพื้นฐาน ขณะที่โครงการนี้เป็นงาน custom หลังบ้านที่ลึกกว่าอย่างชัดเจน</td>
         </tr>
         <tr>
-          <td class="text-center"><strong>D</strong></td>
-          <td>แก้ไข Bug &amp; Cross-Origin Preview — PostgREST 400, ERR_BLOCKED, RLS, Port Detection</td>
-          <td style="font-size:11px">completedTrips.js, publicSiteUrl.js, BusinessToolDetail.jsx</td>
-          <td class="text-center">4,000 บาท</td>
+          <td><strong>CMS หลังบ้านและการจัดการหลายภาษา</strong></td>
+          <td>มีโครงสร้างหลายภาษาและเครื่องมือดูแลเนื้อหาจริงหลายจุดภายในระบบเดียว</td>
+          <td>32,000 บาท</td>
+          <td>WebOneWeek<br>GRAPHIC</td>
+          <td>31,000 บาท</td>
+          <td>ราคาใกล้เคียงกัน แต่โครงการนี้รวม custom editor, live preview และ workflow หลังบ้านที่กว้างกว่าแพ็กเกจสำเร็จรูป</td>
         </tr>
-        <tr class="total-row">
-          <td colspan="3"><strong>รวมค่าบริการ — ระบบ Travel Rewards Per-Trip CMS</strong></td>
-          <td class="text-center"><strong>30,000 บาท</strong></td>
+        <tr>
+          <td><strong>CMS หลังบ้านและการจัดการหลายภาษา</strong></td>
+          <td>รองรับการอัปเดตเนื้อหาอย่างต่อเนื่องโดยทีมงานภายในองค์กร</td>
+          <td>32,000 บาท</td>
+          <td>WebOneWeek<br>CONTENT</td>
+          <td>40,000 บาท</td>
+          <td>ต่ำกว่าแพ็กเกจที่รวมบริการ content handling ภายนอก แต่ยังครอบคลุมระบบจัดการเนื้อหาที่จำเป็นต่อการใช้งานจริง</td>
+        </tr>
+        <tr>
+          <td><strong>CMS หลังบ้านและการจัดการหลายภาษา</strong></td>
+          <td>รวมงานพัฒนาและปรับใช้กับระบบจริงของโครงการ</td>
+          <td>32,000 บาท</td>
+          <td>WPML<br>Multilingual CMS</td>
+          <td>99 ยูโร / ปี</td>
+          <td>ราคาภายนอกนี้เป็นเพียงค่า license หลายภาษา ยังไม่รวมค่าพัฒนา ติดตั้ง ปรับแบบ และเชื่อมเข้ากับ workflow ของจริง</td>
         </tr>
       </tbody>
     </table>
 
-    <div class="note-box" style="margin-top:12px">
-      <strong>หมายเหตุ:</strong>
-      งานข้างต้นจัดอยู่ในระดับ "ฟีเจอร์ขนาดกลาง–ใหญ่" ตามเรทราคาข้อ 5 (18,000–30,000 บาท/ฟีเจอร์) เนื่องจากประกอบด้วย: การออกแบบสถาปัตยกรรมระบบใหม่ (Context + Chrome pattern), สร้างหน้าแอดมินพร้อม UX/UI, ระบบ Live Preview ข้ามพอร์ต, แก้ไข Schema ฐานข้อมูล + RLS, Refactor components เดิม 8+ ไฟล์, รองรับ 5 ภาษา และแก้ไข Bug ที่เกี่ยวข้อง — รวมไฟล์ที่สร้างใหม่/แก้ไข <strong>20+ ไฟล์</strong>
+    <div class="reference-label">8.1.2 เปรียบเทียบงานระบบเฉพาะ, Dashboard และ PDPA / Cookie</div>
+    <table class="data-table reference-table">
+      <thead>
+        <tr>
+          <th style="width: 120px;">หมวดงานของโครงการนี้</th>
+          <th>งานของโครงการนี้</th>
+          <th style="width: 86px;">ราคาในใบเสนอราคา</th>
+          <th style="width: 160px;">งานภายนอกที่ใช้อ้างอิง</th>
+          <th style="width: 92px;">ราคาภายนอก</th>
+          <th style="width: 150px;">ข้อเปรียบเทียบ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Travel Rewards และ Completed Trips</strong></td>
+          <td>Microsite ต่อทริป, completed trips, slug URL, CMS ต่อทริป, live preview และหน้าสาธารณะ</td>
+          <td>30,000 บาท</td>
+          <td>RSR Tech Group<br>Custom Web Application</td>
+          <td>100,000 - 500,000+ บาท</td>
+          <td>ต่ำกว่าตลาด custom web application เต็มรูปแบบ เพราะเป็นการพัฒนาต่อยอดบนฐานระบบเดิม ไม่ได้เริ่มจากศูนย์ทั้งหมด</td>
+        </tr>
+        <tr>
+          <td><strong>ระบบสาขา, กิจกรรม และ API Integration</strong></td>
+          <td>ข้อมูลสาขา, calendar/events, API integration page, calendar API และโครงสร้างสำหรับเชื่อมต่อระบบในอนาคต</td>
+          <td>14,000 บาท</td>
+          <td>RSR Tech Group<br>Custom Web Application</td>
+          <td>100,000 - 500,000+ บาท</td>
+          <td>ราคาของโครงการนี้ต่ำกว่างาน integration เต็มระบบในตลาด เนื่องจากเป็นการต่อยอดและจัดวางโครงสร้างบนระบบที่มีอยู่แล้ว</td>
+        </tr>
+        <tr>
+          <td><strong>ระบบดูแลงานหลังบ้านและความปลอดภัย</strong></td>
+          <td>Users / roles, activity log, backup / restore, help guide และเครื่องมือที่จำเป็นต่อการดูแลระบบจริง</td>
+          <td>18,000 บาท</td>
+          <td>Fastwork<br>Backend Dashboard Package A</td>
+          <td>15,000 บาท</td>
+          <td>สูงกว่าระบบหลังบ้านพื้นฐานเล็กน้อย แต่ของโครงการนี้รวมเครื่องมือกำกับดูแลระบบจริงหลายส่วน ไม่ใช่เฉพาะ dashboard ธรรมดา</td>
+        </tr>
+        <tr>
+          <td><strong>ระบบดูแลงานหลังบ้านและความปลอดภัย</strong></td>
+          <td>เป็นงานดูแลระบบหลังบ้านที่ต่อยอดจากระบบจริงและรองรับการใช้งานในองค์กร</td>
+          <td>18,000 บาท</td>
+          <td>Fastwork<br>Backend Dashboard Package B / C</td>
+          <td>10,000 / 5,000 บาท</td>
+          <td>แสดงให้เห็นว่าระดับราคาของโครงการนี้สูงกว่างานหลังบ้านขั้นต่ำ เพราะรวม users, logs, backup และเครื่องมือซัพพอร์ตผู้ดูแลระบบ</td>
+        </tr>
+        <tr>
+          <td><strong>ระบบคุกกี้ระดับ High-Level และ PDPA Package</strong></td>
+          <td>High-level cookie banner, consent center, consent categories, consent log, analytics gating และหน้า policy / privacy ที่เกี่ยวข้อง</td>
+          <td>30,000 บาท</td>
+          <td>Aosoft<br>Cookie Popup</td>
+          <td>1,900 บาท</td>
+          <td>ขอบเขตของโครงการนี้กว้างกว่าการติดตั้ง popup ขั้นพื้นฐานอย่างมาก เพราะรวม workflow การยินยอมและการควบคุมการเก็บข้อมูล</td>
+        </tr>
+        <tr>
+          <td><strong>ระบบคุกกี้ระดับ High-Level และ PDPA Package</strong></td>
+          <td>ครอบคลุมทั้งการแสดง banner, บันทึก consent, policy และการควบคุม analytics ตามสิทธิ์การยินยอม</td>
+          <td>30,000 บาท</td>
+          <td>Prospace Cookie Banner<br>PDPA Thailand Professional Plan</td>
+          <td>2,400 บาท<br>เริ่มต้น 20,000 บาท</td>
+          <td>สูงกว่าบริการ banner พื้นฐาน แต่ใกล้กับระดับ consent platform จริง และยังรวมงานปรับใช้เข้ากับระบบเว็บไซต์ของโครงการนี้</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note-box">
+      <strong>แนวทางการอ่านตาราง:</strong> คอลัมน์ซ้ายแสดงหมวดงานและราคาของโครงการนี้ ส่วนคอลัมน์ขวาแสดงงานภายนอกที่ใช้อ้างอิงพร้อมราคาที่เผยแพร่สาธารณะ
+      เพื่อให้เห็นชัดว่าราคาของโครงการนี้อยู่ระดับใดเมื่อเทียบกับงานภายนอกในตลาด
+      <br><br>
+      <strong>ข้ออ่านประกอบ:</strong> ราคาภายนอกบางรายการเป็นแพ็กเกจสำเร็จรูป บางรายการเป็นค่า license รายปี และบางรายการเป็นงาน custom application
+      ดังนั้นการเปรียบเทียบนี้ใช้เพื่อชี้ให้เห็นความแตกต่างของระดับขอบเขตงาน ความลึกของระบบ และความคุ้มค่าของใบเสนอราคาฉบับนี้
     </div>
 
-  </div>
+    <div class="page-footer">
+      <span>เปรียบเทียบงานของโครงการนี้กับภายนอก</span>
+      <span>หน้า 8 / 10</span>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="page-header compact">
+      <div>
+        <div class="doc-label">payment terms</div>
+        <div class="doc-subject">เงื่อนไขการชำระเงินและสัดส่วนการรับชำระ</div>
+      </div>
+      <div class="page-meta">
+        <div class="page-meta-row"><span>มูลค่ารวม</span><strong>192,000 บาท</strong></div>
+      </div>
+    </div>
+
+    <h2 class="section-title">9. เงื่อนไขการชำระเงิน</h2>
+    <table class="data-table payment-table">
+      <thead>
+        <tr>
+          <th style="width: 90px;">งวด</th>
+          <th>เงื่อนไขการชำระ</th>
+          <th style="width: 110px;">สัดส่วน</th>
+          <th style="width: 130px;">จำนวนเงิน</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>งวดที่ 1</td>
+          <td>ชำระเมื่อยืนยันใบเสนอราคาและรับทราบสถานะงานปัจจุบัน ซึ่งได้ดำเนินการแล้วประมาณ 98% และอยู่ระหว่างการเก็บรายละเอียดเพื่อส่งมอบงาน</td>
+          <td class="text-center">60%</td>
+          <td>115,200 บาท</td>
+        </tr>
+        <tr>
+          <td>งวดที่ 2</td>
+          <td>ชำระเมื่อส่งมอบงานส่วนสุดท้าย ตรวจรับงาน และนำขึ้นใช้งานจริงตามขอบเขตที่ระบุในเอกสารฉบับนี้</td>
+          <td class="text-center">40%</td>
+          <td>76,800 บาท</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note-box">
+      <strong>หมายเหตุการชำระเงิน:</strong> เนื่องจาก ณ วันที่ออกใบเสนอราคา งานได้ดำเนินการแล้วประมาณ 98%
+      คู่สัญญาจึงสามารถกำหนดรูปแบบการชำระเป็น 2 งวด ในสัดส่วน 60% และ 40% เพื่อรองรับขั้นตอนส่งมอบ ตรวจรับงาน และการปิดโครงการอย่างเป็นทางการ
+    </div>
+
+    <div class="page-footer">
+      <span>เงื่อนไขการชำระเงิน</span>
+      <span>หน้า 9 / 10</span>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="page-header compact">
+      <div>
+        <div class="doc-label">terms &amp; acceptance</div>
+        <div class="doc-subject">เงื่อนไขของใบเสนอราคา บริการ MA และการลงนาม</div>
+      </div>
+      <div class="page-meta">
+        <div class="page-meta-row"><span>การดูแลหลังส่งมอบ</span><strong>MA ฟรี 6 เดือน</strong></div>
+      </div>
+    </div>
+
+    <h2 class="section-title">10. เงื่อนไขของใบเสนอราคา</h2>
+    <ul class="standard-list">
+      <li>ราคาที่เสนอเป็นราคาแบบเหมารวมตามขอบเขตที่ระบุในเอกสารฉบับนี้ และยังไม่รวมค่าบริการจาก third-party ภายนอก เช่น hosting, domain, email service, SMS, paid API หรือสื่อโฆษณา</li>
+      <li>ใบเสนอราคาฉบับนี้มีอายุ 30 วัน นับจากวันที่เสนอราคา หากพ้นกำหนดอาจต้องมีการทบทวนราคาและระยะเวลาดำเนินงานใหม่</li>
+      <li>ข้อความทางกฎหมายในส่วน High-Level Cookie / PDPA Privacy Notice ควรได้รับการตรวจสอบและอนุมัติจากฝ่ายกฎหมายหรือผู้รับผิดชอบขององค์กรก่อนใช้งานจริง</li>
+      <li>การชำระเงินตามใบเสนอราคาฉบับนี้กำหนดเป็น 2 งวด ในสัดส่วน 60% และ 40% โดยสะท้อนสถานะงาน ณ วันที่ออกเอกสารซึ่งได้ดำเนินการแล้วประมาณ 98% และเพื่อรองรับขั้นตอนตรวจรับงานตามลำดับ</li>
+      <li>หากมีการเพิ่มฟีเจอร์ใหม่ ปรับขอบเขตงาน หรือเพิ่ม integration นอกเหนือจากที่ระบุไว้ในเอกสารฉบับนี้ อาจมีการประเมินราคาเพิ่มเติมเป็นลายลักษณ์อักษร</li>
+      <li>ระยะเวลาดำเนินงานอาจเปลี่ยนแปลงได้ตามความพร้อมของข้อมูล การอนุมัติรอบงาน และข้อจำกัดที่เกิดจาก third-party หรือระบบภายนอกที่เกี่ยวข้อง</li>
+      <li>ขอบเขตงานนี้ตั้งอยู่บนสมมติฐานว่าใช้ฐานระบบปัจจุบันของโครงการ Happy MPM เป็นจุดเริ่มต้น ไม่ใช่การพัฒนาใหม่จากศูนย์ทั้งหมด</li>
+      <li>หากผู้ว่าจ้างมีข้อสังเกตหรือรายการแก้ไขในการตรวจรับงาน กรุณาแจ้งเป็นลายลักษณ์อักษรภายใน 7 วันนับจากวันที่ได้รับส่งมอบ เพื่อให้ดำเนินการปรับแก้ตามขอบเขตที่ตกลงร่วมกัน</li>
+    </ul>
+
+    <h2 class="section-title">11. รายละเอียดบริการ MA ฟรี 6 เดือน</h2>
+    <ul class="standard-list">
+      <li>ครอบคลุมการดูแลและแก้ไขประเด็นที่เกิดจากระบบเดิมภายใต้ขอบเขตงานในเอกสารฉบับนี้</li>
+      <li>ครอบคลุมการตอบคำถามการใช้งาน การตรวจสอบปัญหาเบื้องต้น และคำแนะนำเพื่อให้ระบบใช้งานได้ต่อเนื่อง</li>
+      <li>ไม่รวมการพัฒนาฟีเจอร์ใหม่ การเปลี่ยนดีไซน์นอกขอบเขต หรือการเชื่อมต่อระบบใหม่ที่ไม่ได้ระบุไว้ในเอกสารนี้</li>
+      <li>ไม่รวมค่าใช้จ่ายจาก third-party ภายนอกหรือค่าใช้จ่ายที่เกิดจากการเปลี่ยนแปลงบริการของผู้ให้บริการภายนอก</li>
+    </ul>
+
+    <h2 class="section-title">12. การยืนยันและลงนาม</h2>
+    <p class="text">หากผู้ว่าจ้างประสงค์ให้ดำเนินงานตามใบเสนอราคาฉบับนี้ กรุณาพิจารณาลงนามเพื่อยืนยันขอบเขตงานและเงื่อนไขที่ระบุ</p>
+
+    <div class="signature-grid">
+      <div class="signature-box">
+        <div class="signature-title">ฝ่ายผู้เสนอราคา</div>
+        <div class="small-text">
+          ชื่อผู้ลงนาม .................................................................<br>
+          ตำแหน่ง .....................................................................<br>
+          วันที่ ........................................................................
+        </div>
+        <div class="signature-line">ลงนามฝ่ายผู้เสนอราคา</div>
+      </div>
+      <div class="signature-box">
+        <div class="signature-title">ฝ่ายผู้ว่าจ้าง</div>
+        <div class="small-text">
+          ชื่อผู้ลงนาม .................................................................<br>
+          ตำแหน่ง .....................................................................<br>
+          วันที่ ........................................................................
+        </div>
+        <div class="signature-line">ลงนามฝ่ายผู้ว่าจ้าง</div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>เงื่อนไขของใบเสนอราคา บริการ MA และการลงนาม</span>
+      <span>หน้า 10 / 10</span>
+    </div>
+  </section>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
 <script>
 function savePDF() {
-  var btns = document.querySelector('.btn-group');
-  btns.style.display = 'none';
+  var toolbar = document.querySelector('.toolbar');
+  if (toolbar) toolbar.style.display = 'none';
 
-  var el = document.getElementById('doc');
+  var element = document.getElementById('doc');
 
   html2pdf()
     .set({
-      margin:      [8, 8, 10, 8],
-      filename:    'Proposal-HappyMPM-2026.pdf',
-      image:       { type: 'jpeg', quality: 0.95 },
+      margin: [0, 0, 0, 0],
+      filename: 'Quotation-HappyMPM-A4.pdf',
+      image: { type: 'jpeg', quality: 0.96 },
       html2canvas: {
         scale: 2,
         useCORS: true,
-        width: 794,
-        windowWidth: 794,
         scrollY: 0,
-        scrollX: 0
+        scrollX: 0,
+        windowWidth: 1400
       },
-      jsPDF:       { unit: 'mm', format: 'a4', orientation: 'portrait' },
-      pagebreak:   { mode: ['css'], avoid: ['.phase', '.note-box', 'table', '.timeline'] }
+      jsPDF: {
+        unit: 'mm',
+        format: 'a4',
+        orientation: 'portrait'
+      },
+      pagebreak: {
+        mode: ['css', 'legacy']
+      }
     })
-    .from(el)
+    .from(element)
     .save()
-    .then(function() {
-      btns.style.display = 'flex';
+    .then(function () {
+      if (toolbar) toolbar.style.display = 'flex';
     })
-    .catch(function() {
-      btns.style.display = 'flex';
-      alert('เกิดข้อผิดพลาด กรุณาลองอีกครั้ง');
+    .catch(function () {
+      if (toolbar) toolbar.style.display = 'flex';
+      alert('เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง');
     });
 }
 </script>
